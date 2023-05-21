@@ -3,6 +3,16 @@ import { Routes, Route, Link } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
+import { handleGetUserData } from "./components/UserLogin";
+
+const handleLogout = () => {
+  localStorage.clear();
+  window.location.reload();
+};
+
+const user = handleGetUserData();
+const userRol = user?.roles?.map((rol) => rol.authority);
+
 function App() {
   return (
     <div className="App">
@@ -20,7 +30,14 @@ function App() {
           {/* ANIMAL DETAILS */}
           <Route path="/animal/:idAnimal" element={""} />
           {/* PROTEGIDAS */}
-          <Route element={<ProtectedRoute isAllowed={""} redirectTo="/" />}>
+          <Route
+            element={
+              <ProtectedRoute
+                isAllowed={userRol?.includes("Admin")}
+                redirectTo="/"
+              />
+            }
+          >
             {/* RUTAS PROTEGIDAS */}
           </Route>
         </Routes>
