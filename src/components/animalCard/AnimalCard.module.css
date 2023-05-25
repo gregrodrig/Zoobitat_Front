@@ -1,18 +1,48 @@
-.animalCard {
-  list-style: none;
-  font-size: 1.5rem;
-  text-align: center;
+.animalFullContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  grid-auto-rows: minmax(100px, auto);
+  margin: 4rem;
+  text-align: left;
 }
 .animalCard {
-  opacity: 0.8;
+  opacity: 0.92;
+  border: none;
+}
+.animalContainer {
+  padding: 0 !important;
+}
+.animalContainer a {
+  text-decoration-line: none;
 }
 .animalImage {
-  border-radius: 10px;
+  border-radius: 1rem;
   background-color: azure;
 }
+.animalName {
+  margin-top: -4rem;
+  color: white;
+  padding-left: 1rem;
+  font-size: 2rem;
+}
 @media (max-width: 560px) {
+  .animalName {
+    margin-top: -2rem;
+    color: white;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+  }
+  .animalFullContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    grid-auto-rows: minmax(100px, auto);
+    margin: 1.5rem;
+    text-align: left;
+  }
   .animalImage {
-    width: 90%;
-    height: auto;
+    border-radius: 10px;
+    background-color: azure;
   }
 }
