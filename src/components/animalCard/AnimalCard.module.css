@@ -5,9 +5,12 @@
   grid-auto-rows: minmax(100px, auto);
   margin: 4rem;
   text-align: left;
+  height: auto;
+  border: none;
 }
+
+
 .animalCard {
-  opacity: 0.92;
   border: none;
 }
 .animalContainer {
@@ -18,7 +21,7 @@
 }
 .animalImage {
   border-radius: 1rem;
-  background-color: azure;
+  border: none;
 }
 .animalName {
   margin-top: -4rem;
@@ -32,6 +35,7 @@
     color: white;
     padding-left: 0.5rem;
     font-size: 1rem;
+    
   }
   .animalFullContainer {
     display: grid;
@@ -41,8 +45,5 @@
     margin: 1.5rem;
     text-align: left;
   }
-  .animalImage {
-    border-radius: 10px;
-    background-color: azure;
-  }
+ 
 }

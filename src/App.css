@@ -1,10 +1,21 @@
 .App {
   text-align: center;
+  margin-bottom: 0%;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+h1 {
+ 
+  
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 26px;
+  
+  letter-spacing: 0.03em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -23,14 +34,16 @@
   margin: 0 4rem;
 }
 .App-header {
-  background-color: #282c34;
+	background-image:url(/public/assets/HomeBack.png)  ;
+  background-repeat: no-repeat;
+  background-size: 100% auto; /* Adjust the height value as needed */
   min-height: 10vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-top: -20px;
 }
-
 .App-link {
   color: #61dafb;
 }

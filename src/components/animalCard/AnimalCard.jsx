@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./AnimalCard.module.css";
 import Card from "react-bootstrap/Card";
-
 const img = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg";
 export function AnimalCard({ animal }) {
   return (
@@ -12,7 +11,7 @@ export function AnimalCard({ animal }) {
             <Link to="/animal:1">
               <Card.Img
                 variant="top"
-                src={img}
+                src="assets/Animals.png"
                 className={styles.animalImage}
               />
               <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
@@ -24,7 +23,7 @@ export function AnimalCard({ animal }) {
             <Link to="/animal:1">
               <Card.Img
                 variant="top"
-                src={img}
+                src="assets/Actividades.png"
                 className={styles.animalImage}
               />
               <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
@@ -36,7 +35,7 @@ export function AnimalCard({ animal }) {
             <Link to="/animal:1">
               <Card.Img
                 variant="top"
-                src={img}
+                src="assets/habitat.png"
                 className={styles.animalImage}
               />
               <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
@@ -48,7 +47,7 @@ export function AnimalCard({ animal }) {
             <Link to="/animal:1">
               <Card.Img
                 variant="top"
-                src={img}
+                src="assets/mapa.png"
                 className={styles.animalImage}
               />
               <Card.Title className={styles.animalName}>Test Prueba</Card.Title>

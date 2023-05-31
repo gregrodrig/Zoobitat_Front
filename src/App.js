@@ -20,7 +20,7 @@ function App() {
       <Menu />
       <header className="App-header">
         <h1 className="Header-title">
-          Bienvenidos <br />a <Link to="/">ZOOBITAT</Link>
+         Bienvenidos  <br />a <Link to="/">ZOOBITAT</Link>
         </h1>
         <p id="Header-description">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt et
