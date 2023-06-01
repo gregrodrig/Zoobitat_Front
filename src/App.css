@@ -21,6 +21,7 @@
 }
 #Header-description {
   margin: 0 4rem;
+  text-align: left;
 }
 .App-header {
   background-color: #282c34;
@@ -53,6 +54,5 @@
 
   #Header-description {
     margin: 0.4rem 1.5rem;
-    text-align: left;
   }
 }

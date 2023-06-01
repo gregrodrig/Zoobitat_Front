@@ -8,7 +8,9 @@
 }
 .animalCard {
   opacity: 0.92;
-  border: none;
+  border: none !important;
+  background: none !important;
+  margin-bottom: 2rem;
 }
 .animalContainer {
   padding: 0 !important;
@@ -17,18 +19,19 @@
   text-decoration-line: none;
 }
 .animalImage {
+  height: 100%;
   border-radius: 1rem;
   background-color: azure;
 }
 .animalName {
-  margin-top: -4rem;
+  margin-top: -3rem !important;
   color: white;
   padding-left: 1rem;
   font-size: 2rem;
 }
 @media (max-width: 560px) {
   .animalName {
-    margin-top: -2rem;
+    margin-top: -2rem !important;
     color: white;
     padding-left: 0.5rem;
     font-size: 1rem;

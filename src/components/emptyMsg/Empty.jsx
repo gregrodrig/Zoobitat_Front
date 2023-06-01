@@ -8,6 +8,8 @@ export function Empty({ msg }) {
           No se han cargado los datos desde la Base de datos!
         </p>
       );
+    case "animal":
+      return <p className={styles.center}>No hay animales para mostrar!</p>;
     default:
       return null;
   }

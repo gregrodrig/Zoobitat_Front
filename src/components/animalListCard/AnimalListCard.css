@@ -1,0 +1,33 @@
+:root {
+  --main-dark-green-color: #2a411c;
+  --main-medium-green-color: #4f7302;
+  --main-light-green-color: #c0d904;
+  --secondary-natural-color: #f5ca99;
+  --secondary-brown-color: #4f2e0e;
+  --secondary-gray-color: #bcbcbc;
+}
+.animalCard {
+  list-style: none;
+  font-size: 1.5rem;
+  text-align: left;
+  text-decoration: none;
+}
+.animalCard a {
+  text-decoration: none;
+}
+.animalCard:hover {
+  opacity: 0.8;
+}
+.animalCard .animalNombre {
+  color: var(--main-medium-green-color);
+}
+.animalImage {
+  border-radius: 10px;
+  background-color: azure;
+}
+@media (max-width: 560px) {
+  .animalImage {
+    width: 90%;
+    height: auto;
+  }
+}
