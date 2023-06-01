@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./AnimalCard.module.css";
 import Card from "react-bootstrap/Card";
 const img = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg";
-export function AnimalCard({ animal }) {
+export  function AnimalCard({ animal }) {
   return (
     <>
       <div className={styles.animalFullContainer}>

@@ -6,6 +6,7 @@ import Login from "./components/login/Login";
 import { handleGetUserData } from "./components/UserLogin";
 import Menu from "./components/header/Menu";
 import { AnimalCard } from "./components/animalCard/AnimalCard";
+import Home from "./components/header/Home";
 
 const handleLogout = () => {
   localStorage.clear();
@@ -18,20 +19,10 @@ function App() {
   return (
     <div className="App">
       <Menu />
-      <header className="App-header">
-        <h1 className="Header-title">
-         Bienvenidos  <br />a <Link to="/">ZOOBITAT</Link>
-        </h1>
-        <p id="Header-description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt et
-          voluptatibus, incidunt facere quibusdam enim?
-        </p>
-        <AnimalCard />
-      </header>
+    
       <main>
-        <AnimalCard />
         <Routes>
-          <Route path="/" element={""} />
+          <Route path="/" element={<Home />} />
           <Route path="*" element={""} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
