@@ -8,7 +8,7 @@ function Home() {
   <div className="App">
 <header className="App-header">
   <h1 className="Header-title">
-   Bienvenidos  <br />a <Link to="/">ZOOBITAT</Link>
+   Bienvenidos  <br />a ZOOBITAT
   </h1>
   <p id="Header-description">
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt et

@@ -2,32 +2,53 @@ import { Link } from "react-router-dom";
 import styles from "./AnimalCard.module.css";
 import Card from "react-bootstrap/Card";
 const img = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg";
-export  function AnimalCard({ animal }) {
+export function AnimalCard({ animal }) {
   return (
     <>
       <div className={styles.animalFullContainer}>
         <Card className={styles.animalCard}>
           <Card.Body className={styles.animalContainer}>
-            <Link to="/animal:1">
+            <Link to="/AnimalList">
               <Card.Img
                 variant="top"
                 src="assets/Animals.png"
                 className={styles.animalImage}
               />
-              <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
+             <Card.Title
+          className={styles.animalName}
+          style={{
+            position: "absolute",
+            bottom: "7px",
+            left: "0",
+            color:'white',
+            marginBottom:'10px'
+          }}
+        >
+          Animals
+        </Card.Title>
             </Link>
           </Card.Body>
         </Card>
         <Card className={styles.animalCard}>
           <Card.Body className={styles.animalContainer}>
-            <Link to="/animal:1">
+            <Link to="/action:2">
               <Card.Img
                 variant="top"
                 src="assets/Actividades.png"
                 className={styles.animalImage}
               />
-              <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
-            </Link>
+  <Card.Title
+          className={styles.animalName}
+          style={{
+            position: "absolute",
+            bottom: "7px",
+            left: "0",
+            color:'white',
+            marginBottom:'10px'
+          }}
+        >
+          Actividades
+        </Card.Title>            </Link>
           </Card.Body>
         </Card>
         <Card className={styles.animalCard}>
@@ -38,8 +59,18 @@ export  function AnimalCard({ animal }) {
                 src="assets/habitat.png"
                 className={styles.animalImage}
               />
-              <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
-            </Link>
+  <Card.Title
+          className={styles.animalName}
+          style={{
+            position: "absolute",
+            bottom: "7px",
+            left: "0",
+            color:'white',
+            marginBottom:'10px'
+          }}
+        >
+          Habitat
+        </Card.Title>            </Link>
           </Card.Body>
         </Card>
         <Card className={styles.animalCard}>
@@ -50,8 +81,18 @@ export  function AnimalCard({ animal }) {
                 src="assets/mapa.png"
                 className={styles.animalImage}
               />
-              <Card.Title className={styles.animalName}>Test Prueba</Card.Title>
-            </Link>
+  <Card.Title
+          className={styles.animalName}
+          style={{
+            position: "absolute",
+            bottom: "7px",
+            left: "0",
+            color:'white',
+            marginBottom:'10px'
+          }}
+        >
+          Mapa
+        </Card.Title>            </Link>
           </Card.Body>
         </Card>
       </div>

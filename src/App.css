@@ -29,6 +29,7 @@ h1 {
   margin: 4rem;
   margin-bottom: 2rem;
   text-align: left;
+ font-weight: bold;
 }
 #Header-description {
   margin: 0 4rem;
@@ -36,7 +37,7 @@ h1 {
 .App-header {
 	background-image:url(/public/assets/HomeBack.png)  ;
   background-repeat: no-repeat;
-  background-size: 100% auto; /* Adjust the height value as needed */
+  background-size: 100% auto; 
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -69,3 +70,17 @@ h1 {
     text-align: left;
   }
 }
+.imageContainer {
+  position: relative;
+}
+
+.animalName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  color: red;
+}
+

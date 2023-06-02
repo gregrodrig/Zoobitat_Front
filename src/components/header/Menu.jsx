@@ -27,10 +27,12 @@ function Menu() {
           className={`mb-3 ${style.customNavbar}`}
         >
           <Container fluid>
-            <Navbar.Toggle
-              aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="menuToggle"
-            />
+          <Navbar.Toggle
+  aria-controls={`offcanvasNavbar-expand-${expand}`}
+  className={`menuToggle ${style.customMenuToggle}`}
+/>
+
+
             <Navbar.Brand href="#">
               <Link to="/">
                 <img src="assets/Logo.png" alt="Logo" />

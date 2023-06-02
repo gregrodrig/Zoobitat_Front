@@ -7,6 +7,7 @@ import { handleGetUserData } from "./components/UserLogin";
 import Menu from "./components/header/Menu";
 import { AnimalCard } from "./components/animalCard/AnimalCard";
 import Home from "./components/header/Home";
+import AnimalList from "./pages/AnimalList";
 
 const handleLogout = () => {
   localStorage.clear();
@@ -25,6 +26,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={""} />
           <Route path="/login" element={<Login />} />
+          <Route path="/AnimalList" element={<AnimalList />} />
+
           <Route path="/register" element={<Register />} />
           {/* ANIMAL DETAILS */}
           <Route path="/animal/:idAnimal" element={""} />
