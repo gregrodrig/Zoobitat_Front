@@ -10,7 +10,7 @@ export default function Register() {
   <>
   <div style={{ maxWidth: "320px", margin: "0 auto" }}>
     <Form>
-      <Form.Group className="mb-3" controlId="formGroupEmail" style={{ marginTop: "30px" }}>
+      <Form.Group className="mb-3" controlId="formGroupNombre" style={{ marginTop: "30px" }}>
         <h1 style={{ marginBottom: '40px', color: '#2A411C', fontWeight: "bold", fontSize: '32px' }}>Crear Cuenta </h1>
 
         <Form.Control
@@ -19,14 +19,14 @@ export default function Register() {
           placeholder="Nombre Completo"
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupPassword">
+      <Form.Group className="mb-3" controlId="formGroupEmail">
         <Form.Control
           style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: ''}}
           type="email"
           placeholder="Email"
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupPassword">
+      <Form.Group className="mb-3" controlId="formGroupRol">
   <Form.Select
     style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: '' }}
     aria-label="Rol"

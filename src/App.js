@@ -8,6 +8,8 @@ import Menu from "./components/header/Menu";
 import { AnimalCard } from "./components/animalCard/AnimalCard";
 import Home from "./components/header/Home";
 import AnimalList from "./pages/AnimalList";
+import AnimalDetails from "./pages/AnimalDetails";
+import NoticiasDetails from "./pages/NoticiasDetails";
 
 const handleLogout = () => {
   localStorage.clear();
@@ -27,6 +29,8 @@ function App() {
           <Route path="*" element={""} />
           <Route path="/login" element={<Login />} />
           <Route path="/AnimalList" element={<AnimalList />} />
+          <Route path="/AnimalDetails" element={<AnimalDetails />} />
+          <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
 
           <Route path="/register" element={<Register />} />
           {/* ANIMAL DETAILS */}
