@@ -10,6 +10,7 @@ import Home from "./components/header/Home";
 import AnimalList from "./pages/AnimalList";
 import AnimalDetails from "./pages/AnimalDetails";
 import NoticiasDetails from "./pages/NoticiasDetails";
+import Actividades from "./pages/Actividades";
 
 const handleLogout = () => {
   localStorage.clear();
@@ -30,6 +31,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/AnimalList" element={<AnimalList />} />
           <Route path="/AnimalDetails" element={<AnimalDetails />} />
+          <Route path="/Actividades" element={<Actividades />} />
           <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
 
           <Route path="/register" element={<Register />} />
