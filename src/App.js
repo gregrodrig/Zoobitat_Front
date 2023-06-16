@@ -9,6 +9,9 @@ import Home from "./components/header/Home";
 import AnimalDetails from "./pages/AnimalDetails";
 import NoticiasDetails from "./pages/NoticiasDetails";
 import AnimalListView from "pages/animalListView/AnimalListView";
+import Actividades from "./pages/Actividades";
+import Habitat from "./pages/Habitat";
+import Contacto from "./pages/Contacto";
 
 export const Context = createContext({});
 
@@ -16,6 +19,7 @@ function App() {
   const token = window.sessionStorage.getItem("token");
   const [jwt, setJwt] = useState(token);
   return (
+
     <Context.Provider value={{ jwt, setJwt }}>
       <div className="App">
         <main>
@@ -47,8 +51,8 @@ function App() {
           </div>
         </main>
       </div>
-    </Context.Provider>
-  );
+    </Context.Provider>);
+
 }
 
 export default App;

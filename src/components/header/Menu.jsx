@@ -82,7 +82,7 @@ function Menu() {
                     Nosotros
                   </Nav.Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Nav.Link href="/Actividades">
                     {" "}
                     <FiActivity
                       style={{
@@ -107,7 +107,7 @@ function Menu() {
                     Horarios
                   </Nav.Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Nav.Link href="/AnimalList">
                     <MdPets
                       style={{
                         color: "gray",
@@ -119,7 +119,7 @@ function Menu() {
                     Animales
                   </Nav.Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Nav.Link href="/habitat">
                     {" "}
                     <GiTreeBranch
                       style={{
@@ -132,7 +132,7 @@ function Menu() {
                     Habitat
                   </Nav.Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Nav.Link href="/mapa">
                     {" "}
                     <TbMapSearch
                       style={{
@@ -145,7 +145,7 @@ function Menu() {
                     Mapa
                   </Nav.Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Nav.Link href="Contacto">
                     <MdContactPhone
                       style={{
                         color: "gray",

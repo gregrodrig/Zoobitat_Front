@@ -31,7 +31,7 @@ export function AnimalCard({ animal }) {
         </Card>
         <Card className={styles.animalCard}>
           <Card.Body className={styles.animalContainer}>
-            <Link to="/action:2">
+            <Link to="/Actividades">
               <Card.Img
                 variant="top"
                 src="assets/Actividades.png"
@@ -53,7 +53,7 @@ export function AnimalCard({ animal }) {
         </Card>
         <Card className={styles.animalCard}>
           <Card.Body className={styles.animalContainer}>
-            <Link to="/animal:1">
+            <Link to="/habitat">
               <Card.Img
                 variant="top"
                 src="assets/habitat.png"
@@ -75,7 +75,7 @@ export function AnimalCard({ animal }) {
         </Card>
         <Card className={styles.animalCard}>
           <Card.Body className={styles.animalContainer}>
-            <Link to="/animal:1">
+            <Link to="/mapa">
               <Card.Img
                 variant="top"
                 src="assets/mapa.png"
