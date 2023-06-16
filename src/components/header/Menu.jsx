@@ -14,10 +14,11 @@ import { MdPets } from "react-icons/md";
 import { GiTreeBranch } from "react-icons/gi";
 import { TbMapSearch } from "react-icons/tb";
 import { MdContactPhone } from "react-icons/md";
-import { useState } from "react";
-function Menu() {
+import useUser from "../../hooks/useUser";
 
-  
+function Menu() {
+  const { isLogged, logout } = useUser();
+
   return (
     <>
       {[false].map((expand) => (
@@ -27,11 +28,10 @@ function Menu() {
           className={`mb-3 ${style.customNavbar}`}
         >
           <Container fluid>
-          <Navbar.Toggle
-  aria-controls={`offcanvasNavbar-expand-${expand}`}
-  className={`menuToggle ${style.customMenuToggle}`}
-/>
-
+            <Navbar.Toggle
+              aria-controls={`offcanvasNavbar-expand-${expand}`}
+              className={`menuToggle ${style.customMenuToggle}`}
+            />
 
             <Navbar.Brand href="#">
               <Link to="/">
@@ -158,30 +158,54 @@ function Menu() {
                   </Nav.Link>
                 </Nav>
                 <Nav className="d-grid gap-2">
-                  <Nav.Link href="/register">
-                  <Button
-                    variant="primary"
-                    style={{ backgroundColor: "#4F7302", borderRadius: "30px", width:"320px",
-                    marginLeft:"30px" }}
-                    size="lg"
-                  >
-                    Registrarse
-                  </Button>
-                  </Nav.Link>
-                  <Nav.Link href="/login">
-                    <Button
-                      variant="secondary"
-                      style={{
-                        backgroundColor: "#2A411C",
-                        borderRadius: "30px",
-                        width:"320px",
-                        marginLeft:"30px"
-                      }}
-                      size="lg"
-                    >
-                      Iniciar Sesion
-                    </Button>
-                  </Nav.Link>
+                  {isLogged ? (
+                    <Nav.Link href="/login">
+                      <Button
+                        onClick={logout}
+                        variant="secondary"
+                        style={{
+                          backgroundColor: "#2A411C",
+                          borderRadius: "30px",
+                          width: "320px",
+                          marginLeft: "30px",
+                        }}
+                        size="lg"
+                      >
+                        Cerrar Sesión
+                      </Button>
+                    </Nav.Link>
+                  ) : (
+                    <>
+                      <Nav.Link href="/register">
+                        <Button
+                          variant="primary"
+                          style={{
+                            backgroundColor: "#4F7302",
+                            borderRadius: "30px",
+                            width: "320px",
+                            marginLeft: "30px",
+                          }}
+                          size="lg"
+                        >
+                          Registrarse
+                        </Button>
+                      </Nav.Link>
+                      <Nav.Link href="/login">
+                        <Button
+                          variant="secondary"
+                          style={{
+                            backgroundColor: "#2A411C",
+                            borderRadius: "30px",
+                            width: "320px",
+                            marginLeft: "30px",
+                          }}
+                          size="lg"
+                        >
+                          Iniciar Sesion
+                        </Button>
+                      </Nav.Link>
+                    </>
+                  )}
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
