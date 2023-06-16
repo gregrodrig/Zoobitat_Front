@@ -1,5 +1,5 @@
 export const handleGetUserData = () => {
-  const userData = localStorage.getItem("User");
+  const userData = sessionStorage.getItem("token");
   const userIn = JSON.parse(userData);
   if (userIn && userIn.enable === true) {
     return userIn;

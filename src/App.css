@@ -8,13 +8,11 @@
   pointer-events: none;
 }
 h1 {
- 
-  
   font-style: normal;
   font-weight: bold;
   font-size: 28px;
   line-height: 26px;
-  
+
   letter-spacing: 0.03em;
 }
 
@@ -29,15 +27,15 @@ h1 {
   margin: 4rem;
   margin-bottom: 2rem;
   text-align: left;
- font-weight: bold;
+  font-weight: bold;
 }
 #Header-description {
   margin: 0 4rem;
 }
 .App-header {
-	background-image:url(/public/assets/HomeBack.png)  ;
+  background-image: url(/public/assets/HomeBack.png);
   background-repeat: no-repeat;
-  background-size: 100% auto; 
+  background-size: 100% auto;
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -83,4 +81,3 @@ h1 {
   padding: 10px;
   color: red;
 }
-
