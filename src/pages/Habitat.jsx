@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Habitat.css'
+import "../index.css"
+import { auto } from '@popperjs/core';
 
 function Habitat() {
 
@@ -23,14 +25,21 @@ Descubre la maravillosa diversidad de los hábitats naturales de nuestro zoológ
 </p>
 </header>
 
-<Container className=''>
-{Habiat.map((habitat) => (
-<img src={habitat.imagen} alt={habitat.nombre} className="img-fluid" />
-
-))}
-
-</Container>
-</div>
+<div>
+      <Container>
+        <Row>
+          {Habiat.map((habitat) => (
+            <Col xs={12} md={4} key={habitat.nombre} style={{ margin: '10px' }}>
+              
+                <img src={habitat.imagen} alt={habitat.nombre} style={{ width: '200px', height: 'auto' }} />
+                <h6 style={{ color: 'var(--MediumGreen)' }}>{habitat.nombre}</h6>
+              
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
+  </div>
 );
 }
 

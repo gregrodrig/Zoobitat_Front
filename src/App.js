@@ -33,9 +33,13 @@ function App() {
               <Route path="/AnimalDetails" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
 
+              <Route path="/Actividades" element={<Actividades />} />
+              <Route path="/Habitat" element={<Habitat />} />
+
+
               <Route path="/register" element={<Register />} />
               {/* ANIMAL DETAILS */}
-              <Route path="/animal/:idAnimal" element={""} />
+              <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               {/* PROTEGIDAS */}
               <Route
                 element={
