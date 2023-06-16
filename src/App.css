@@ -1,10 +1,21 @@
 .App {
   text-align: center;
+  margin-bottom: 0%;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+h1 {
+ 
+  
+  font-style: normal;
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 26px;
+  
+  letter-spacing: 0.03em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -12,18 +23,28 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.Header-title {
+  font-size: calc(4rem + 2vmin);
+  text-transform: uppercase;
+  margin: 4rem;
+  margin-bottom: 2rem;
+  text-align: left;
+ font-weight: bold;
+}
+#Header-description {
+  margin: 0 4rem;
+}
 .App-header {
-  background-color: #282c34;
+	background-image:url(/public/assets/HomeBack.png)  ;
+  background-repeat: no-repeat;
+  background-size: 100% auto; 
   min-height: 10vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-top: -20px;
 }
-
 .App-link {
   color: #61dafb;
 }
@@ -36,3 +57,30 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 560px) {
+  .Header-title {
+    font-size: calc(1rem + 2vmin);
+    padding-top: 1rem;
+    margin: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  #Header-description {
+    margin: 0.4rem 1.5rem;
+    text-align: left;
+  }
+}
+.imageContainer {
+  position: relative;
+}
+
+.animalName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  color: red;
+}
+
