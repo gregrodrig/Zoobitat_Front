@@ -36,10 +36,13 @@ function App() {
               <Route path="/Actividades" element={<Actividades />} />
               <Route path="/Habitat" element={<Habitat />} />
 
+              <Route path="/Contacto" element={<Contacto />} />
+
 
               <Route path="/register" element={<Register />} />
               {/* ANIMAL DETAILS */}
               <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
+              <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
               {/* PROTEGIDAS */}
               <Route
                 element={

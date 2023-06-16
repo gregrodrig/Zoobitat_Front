@@ -12,4 +12,42 @@
   font-size: 54px; /* Adjust the size of the icon */
   color: red; /* Adjust the color of the icon */
 }
-
+.contacto-header {
+  background-image: url(/public/assets/Animal_Catalog_Header_Bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  min-height: 12vh;
+  display: flex;
+  flex-direction: column;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  margin-top: -20px;
+  width: 100% auto;
+  }
+  .contacto-title {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.03em;
+  margin-top: 30px;
+  margin-left: 30px;
+  text-transform: uppercase;
+  }
+  .contacto-description {
+  align-items: center;
+  margin-left: 30px;
+  text-align: justify;
+  margin-right: 15px;
+  font-size: 14px;
+  }
+  .radioLabel {
+  
+  margin-right: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
