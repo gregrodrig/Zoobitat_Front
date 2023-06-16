@@ -36,7 +36,7 @@ function App() {
 
           <Route path="/register" element={<Register />} />
           {/* ANIMAL DETAILS */}
-          <Route path="/animal/:idAnimal" element={""} />
+          <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
           {/* PROTEGIDAS */}
           <Route
             element={
