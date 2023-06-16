@@ -1,67 +1,122 @@
-import React from "react";
-import Form from 'react-bootstrap/Form';
+import React, { useEffect } from "react";
+import styles from "./Login.module.css";
+import "../../index.css";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./Login.module.css"
+import "./Login.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
-export default function Login() {
+export const Login = () => {
+  const navigate = useNavigate();
+  const { isLoginLoading, hasLoginError, isLogged, loginIn } = useUser();
+
+  useEffect(() => {
+    if (isLogged) navigate("/");
+  }, [isLogged, navigate]);
+
+  const formik = useFormik({
+    initialValues: {
+      password: "",
+      email: "",
+    },
+    onSubmit: async (values, { resetForm }) => {
+      const token = await loginIn(values.email, values.password);
+      if (token) {
+        navigate("/");
+      }
+    },
+  });
   return (
-    
-<>
-  <div style={{ maxWidth: "320px", margin: "0 auto" }}>
-    <Form>
-      <Form.Group className="mb-3" controlId="formGroupEmail" style={{ marginTop: "100px" }}>
-        <h1 style={{ marginBottom: '40px', color: '#2A411C', fontWeight: "bold", fontSize: '32px' }}>¡Bienvenido! </h1>
-
-        <Form.Control
-          style={{ backgroundColor: '#F2F4F7', height: "60px", borderRadius: '' }}
-          type="email"
-          placeholder="Enter email"
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formGroupPassword">
-        <Form.Control
-          style={{ backgroundColor: '#F2F4F7', height: "60px", borderRadius: ''}}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Group>
-      
-      <Button
-        variant="secondary"
-        style={{
-          backgroundColor: "#2A411C",
-          borderRadius: "30px",
-          width: "100%"
-        }}
-        size="lg"
-      >
-        Iniciar Sesion
-      </Button>
-    </Form>
-  </div>
-    <div style={{ display: 'flex', alignItems: 'center', marginTop: '10px' , fontSize:'14px' }}>
-      <AiFillCheckCircle style={{ fontSize: '25px', color:'#2A411C' , marginLeft:'5px'}} />
-      <span style={{ marginLeft: '9px', marginRight:'80px' ,paddingRight:'-15px', color:'#4F7302' }}>Recuérdame</span>
-      <span style={{ marginLeft: '5px',color:'#4F7302'}}>¿Olvidaste tu contraseña?</span>
-    </div>
-<div style={{ marginTop: '100px', fontSize: '14px' }}>
-  ¿No tienes cuenta? ?
-  <span style={{ color: '#4F7302' }}>
-    <a href="/register" style={{ color: '#4F7302' ,marginLeft:'5px' }}>Regístrate Ahora</a>
-  </span>
-</div>
-
-</>
-
-
-
-
-
-
-
+    <>
+      {!isLoginLoading ? (
+        <>
+          <div className={`${styles.main_container}`}>
+            <Form onSubmit={formik.handleSubmit}>
+              <Form.Group className={`${styles.mtop} mb-3`}>
+                <h1
+                  className={`${styles.header}`}
+                  style={{ color: "var(--DarkGreen)" }}
+                >
+                  ¡Bienvenido!{" "}
+                </h1>
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="user@mail.com"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                  className={`${styles.inputs}`}
+                  style={{
+                    backgroundColor: "var(--input-color)",
+                  }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                  className={`${styles.inputs}`}
+                  style={{
+                    backgroundColor: "var(--input-color)",
+                  }}
+                />
+              </Form.Group>
+              {hasLoginError ? (
+                <strong className="mb-3">Credentials are invalid</strong>
+              ) : (
+                ""
+              )}
+              <Button
+                type="submit"
+                size="lg"
+                variant="secondary"
+                className={`${styles.btnSubmit} disable`}
+                style={{
+                  backgroundColor: "var(--DarkGreen)",
+                }}
+              >
+                Iniciar Sesión
+              </Button>
+            </Form>
+            <div className={`${styles.register_container}`}>
+              <AiFillCheckCircle
+                className={`${styles.register_check}`}
+                style={{ color: "var(--DarkGreen)" }}
+              />
+              <span
+                className={`${styles.register_recuerdame}`}
+                style={{ color: "var(--MediumGreen)" }}
+              >
+                Recuérdame
+              </span>
+              <span style={{ color: "var(--MediumGreen)" }}>
+                ¿Olvidaste tu contraseña?
+              </span>
+            </div>
+          </div>
+          <div
+            style={{ color: "#808080", marginTop: "100px", fontSize: "14px" }}
+          >
+            ¿No tienes cuenta?
+            <span style={{ color: "#4F7302" }}>
+              <a
+                href="/register"
+                style={{ color: "#4F7302", marginLeft: "5px" }}
+              >
+                Regístrate Ahora
+              </a>
+            </span>
+          </div>
+        </>
+      ) : (
+        <strong>Checking credentials...</strong>
+      )}
+    </>
   );
-}
-
-    
-
+};

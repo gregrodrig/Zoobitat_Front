@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Menu from './Menu'
 import { AnimalCard } from "../animalCard/AnimalCard";
+import NoticiasList from 'components/Noticia/NoticiasList';
+import "../../index.css"
 
 function Home() {
   return (
@@ -15,6 +17,13 @@ function Home() {
     voluptatibus, incidunt facere quibusdam enim?
   </p>
   <AnimalCard animal={undefined} />
+
+
+  <h1 style={{ color: 'var(--MediumGreen)' }}>ATICULOS FORMATIVOS</h1>
+  <div style={{width:"95%" , margin:"5px"}}>
+    <NoticiasList/>
+  </div>
+  
 </header>
 </div>
   )
