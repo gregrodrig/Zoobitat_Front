@@ -1,28 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Button, Container ,Row ,Col} from 'react-bootstrap';
 import './AnimalList.css'
 import { Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 function AnimalList() {
-  const animalsData = [
-    {
-      idAnimal: 1,
-      imagen: "/assets/elephantAfricano.jpg",
-      nombre: "Elefante Africano ",
-      informacion: "El elefante africano es la especie de elefante mas grande y habita en diversas"
-    },
-    {
-      idAnimal: 2,
-      imagen: "/assets/Tiger.jpg",
-      nombre: "Tiger",
-      informacion: "El tigre es una especie de felino que habita en varios hábitats,inclyuendo selv.. "
-    },
-    {
-      idAnimal: 3,
-      imagen: "/assets/Chamaleon.jpg",
-      nombre: "Cameleon",
-      informacion: "Los Camaleones son conocidos por sus capacidad unica de cambiar el color.."
-    },
-  ];
+
+  const [animalsData, setAnimalsData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://localhost:7106/api/especie')
+      .then((response) => response.json())
+      .then((data) => setAnimalsData(data))
+      .catch((error) => console.error(error));
+  }, []);
+  
 
   return (
 
@@ -64,16 +55,18 @@ function AnimalList() {
         <img 
         style={{marginRight:'-5px' ,borderRadius:'5px' , height:'100px', width:'100px',marginBottom:'7px'}}
           className="col animalImage"
-          src={animal.imagen}
+          src={animal.icono}
           alt={animal.nombre}
         />
         </Col>
         <Col>
       <div className="animalDetailsContainer">
         <div className="firstItem">
-          <p>
-            <strong>{animal.nombre}</strong>
-          </p>
+        <Link to={`/animal/${animal.idEspecie}`}>
+                <p>
+                <strong>{animal.nombre}</strong>
+                </p> 
+        </Link>
         </div>
         <div className="information">
           <p>
