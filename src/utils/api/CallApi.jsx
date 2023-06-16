@@ -6,4 +6,13 @@ const axiosInstance = axios.create({
   headers: { "X-Custom-Header": "foobar" },
 });
 
+const setAuthorization = () => {
+  const accessToken = window.sessionStorage.getItem("token");
+  if (accessToken)
+    axios.defaults.headers.common["Authorization"] = "bearer " + accessToken;
+  else delete axios.defaults.headers.common["Authorization"];
+};
+
+setAuthorization();
+
 export default axiosInstance;

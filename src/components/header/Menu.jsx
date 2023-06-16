@@ -201,7 +201,7 @@ function Menu() {
                           }}
                           size="lg"
                         >
-                          Iniciar Sesion
+                          Iniciar Sesión
                         </Button>
                       </Nav.Link>
                     </>

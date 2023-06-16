@@ -11,11 +11,7 @@ import useUser from "../../hooks/useUser";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { isLoginLoading, hasLoginError, login, isLogged, loginIn } = useUser();
-
-  // useEffect(() => {
-  //   if (sessionStorage.getItem("token")) navigate("/");
-  // }, [isLogged, navigate]);
+  const { isLoginLoading, hasLoginError, isLogged, loginIn } = useUser();
 
   useEffect(() => {
     if (isLogged) navigate("/");
@@ -30,8 +26,6 @@ export const Login = () => {
       const token = await loginIn(values.email, values.password);
       if (token) {
         navigate("/");
-      } else {
-        console.log("buaaaa");
       }
     },
   });
@@ -73,11 +67,16 @@ export const Login = () => {
                   }}
                 />
               </Form.Group>
+              {hasLoginError ? (
+                <strong className="mb-3">Credentials are invalid</strong>
+              ) : (
+                ""
+              )}
               <Button
                 type="submit"
                 size="lg"
                 variant="secondary"
-                className={`${styles.btnSubmit}`}
+                className={`${styles.btnSubmit} disable`}
                 style={{
                   backgroundColor: "var(--DarkGreen)",
                 }}
@@ -118,7 +117,6 @@ export const Login = () => {
       ) : (
         <strong>Checking credentials...</strong>
       )}
-      {hasLoginError && <strong>Credentials are invalid</strong>}
     </>
   );
 };
