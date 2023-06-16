@@ -12,6 +12,8 @@ import AnimalListView from "pages/animalListView/AnimalListView";
 import Actividades from "./pages/Actividades";
 import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
+import HabitatDetails from "pages/HabitatDetails";
+import ActividadDetails from "pages/ActividadesDetails";
 
 export const Context = createContext({});
 
@@ -32,10 +34,13 @@ function App() {
               <Route path="/AnimalList" element={<AnimalListView />} />
               <Route path="/AnimalDetails" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
+              <Route path="/ActividadesDetails" element={<ActividadDetails />} />
 
               <Route path="/Actividades" element={<Actividades />} />
               <Route path="/Habitat" element={<Habitat />} />
-
+              <Route path="/Contacto" element={<Contacto />} />
+        
+              <Route path="/HabitatDetails" element={<HabitatDetails />} />
 
               <Route path="/register" element={<Register />} />
               {/* ANIMAL DETAILS */}
