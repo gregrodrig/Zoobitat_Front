@@ -1,8 +1,15 @@
 .img-fluid {
-    border-radius: 10px;
-    margin: 10px;
-    height: 100px;
-    width: 100px;
-    
-    }
-    
+  border-radius: 10px;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.item {
+  padding: 20px;
+}
