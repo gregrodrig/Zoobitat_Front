@@ -1,28 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Habitat.css'
 
 function Habitat() {
-const habitatData = [
-{
-id: 1,
-habitat:["Sabana Africana","Selva Tropical","Zona Polar","Desierto", "Aviario","Pantano","Bosque Templado","Acuario","Amazónica" ],
-imagenes: [
-"/assets/Sabana_Africana.jpg",
-"/assets/Selva_Tropical.jpg",
-"/assets/Polar.jpg",
-"/assets/Desierto.jpg",
-"/assets/Aviario.jpg",
-"/assets/Pantano.jpg",
-"/assets/Bosque_Templado.jpg",
-"/assets/Acuario.jpg",
-"/assets/Amazonica.jpg"
 
+    const [Habiat, setHabitat] = useState([]);
 
+  useEffect(() => {
+    fetch('https://localhost:7106/api/habitat')
+      .then((response) => response.json())
+      .then((data) => setHabitat(data))
+      .catch((error) => console.error(error));
+  }, []);
 
-],
-},
-];
 
 return (
 <div className="main">
@@ -34,8 +24,8 @@ Descubre la maravillosa diversidad de los hábitats naturales de nuestro zoológ
 </header>
 
 <Container className=''>
-{habitatData[0].imagenes.map((imagen, index) => (
-<img src={imagen} alt={`Imagen ${index + 1}`} className="img-fluid" />
+{Habiat.map((habitat) => (
+<img src={habitat.imagen} alt={habitat.nombre} className="img-fluid" />
 
 ))}
 

@@ -11,6 +11,8 @@ import AnimalList from "./pages/AnimalList";
 import AnimalDetails from "./pages/AnimalDetails";
 import NoticiasDetails from "./pages/NoticiasDetails";
 import Actividades from "./pages/Actividades";
+import Habitat from "./pages/Habitat";
+import Contacto from "./pages/Contacto";
 
 const handleLogout = () => {
   localStorage.clear();
@@ -33,6 +35,8 @@ function App() {
           <Route path="/AnimalDetails" element={<AnimalDetails />} />
           <Route path="/Actividades" element={<Actividades />} />
           <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
+          <Route path="/Habitat" element={<Habitat />} />
+          <Route path="/Contacto" element={<Contacto />} />
 
           <Route path="/register" element={<Register />} />
           {/* ANIMAL DETAILS */}

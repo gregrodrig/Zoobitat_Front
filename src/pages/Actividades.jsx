@@ -1,37 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { GrMapLocation } from 'react-icons/gr';
 import { MdDateRange } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import './Actividades.css'
 
+function formatDate(dateTimeString) {
+    const dateObject = new Date(dateTimeString);
+    const formattedDate = dateObject.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  
+    return formattedDate;
+  }
+  
+
 function Actividades() {
-const actividadesData = [
-{
-idActividad: 1,
-imagen: "/assets/Alimentacion_03.png",
-actividad: "Alimentación de Animales ",
-descripcion: "Experimenta la emoción de acercarte a nuestros increíbles animales mientras los alimentas.",
-ubicacion: "La Granja",
-fecha: "22/06/2023"
-},
-{
-idActividad: 2,
-imagen: "/assets/Exhibicion_02.png",
-actividad: "Exhibiciones Interactivas",
-descripcion: "Toca y aprende sobre nuestras fascinantes criaturas! Descubre sus adaptaciones únicas..",
-ubicacion: "Área Abierta",
-fecha: "25/07/2023"
-},
-{
-idActividad: 3,
-imagen: "/assets/Aguila_02.png",
-actividad: "Vuelo de Águilas ",
-descripcion: "Sumérgete en el fascinante mundo de las águilas en nuestra espectacular exhibición de vuelo.",
-ubicacion: "La CUEVAS",
-fecha: "08/07/2023"
-},
-];
+
+
+    const [actividades, setActividades] = useState(null);
+
+
+    useEffect(() => {
+        fetch('https://localhost:7106/api/Actividades/actividades/semana-actual')
+          .then((response) => response.json())
+          .then((data) => {
+          console.log (data)
+          setActividades(data)})
+          .catch((error) => console.error(error));
+      }, []);
+
+
+      if(!actividades){
+        return <div>No hay actividades</div>
+      }
 
 return (
 
@@ -42,8 +46,8 @@ return (
 </header>
 
 <div className="detailsContainer">
-{actividadesData.map((act) => (
-<div className="actividadContainer" key={act.idActividad}>
+{actividades.map((act) => (
+<div className="actividadContainer" key={act.id}>
 <Container>
 <Link to= '/actividadDetails' className='link'>
 
@@ -52,15 +56,15 @@ return (
 <img
 style={{ marginRight: '-5px', borderRadius: '6px', height: '100px', width: '100px', marginBottom: '7px' }}
 className="actividadImage"
-src={act.imagen}
-alt={act.actividad}
+src={act.foto}
+alt={act.titulo}
 />
 </Col>
 <Col>
 <div className="actividadDetailsContainer">
 <div className="firstItem">
 <p>
-<strong>{act.actividad}</strong>
+<strong>{act.titulo}</strong>
 </p>
 </div>
 <div className="information">
@@ -70,9 +74,9 @@ alt={act.actividad}
 <div>
 <p className='dateAndplace' >
 <GrMapLocation style={{ marginRight: '5px' , color:'#C0D904' }} />
-{`${act.ubicacion} - `}
+{`${act.ubicacion.nombre} - `}
 <MdDateRange style={{ marginRight: '5px' , color : '#C0D904' }} />
-{act.fecha}
+{formatDate(act.fecha)}
 </p>
 </div>
 </div>
