@@ -1,55 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GrMapLocation } from 'react-icons/gr';
 import { MdDateRange } from 'react-icons/md';
 import { BiTimeFive } from 'react-icons/bi';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import './HabitatDetails.css'
+import axios from "axios";
 
 function HabitatDetails() {
-const HabitatData = [
-{
-idHabitat: 1,
-titulo: "SABANA AFRICANA",
-descripcion: `La sabana africana es un vasto paisaje de hierba alta intercalada con arbustos dispersos y algunos árboles. Este hábitat se caracteriza por sus extensas llanuras abiertas y su clima cálido.
+   
 
-En la sabana africana, los animales como leones, cebras, jirafas, elefantes y antílopes conviven en un delicado equilibrio.
+    const { idhabitat } = useParams();
+    const [habitat, setHabitat] = useState([]);
 
-Es común ver a los leones acechando en la hierba alta, las cebras pastando en grupos y las jirafas alcanzando las hojas de los árboles altos.`,
+    useEffect(() => {
+      // Realizar la solicitud GET utilizando el valor de idhabitat
+      axios.get(`https://localhost:7106/api/habitat/${idhabitat}`)
+        .then(response => {
 
-backImages:"/assets/Elefante_Header_Image.png",
+            setHabitat(response.data);
+          // Manejar la respuesta de la solicitud
+          console.log(idhabitat);
+        })
+        .catch(error => {
+          // Manejar el error de la solicitud
+          console.error(error);
+        });
+    }, [idhabitat]);
 
-}
+    return (
+        <body>
+            <header className='AD-header'>
+                {/* una map para sacar la background image */}
+                
+                    <div className='animal-header' key={habitat.idHabitat}>
+                        <div className='header-container'>
+                            <div className='header-image'>
+                                <img src={habitat.imagen} alt='back-img' style={{ height: '210px' }} />
+                            </div>
+                        </div>
+                    </div>
+                
+            </header>
+            {/* una map para sacar el titulo , la descripcion y la image */}
+            <div className='habitats'>
+                
+                    <div className='habitat-details'>
 
-];
-return (
-<body>
-<header className='AD-header'>
-{/* una map para sacar la background image */}
-{HabitatData.map((habitat) => (
-<div className='animal-header' key={habitat.id}>
-<div className='header-container'>
-<div className='header-image'>
-<img src={habitat.backImages} alt='back-img' style={{ height: '210px' }} />
-</div>
-</div>
-</div>
-))}
-</header>
-{/* una map para sacar el titulo , la descripcion y la image */}
-<div className='habitats'>
-{HabitatData.map((habitat) => (
-<div className='habitat-details'>
+                        <h2 className='habitat' style={{ fontWeight: 'bold' }}>{habitat.nombre}</h2>
+                        <hr style={{ margin: "10px ", borderWidth: "2px", width: "80%", marginLeft: '36px', color: 'black' }} />
 
-<h2 className='habitat' style={{ fontWeight: 'bold' }}>{habitat.titulo}</h2>
-<hr style={{ margin: "10px ", borderWidth: "2px", width: "80%" , marginLeft:'36px' ,color:'black' }} />
+                        <p style={{ textAlign: 'start', marginLeft: '20px', fontSize: '12px', width: '100%', marginTop: '20px' }}>{habitat.descripcion}</p>
 
-<p style={{ textAlign: 'start', marginLeft: '20px', fontSize: '12px' , width:'100%', marginTop:'20px' }}>{habitat.descripcion}</p>
+                    </div>
+               
+            </div>
 
-</div>
-))}
-</div>
-
-</body>
-)
+        </body>
+    )
 }
 export default HabitatDetails;

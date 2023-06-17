@@ -1,22 +1,90 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiFillCheckCircle } from "react-icons/ai";
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import { AiFillEye } from 'react-icons/ai';
+import axios from "axios";
 
 
 export default function Register() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+ 
+
+  const handleRegistration = () => {
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          setErrorMessage("Error: No se pudo crear el usuario. Verifique la información proporcionada.");
+          setSuccessMessage("");
+            setTimeout(() => {
+              setErrorMessage("");
+            }, 5000); // Ocultar el mensaje después de 5 segundos
+            return;
+        }
+    const userData = {
+      email: email,
+      contrasenna: password,
+      nombre: name,
+      apellido: name,
+      idRol: 5,
+      rol:null,
+      asignaciones:[]
+    };
+
+
+    axios.post('https://localhost:7106/api/Usuario', userData)
+      .then(response => {
+        // Manejar la respuesta de la solicitud
+        console.log(response.data);
+        setName("");
+        setPassword("");
+        setEmail("");
+        setSuccessMessage("Se registró exitosamente. Espere a ser confirmado por un administrador.");
+        setErrorMessage("");
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 5000);
+      })
+      .catch(error => {
+        // Manejar el error de la solicitud
+        console.error(error);
+        setSuccessMessage("");
+        setErrorMessage("Error: No se pudo crear el usuario. Verifique la información proporcionada.");
+        setTimeout(() => {
+          setErrorMessage("");
+        }, 5000);
+      });
+  };
   return (
   <>
+   {successMessage && (
+          <div style={{ backgroundColor: "green", height: "auto" }}>
+            <p>{successMessage}</p>
+          </div>
+        )}
+    {errorMessage && (
+      <div style={{ backgroundColor: "red", height: "auto" }}>
+        <p>{errorMessage}</p>
+      </div>
+    )}
   <div style={{ maxWidth: "320px", margin: "0 auto" }}>
+   
     <Form>
       <Form.Group className="mb-3" controlId="formGroupNombre" style={{ marginTop: "30px" }}>
         <h1 style={{ marginBottom: '40px', color: '#2A411C', fontWeight: "bold", fontSize: '32px' }}>Crear Cuenta </h1>
+
+       
 
         <Form.Control
           style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: '' }}
           type="text"
           placeholder="Nombre Completo"
+          value={name} onChange={e => setName(e.target.value)}
+          
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formGroupEmail">
@@ -24,19 +92,11 @@ export default function Register() {
           style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: ''}}
           type="email"
           placeholder="Email"
+          value={email} onChange={e => setEmail(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formGroupRol">
-  <Form.Select
-    style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: '' }}
-    aria-label="Rol"
-  >
-    <option>Rol</option>
-    <option>Visitante</option>
-    <option>Cuidador</option>
-    <option>Medico</option>
-    <option>Gestor</option>
-  </Form.Select>
+  
 </Form.Group>
 
       <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -44,6 +104,8 @@ export default function Register() {
           style={{ backgroundColor: '#F2F4F7', height: "55px", borderRadius: ''}}
           type="password"
           placeholder="Contraseña"
+
+          value={password} onChange={e => setPassword(e.target.value)}
           
         />
          <AiFillEye
@@ -67,6 +129,7 @@ export default function Register() {
           width: "100%"
         }}
         size="lg"
+        onClick={handleRegistration}
       >
         Registrarme
       </Button>
