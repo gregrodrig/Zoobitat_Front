@@ -28,6 +28,12 @@ function App() {
           <div>
             <Menu />
             <Routes>
+
+              {/**/}
+
+              {/**/}
+
+               
               <Route path="/" element={<Home />} />
               <Route path="*" element={""} />
               <Route path="/login" element={<Login />} />
@@ -35,24 +41,18 @@ function App() {
               <Route path="/AnimalDetails" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
               <Route path="/ActividadesDetails" element={<ActividadDetails />} />
-
               <Route path="/Actividades" element={<Actividades />} />
               <Route path="/Habitat" element={<Habitat />} />
-
-
+              <Route path="/Habitat/:idhabitat" element={<HabitatDetails />} />
               <Route path="/Contacto" element={<Contacto />} />
-
-
-            
-        
               <Route path="/HabitatDetails" element={<HabitatDetails />} />
-
-
               <Route path="/register" element={<Register />} />
-              {/* ANIMAL DETAILS */}
               <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
-              {/* PROTEGIDAS */}
+
+
+
+
               <Route
                 element={
                   <ProtectedRoute

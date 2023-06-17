@@ -4,6 +4,7 @@ import "./Habitat.css";
 import "../index.css";
 import { auto } from "@popperjs/core";
 import style from "./Habitat.css";
+import { Link } from "react-router-dom";
 
 function Habitat() {
   const [Habiat, setHabitat] = useState([]);
@@ -32,6 +33,7 @@ function Habitat() {
       >
         <Row className="justify-content-center">
           {Habiat.map((habitat) => (
+           
             <Col className="mb-4 item" key={habitat.nombre}>
               <img
                 className="img-fluid"
@@ -43,17 +45,21 @@ function Habitat() {
                   margin: "0px",
                 }}
               />
-              <h2
-                style={{
-                  color: "var(--MediumGreen)",
-                  margin: "0px",
-                  marginBottom: "20px",
-                  paddingTop: "0px",
-                  textAlign: "center",
-                }}
-              >
-                {habitat.nombre}
-              </h2>
+
+              <Link  to={`/habitat/${habitat.idHabitat}`}>
+                <h2
+                  style={{
+                    color: "var(--MediumGreen)",
+                    margin: "0px",
+                    marginBottom: "20px",
+                    paddingTop: "0px",
+                    textAlign: "center",
+                  }}
+                >
+                  {habitat.nombre}
+                </h2>
+              </Link>
+             
             </Col>
           ))}
         </Row>
