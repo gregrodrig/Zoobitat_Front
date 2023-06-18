@@ -5,19 +5,21 @@ import { useParams } from 'react-router-dom';
 export const AnimalFormPage = () => {
     let { id } = useParams();
 
-    if(id){
+    
+    if(id!=null){
 
       return (
         <div>
            
-           <AnimalForm idanimal={id} />
+           <AnimalForm idAnimal={id} />
         </div>
       );
-    }
+    }else{
+    
     return (
       <div>
         
          <AnimalForm  />
       </div>
-    );
+    );}
 }
