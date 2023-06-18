@@ -14,6 +14,12 @@ import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
 import HabitatDetails from "pages/HabitatDetails";
 import ActividadDetails from "pages/ActividadesDetails";
+import { AnimalListPage } from "pages/Animales/AnimalListPage";
+import { AnimalFormPage } from "pages/Animales/AnimalFormPage";
+import { UserList } from "pages/usuarios/UserList";
+import { AsignacionForm } from "pages/asignaciones/AsignacionForm";
+import { AsignacionList } from "pages/asignaciones/AsignacionList";
+
 
 export const Context = createContext({});
 
@@ -49,6 +55,24 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
+
+
+              <Route path="/AnimalDash" element={<AnimalListPage />} />
+              <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
+              <Route path="/AnimalForm/" element={<AnimalFormPage />} />
+
+
+              <Route path="/usuarioList" element={<UserList />} />
+
+
+              <Route path="/AsignacionForm" element={<AsignacionForm />} />
+
+              <Route path="/AsignacionList" element={<AsignacionList />} />
+
+              
+              <Route path="/asignacionDetail/:id" element={<AsignacionList />} />
+
+              
 
 
 
