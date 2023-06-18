@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import styles from "./Login.module.css";
 import "../../index.css";
 import Form from "react-bootstrap/Form";
@@ -11,11 +10,7 @@ import useUser from "../../hooks/useUser";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { isLoginLoading, hasLoginError, isLogged, loginIn } = useUser();
-
-  useEffect(() => {
-    if (isLogged) navigate("/");
-  }, [isLogged, navigate]);
+  const { isLoginLoading, hasLoginError, loginIn } = useUser();
 
   const formik = useFormik({
     initialValues: {
@@ -25,7 +20,7 @@ export const Login = () => {
     onSubmit: async (values, { resetForm }) => {
       const token = await loginIn(values.email, values.password);
       if (token) {
-        navigate("/");
+        navigate("/Dashboard");
       }
     },
   });

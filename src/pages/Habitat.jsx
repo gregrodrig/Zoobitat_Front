@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Habitat.css";
 import "../index.css";
-import { auto } from "@popperjs/core";
 import style from "./Habitat.css";
 import { Link } from "react-router-dom";
 
