@@ -14,6 +14,7 @@ import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
 import HabitatDetails from "pages/HabitatDetails";
 import ActividadDetails from "pages/ActividadesDetails";
+import Dashboard from "components/dashboard/Dashboard";
 
 export const Context = createContext({});
 
@@ -21,7 +22,6 @@ function App() {
   const token = window.sessionStorage.getItem("token");
   const [jwt, setJwt] = useState(token);
   return (
-
     <Context.Provider value={{ jwt, setJwt }}>
       <div className="App">
         <main>
@@ -34,19 +34,19 @@ function App() {
               <Route path="/AnimalList" element={<AnimalListView />} />
               <Route path="/AnimalDetails" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
-              <Route path="/ActividadesDetails" element={<ActividadDetails />} />
+              <Route
+                path="/ActividadesDetails"
+                element={<ActividadDetails />}
+              />
 
               <Route path="/Actividades" element={<Actividades />} />
               <Route path="/Habitat" element={<Habitat />} />
 
-
               <Route path="/Contacto" element={<Contacto />} />
 
+              <Route path="/Dashboard" element={<Dashboard />} />
 
-            
-        
               <Route path="/HabitatDetails" element={<HabitatDetails />} />
-
 
               <Route path="/register" element={<Register />} />
               {/* ANIMAL DETAILS */}
@@ -67,8 +67,8 @@ function App() {
           </div>
         </main>
       </div>
-    </Context.Provider>);
-
+    </Context.Provider>
+  );
 }
 
 export default App;
