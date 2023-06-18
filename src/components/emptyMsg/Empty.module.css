@@ -1,0 +1,30 @@
+:root {
+  --DarkGreen: #2a411c;
+  --MediumGreen: #4f7302;
+  --LightGreen: #c0d904;
+  --LightBrown: #d98859;
+  --DarkBrown: #733729;
+  --Gray: #bcbcbc;
+  --Black: #000000;
+  --white: #ffffff;
+  --background: linear-gradient(0deg, #f6f6f6, #f6f6f6);
+  --input-color: #f2f4f7;
+  --mesaje: #c50000;
+}
+.msgNot {
+  background: var(--mesaje);
+}
+.msgOk {
+  background: var(--LightGreen);
+}
+.msgNot,
+.msgOk {
+  padding: 0.75rem 0;
+  color: var(--white);
+  margin: 20px 0;
+  border-radius: 12px;
+}
+.center {
+  text-align: center;
+  margin: 0;
+}
