@@ -8,6 +8,25 @@ export function Empty({ msg }) {
           No se han cargado los datos desde la Base de datos!
         </p>
       );
+    case "msgOk":
+      return (
+        <div className={styles.msgOk}>
+          <span className={styles.center}>
+            <strong>¡FENOMENAL!</strong>
+            <br />
+            Mensaje enviado con éxito...
+          </span>
+        </div>
+      );
+    case "msgNot":
+      return (
+        <div className={styles.msgNot}>
+          <span className={styles.center}>
+            <strong>¡ERROR!</strong>
+            <br /> Al enviar el mensaje. Inténtalo más tarde...
+          </span>
+        </div>
+      );
     default:
       return null;
   }
