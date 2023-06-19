@@ -6,12 +6,12 @@ import style from "./Habitat.css";
 import { Link } from "react-router-dom";
 
 function Habitat() {
-  const [Habiat, setHabitat] = useState([]);
+  const [habitats, setHabitats] = useState([]);
 
   useEffect(() => {
     fetch("https://localhost:7106/api/habitat")
       .then((response) => response.json())
-      .then((data) => setHabitat(data))
+      .then((data) => setHabitats(data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -20,19 +20,13 @@ function Habitat() {
       <header className="contacto-header">
         <h1 className="contacto-title">Habitat</h1>
         <p className="contacto-description">
-          Descubre la maravillosa diversidad de los hábitats naturales de
-          nuestro zoológico
+          Descubre la maravillosa diversidad de los hábitats naturales de nuestro zoológico
         </p>
       </header>
 
-      <Container
-        fluid
-        style={{ margin: "0px", marginTop: "20px" }}
-        className={style.Container}
-      >
+      <Container fluid style={{ margin: "0px", marginTop: "20px" }} className={style.Container}>
         <Row className="justify-content-center">
-          {Habiat.map((habitat) => (
-           
+          {habitats.map((habitat) => (
             <Col className="mb-4 item" key={habitat.nombre}>
               <img
                 className="img-fluid"
@@ -45,7 +39,7 @@ function Habitat() {
                 }}
               />
 
-              <Link  to={`/habitat/${habitat.idHabitat}`}>
+              <Link to={`/habitat/${habitat.idHabitat}`}>
                 <h2
                   style={{
                     color: "var(--MediumGreen)",
@@ -58,7 +52,6 @@ function Habitat() {
                   {habitat.nombre}
                 </h2>
               </Link>
-             
             </Col>
           ))}
         </Row>
