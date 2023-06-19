@@ -118,7 +118,7 @@ export default class AsignacionFormComponent extends Component {
       .post('https://localhost:7106/api/AsignacionesUsuario', asignacionuser)
       .then(response => {
         console.log('Animal saved successfully');
-        alert("hay que mamartelo");
+       
         // Realizar acciones adicionales después de guardar el animal
       })
       .catch(error => {

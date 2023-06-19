@@ -1,47 +1,42 @@
-import React, { Component } from 'react';
 import axios from 'axios';
-import { Col, Container } from 'react-bootstrap';
+import React, { Component } from 'react'
+import { Col } from 'react-bootstrap';
 import { FaCamera } from 'react-icons/fa';
 
-export default class AnimalForm extends Component {
+export default class HabitatsFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idAnimal: props.idAnimal || 0,
-      image: null,
-      nombre: '',
-      edad: '',
-      especie: '',
-      genero: '',
-      descripcion: '',
-      fechaNacimiento:"",
-      peso:"",
-      especies: [],
+      idHabitat: props.idHabitat || 0,
+      
+      nombre: "",
+      imagen: "",
+      descripcion: "",
+      idTipoHabitat: 0,
+      
+      tipoHabitatList:[]
     };
   }
 
   
 
   componentDidMount() {
-    const { idAnimal } = this.state;
+    const { idHabitat } = this.state;
  
   
-    if (idAnimal !== 0) {
+    if (idHabitat !== 0) {
       axios
-        .get(`https://localhost:7106/api/animal/${idAnimal}`)
+        .get(`https://localhost:7106/api/habitat/${idHabitat}`)
         .then(response => {
-          const animalData = response.data;
+          const habitatData = response.data;
          
-          console.log(animalData)
+          console.log(habitatData)
           this.setState({
-            nombre: animalData.nombre,
-            edad: animalData.edad,
-            especie: animalData.idEspecie,
-            genero: animalData.sexo,
-            descripcion: animalData.informacion,
-            fechaNacimiento:   this.formatoFecha(animalData.fechaNacimiento)  ,
-            peso: animalData.peso,
-            image: animalData.imagen,
+            nombre: habitatData.nombre,
+            imagen: habitatData.imagen,
+            descripcion: habitatData.descripcion,
+            idTipoHabitat: habitatData.idTipoHabitat,
+            
           });
         })
         .catch(error => {
@@ -49,7 +44,7 @@ export default class AnimalForm extends Component {
         });
     }
   
-    this.fetchEspecies();
+    this.fetchTipoHabitat();
   }
   
   formatoFecha = (fechaHora) => {
@@ -65,11 +60,11 @@ export default class AnimalForm extends Component {
     return `${año}-${mesFormateado}-${diaFormateado}`;
   }
   
-  fetchEspecies = () => {
+  fetchTipoHabitat= () => {
     axios
-      .get('https://localhost:7106/api/Especie')
+      .get('https://localhost:7106/api/TipoHabitat')
       .then(response => {
-        this.setState({ especies: response.data });
+        this.setState({ tipoHabitatList: response.data });
       })
       .catch(error => {
         console.error(error);
@@ -83,7 +78,7 @@ export default class AnimalForm extends Component {
 
     reader.onloadend = () => {
       this.setState({
-        image: reader.result,
+        imagen: reader.result,
       });
     };
 
@@ -91,7 +86,7 @@ export default class AnimalForm extends Component {
     }
     catch(e){
       this.setState({
-        image: null,
+        imagen: null,
       });
 
     }
@@ -107,23 +102,18 @@ export default class AnimalForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
   
-    const { idAnimal } = this.props;
-    const { image, nombre, edad, especie, genero, descripcion, fechaNacimiento, peso } = this.state;
+    
+    const {idHabitat, nombre, imagen, descripcion, idTipoHabitat, tipoHabitatList  } = this.state;
   
-    const animalData = {
-      idAnimal: 0,
-      idEspecie: especie,
-      especie: null,
+    alert(idHabitat)
+    const habitatData = {
+      idHabitat:0,
       nombre: nombre,
-      idEstado: 1,
-      estado: null,
-      fechaNacimiento: fechaNacimiento,
-      idHabitat: 1,
-      habitat: null,
-      informacion: descripcion,
-      imagen: image,
-      sexo: genero,
-      peso: peso
+      imagen: imagen,
+      descripcion: descripcion,
+      idTipoHabitat: idTipoHabitat,
+      tipoHabitat: null
+
     };
   
     // Obtener el token del sessionStorage
@@ -132,11 +122,11 @@ export default class AnimalForm extends Component {
     // Agregar el token al encabezado de la solicitud Axios
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
-    const requestMethod = idAnimal !== 0 ? 'PUT' : 'POST';
-    const requestURL = idAnimal !== 0 ? `https://localhost:7106/api/animal/${idAnimal}` : 'https://localhost:7106/api/animal';
+    const requestMethod = idHabitat !== 0 ? 'PUT' : 'POST';
+    const requestURL = idHabitat !== 0 ? `https://localhost:7106/api/habitat/${idHabitat}` : 'https://localhost:7106/api/habitat';
   
-    if(idAnimal !== 0){
-      animalData.idAnimal=idAnimal;
+    if(idHabitat !== 0){
+      habitatData.idHabitat=idHabitat;
     }
     // Resto del código para enviar la solicitud utilizando axios y realizar acciones adicionales
   
@@ -144,7 +134,7 @@ export default class AnimalForm extends Component {
       .request({
         method: requestMethod,
         url: requestURL,
-        data: animalData,
+        data: habitatData,
       })
       .then(response => {
         console.log('Animal saved successfully');
@@ -159,7 +149,7 @@ export default class AnimalForm extends Component {
   
 
   render() {
-    const { image, nombre, edad, especie, genero, descripcion, especies,fechaNacimiento,peso  } = this.state;
+    const { nombre, imagen, descripcion, idTipoHabitat, tipoHabitatList  } = this.state;
 
     return (
 
@@ -167,9 +157,9 @@ export default class AnimalForm extends Component {
    
         <Col className="text-center">
           <div className="d-flex justify-content-center align-items-center mb-4">
-            {image ? (
+            {imagen ? (
                 <label htmlFor="imageInput">
-                  <img src={image} alt="Preview" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
+                  <img src={imagen} alt="Preview" style={{ width: '200px', height: '200px', borderRadius: '50%' }} />
                 </label>
               
             ) : (
@@ -199,9 +189,8 @@ export default class AnimalForm extends Component {
           </div>
 
 
-
        <div>
-        <input
+          <input
               type="text"
               name="nombre"
               value={nombre}
@@ -210,76 +199,22 @@ export default class AnimalForm extends Component {
               style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px' , height:"50px", borderRadius: '5px',}}
             />
        </div>
-       <div>
-         <input
-              type="number"
-              name="edad"
-              value={edad}
-              onChange={this.handleInputChange}
-              placeholder="Edad"
-              style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}
-            />
 
-       </div>
-
-       <div>
-       <input
-  type="number"
-  name="peso" 
-  value={peso}
-  onChange={this.handleInputChange}
-  placeholder="Peso"
-  style={{ width: "95%", border: "none", backgroundColor: 'lightgray', marginBottom: '10px', height: "50px", borderRadius: '5px', }}
-/>
-
-       </div>
-
-
-       <div>
-       <input
-  type="date"
-  name="fechaNacimiento" 
-  value={fechaNacimiento}
-  onChange={this.handleInputChange}
-  placeholder="Fecha"
-  style={{ width: "95%", border: "none", backgroundColor: 'lightgray', marginBottom: '10px', height: "50px", borderRadius: '5px', }}
-/>
-
-       </div>
-
-
-
-
-
-
-       
-
-
-
-
-       <div>
-              <select name="especie" value={especie} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
-              <option value="">Seleccione una especie</option>
-              {especies.map(especie => (
-                <option key={especie.idEspecie} value={especie.idEspecie}>
-                  {especie.nombre}
+        <div>
+          <select name="idTipoHabitat" value={idTipoHabitat} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
+              <option value="">Seleccione un tipo de habitat</option>
+              {tipoHabitatList.map(habitat => (
+                <option key={habitat.idTipoHabitat} value={habitat.idTipoHabitat}>
+                  {habitat.nombre}
                 </option>
               ))}
-            </select>
-          </div>
-          <div>
-            
-            <select name="genero" value={genero} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
-              <option value="">Seleccione un género</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
-            </select>
-          </div>
-          <div>
-            
+          </select>
+        </div>
+
+       <div>
             <textarea placeholder='Descripcion' name="descripcion" value={descripcion} onChange={this.handleInputChange}   style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"150px", borderRadius: '5px',}}/>
-          </div>
-           
+        </div>
+    
           <div style={{width:"100%", margin:"10px"}}  >
             
             <button className="btn rounded-pill btn-block" style={{ color: 'white', fontSize:"30px" ,width:"90%", backgroundColor:"#2a411c"}} type="submit">Guardar</button>
@@ -293,3 +228,4 @@ export default class AnimalForm extends Component {
     );
   }
 }
+
