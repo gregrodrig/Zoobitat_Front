@@ -6,7 +6,7 @@ export const AnimalFormPage = () => {
     let { id } = useParams();
 
     
-    if(id!=null){
+
 
       return (
         <div>
@@ -14,12 +14,5 @@ export const AnimalFormPage = () => {
            <AnimalForm idAnimal={id} />
         </div>
       );
-    }else{
-    
-    return (
-      <div>
-        
-         <AnimalForm  />
-      </div>
-    );}
+   
 }
