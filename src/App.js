@@ -30,8 +30,6 @@ import { ParteList } from "pages/parte/ParteList";
 import { ParteDetail } from "pages/parte/ParteDetail";
 import { ParteForm } from "pages/parte/ParteForm";
 
-
-
 export const Context = createContext({});
 
 function App() {
@@ -66,7 +64,6 @@ function App() {
               <Route path="/HabitatForm" element={<HabitasForms />} />
               <Route path="/HabitatForm/:id" element={<HabitasForms />} />
 
-
               <Route path="/Contacto" element={<Contacto />} />
               <Route path="/HabitatDetails" element={<HabitatDetails />} />
               <Route path="/register" element={<Register />} />
@@ -79,15 +76,10 @@ function App() {
               <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
               <Route path="/AnimalForm/" element={<AnimalFormPage />} />
 
-
-
               <Route path="/partelist" element={<ParteList />} />
               <Route path="/partedetail/:id" element={<ParteDetail />} />
               <Route path="/parteForm/:id" element={<ParteForm />} />
               <Route path="/parteForm/" element={<ParteForm />} />
-
-
-
 
               <Route path="/usuarioList" element={<UserList />} />
 
@@ -95,22 +87,15 @@ function App() {
 
               <Route path="/AsignacionList" element={<AsignacionList />} />
 
-
-              <Route path="/asignacionDetail/:id" element={<AsignacionDetail />} />
-
-              
-
-
-              <Route path="/Dashboard" element={<Dashboard />} />
-
+              <Route
+                path="/asignacionDetail/:id"
+                element={<AsignacionDetail />}
+              />
 
               <Route path="/Dashboard" element={<DashboardView />} />
               <Route path="/Mapa" element={<MapaView />} />
 
               <Route path="/HabitatList" element={<HabitatsList />} />
-
-
-              
 
               <Route path="/register" element={<Register />} />
               {/* ANIMAL DETAILS */}
