@@ -14,14 +14,15 @@ import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
 import HabitatDetails from "pages/HabitatDetails";
 import ActividadDetails from "pages/ActividadesDetails";
-
-import Dashboard from "components/dashboard/Dashboard";
-
 import { AnimalListPage } from "pages/Animales/AnimalListPage";
 import { AnimalFormPage } from "pages/Animales/AnimalFormPage";
 import { UserList } from "pages/usuarios/UserList";
 import { AsignacionForm } from "pages/asignaciones/AsignacionForm";
 import { AsignacionList } from "pages/asignaciones/AsignacionList";
+
+import MapaView from "pages/mapa/MapaView";
+import DashboardView from "pages/dashboard/DashboardView";
+
 import { HabitatsList } from "pages/habitat/HabitatsList";
 import { HabitasForms } from "pages/habitat/HabitasForms";
 import { AsignacionDetail } from "pages/asignaciones/AsignacionDetail";
@@ -43,12 +44,10 @@ function App() {
           <div>
             <Menu />
             <Routes>
-
               {/**/}
 
               {/**/}
 
-               
               <Route path="/" element={<Home />} />
               <Route path="*" element={""} />
               <Route path="/login" element={<Login />} />
@@ -56,7 +55,10 @@ function App() {
               <Route path="/AnimalDetails" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
 
-              <Route path="/ActividadesDetails" element={<ActividadDetails />} />
+              <Route
+                path="/ActividadesDetails"
+                element={<ActividadDetails />}
+              />
 
               <Route path="/Actividades" element={<Actividades />} />
               <Route path="/Habitat" element={<Habitat />} />
@@ -71,9 +73,7 @@ function App() {
               <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
 
-
               <Route path="/Contacto" element={<Contacto />} />
-
 
               <Route path="/AnimalDash" element={<AnimalListPage />} />
               <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
@@ -88,14 +88,14 @@ function App() {
 
 
 
-              <Route path="/usuarioList" element={<UserList />} />
 
+              <Route path="/usuarioList" element={<UserList />} />
 
               <Route path="/AsignacionForm" element={<AsignacionForm />} />
 
               <Route path="/AsignacionList" element={<AsignacionList />} />
 
-              
+
               <Route path="/asignacionDetail/:id" element={<AsignacionDetail />} />
 
               
@@ -103,6 +103,9 @@ function App() {
 
               <Route path="/Dashboard" element={<Dashboard />} />
 
+
+              <Route path="/Dashboard" element={<DashboardView />} />
+              <Route path="/Mapa" element={<MapaView />} />
 
               <Route path="/HabitatList" element={<HabitatsList />} />
 
@@ -114,8 +117,6 @@ function App() {
               <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
               {/* PROTEGIDAS */}
-
-
 
               <Route
                 element={
