@@ -1,3 +1,4 @@
+
 import AnimalListDash from 'components/animalsListDash/AnimalListDash';
 import Encabezado from 'components/header/Encabezado';
 import React, { useEffect } from 'react';
@@ -29,6 +30,7 @@ export const AnimalListPage = () => {
   return (
     <div>
       <Encabezado titulo={'LISTADO DE ANIMALES'} />
+
       <AnimalListDash />
     </div>
   );

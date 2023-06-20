@@ -35,84 +35,76 @@ export const Context = createContext({});
 function App() {
   const token = window.sessionStorage.getItem("token");
   const [jwt, setJwt] = useState(token);
+  const [rol, setRol] = useState([]);
+
   return (
-    <Context.Provider value={{ jwt, setJwt }}>
+    <Context.Provider value={{ jwt, setJwt, rol, setRol }}>
       <div className="App">
         <main>
           <div>
             <Menu />
             <Routes>
-              {/**/}
-
-              {/**/}
-
+              {/*SIN AUTENTICAR*/}
               <Route path="/" element={<Home />} />
               <Route path="*" element={""} />
               <Route path="/login" element={<Login />} />
-              <Route path="/AnimalList" element={<AnimalListView />} />
-              <Route path="/AnimalDetails" element={<AnimalDetails />} />
-              <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
-
               <Route
                 path="/ActividadesDetails"
                 element={<ActividadDetails />}
               />
-
               <Route path="/Actividades" element={<Actividades />} />
+
               <Route path="/Habitat" element={<Habitat />} />
               <Route path="/Habitat/:idhabitat" element={<HabitatDetails />} />
-              <Route path="/HabitatForm" element={<HabitasForms />} />
-              <Route path="/HabitatForm/:id" element={<HabitasForms />} />
-
+              <Route path="/AnimalList" element={<AnimalListView />} />
+              <Route path="/AnimalDetails" element={<AnimalDetails />} />
+              <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
               <Route path="/Contacto" element={<Contacto />} />
-              <Route path="/HabitatDetails" element={<HabitatDetails />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
               <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
-
-              <Route path="/Contacto" element={<Contacto />} />
-
-              <Route path="/AnimalDash" element={<AnimalListPage />} />
-              <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
-              <Route path="/AnimalForm/" element={<AnimalFormPage />} />
-
-              <Route path="/partelist" element={<ParteList />} />
-              <Route path="/partedetail/:id" element={<ParteDetail />} />
-              <Route path="/parteForm/:id" element={<ParteForm />} />
-              <Route path="/parteForm/" element={<ParteForm />} />
-
-              <Route path="/usuarioList" element={<UserList />} />
-
-              <Route path="/AsignacionForm" element={<AsignacionForm />} />
-
-              <Route path="/AsignacionList" element={<AsignacionList />} />
-
-              <Route
-                path="/asignacionDetail/:id"
-                element={<AsignacionDetail />}
-              />
-
-              <Route path="/Dashboard" element={<DashboardView />} />
               <Route path="/Mapa" element={<MapaView />} />
+              {/*FIN SIN AUTENTICAR*/}
 
-              <Route path="/HabitatList" element={<HabitatsList />} />
-
-              <Route path="/register" element={<Register />} />
-              {/* ANIMAL DETAILS */}
-              <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
-              <Route path="/Noticia/:idnoticia" element={<NoticiasDetails />} />
-              {/* PROTEGIDAS */}
-
+              {/* RUTAS PROTEGIDAS */}
               <Route
-                element={
-                  <ProtectedRoute
-                    // isAllowed={userRol?.includes("Admin")}
-                    redirectTo="/"
-                  />
-                }
+                element={<ProtectedRoute isAllowed={token} redirectTo="/" />}
               >
-                {/* RUTAS PROTEGIDAS */}
+                {/* RUTAS USUARIOS */}
+                <Route path="/usuarioList" element={<UserList />} />
+                <Route path="/Dashboard" element={<DashboardView />} />
+                {/* FIN RUTAS USUARIOS */}
+
+                {/* RUTAS HABITAT */}
+                <Route path="/HabitatForm" element={<HabitasForms />} />
+                <Route path="/HabitatForm/:id" element={<HabitasForms />} />
+                <Route path="/HabitatDetails" element={<HabitatDetails />} />
+                <Route path="/HabitatList" element={<HabitatsList />} />
+                {/* FIN RUTAS HABITAT */}
+
+                {/* RUTAS ANIMALES */}
+                <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
+                <Route path="/AnimalDash" element={<AnimalListPage />} />
+                <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
+                <Route path="/AnimalForm/" element={<AnimalFormPage />} />
+                {/* FIN RUTAS ANIMALES */}
+
+                {/* RUTAS PARTES */}
+                <Route path="/partelist" element={<ParteList />} />
+                <Route path="/partedetail/:id" element={<ParteDetail />} />
+                <Route path="/parteForm/" element={<ParteForm />} />
+                <Route path="/parteForm/:id" element={<ParteForm />} />
+                {/* FIN RUTAS PARTES */}
+
+                {/* RUTAS ASIGNACIONES */}
+                <Route path="/AsignacionForm" element={<AsignacionForm />} />
+                <Route path="/AsignacionList" element={<AsignacionList />} />
+                <Route
+                  path="/asignacionDetail/:id"
+                  element={<AsignacionDetail />}
+                />
+                {/* FIN RUTAS ASIGNACIONES */}
               </Route>
+              {/* FIN RUTAS PROTEGIDAS */}
             </Routes>
           </div>
         </main>

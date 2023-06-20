@@ -1,10 +1,12 @@
 import { useCallback, useContext, useState } from "react";
 import { Context } from "../App";
+
 import axiosInstance from "utils/api/CallApi";
 import axios from "axios";
 
+
 export default function useUser() {
-  const { jwt, setJwt } = useContext(Context);
+  const { jwt, setJwt, rol, setRol } = useContext(Context);
 
   const [isLoading, setLoading] = useState({ loading: false, error: false });
 
@@ -17,6 +19,7 @@ export default function useUser() {
       setJwt(response.data);
       window.sessionStorage.setItem("token", response.data);
       setLoading({ loading: false, error: false });
+      setAuthorization();
       return response.data;
     } catch (err) {
       axios
@@ -38,8 +41,10 @@ export default function useUser() {
 
   const logout = useCallback(() => {
     window.sessionStorage.removeItem("token");
+    setAuthorization();
     setJwt(null);
-  }, [setJwt]);
+    setRol(null);
+  }, [setJwt, setRol]);
 
   return {
     isLogged: Boolean(jwt),
@@ -47,5 +52,7 @@ export default function useUser() {
     hasLoginError: isLoading.error,
     logout,
     loginIn,
+    rol,
+    setRol,
   };
 }

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Card, Button, Container, Row, Col } from 'react-bootstrap';
 import { GrMapLocation } from 'react-icons/gr';
@@ -13,6 +14,7 @@ function formatDate(dateTimeString) {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit'
+
   });
 
   return formattedDate;
@@ -22,10 +24,12 @@ function Actividades() {
   const [actividades, setActividades] = useState(null);
 
   useEffect(() => {
+
     log.info('Página lista de Actividades  visitada');
     sendLogToServer('Página Actividades visitada');
     
     fetch('https://localhost:7106/api/Actividades/actividades/semana-actual')
+
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -48,6 +52,7 @@ function Actividades() {
       
       );
   }, []);
+
 
   function sendLogToServer(logMessage) {
     axios
@@ -82,10 +87,12 @@ function Actividades() {
           <div className='actividadContainer' key={act.id}>
             <Container>
               <Link to='/actividadDetails' className='link'>
+
                 <Row>
                   <Col>
                     <img
                       style={{
+
                         marginRight: '-5px',
                         borderRadius: '6px',
                         height: '100px',
@@ -93,26 +100,33 @@ function Actividades() {
                         marginBottom: '7px'
                       }}
                       className='actividadImage'
+
                       src={act.foto}
                       alt={act.titulo}
                     />
                   </Col>
                   <Col>
-                    <div className='actividadDetailsContainer'>
-                      <div className='firstItem'>
+
+                    <div className="actividadDetailsContainer">
+                      <div className="firstItem">
+
                         <p>
                           <strong>{act.titulo}</strong>
                         </p>
                       </div>
-                      <div className='information'>
+
+                      <div className="information">
+
                         <p>
                           <span>{act.descripcion}</span>
                         </p>
                         <div>
+
                           <p className='dateAndplace'>
                             <GrMapLocation style={{ marginRight: '5px', color: '#C0D904' }} />
                             {`${act.ubicacion.nombre} - `}
                             <MdDateRange style={{ marginRight: '5px', color: '#C0D904' }} />
+
                             {formatDate(act.fecha)}
                           </p>
                         </div>
