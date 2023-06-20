@@ -27,6 +27,15 @@ export function Empty({ msg }) {
           </span>
         </div>
       );
+    case "msgError":
+      return (
+        <div className={styles.msgNot}>
+          <span className={styles.center}>
+            <strong>¡ERROR!</strong>
+            <br /> Su solicitud no ha podido ser enviada. Inténtalo más tarde...
+          </span>
+        </div>
+      );
     default:
       return null;
   }

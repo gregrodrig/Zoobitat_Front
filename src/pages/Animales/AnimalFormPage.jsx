@@ -1,11 +1,14 @@
+
 import AnimalForm from 'components/AnimalForm/AnimalForm';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
 
+
 export const AnimalFormPage = () => {
   let { id } = useParams();
+
 
   useEffect(() => {
     log.info(`Página AnimalFormPage visitada. ID de animal: ${id}`);
@@ -27,4 +30,5 @@ export const AnimalFormPage = () => {
       <AnimalForm idAnimal={id} />
     </div>
   );
+
 };

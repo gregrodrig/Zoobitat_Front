@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { GrMapLocation } from 'react-icons/gr';
-import { MdDateRange } from 'react-icons/md';
-import { BiTimeFive } from 'react-icons/bi';
-import { Link, useParams } from "react-router-dom";
-import './HabitatDetails.css'
+import { useParams } from "react-router-dom";
+import "./HabitatDetails.css";
 import axios from "axios";
 
 function HabitatDetails() {
+
     const { idhabitat } = useParams();
     const [habitat, setHabitat] = useState({});
 
@@ -41,5 +39,6 @@ function HabitatDetails() {
         </div>
     )
 }
+
 
 export default HabitatDetails;
