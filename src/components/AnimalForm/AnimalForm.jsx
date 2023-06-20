@@ -101,17 +101,9 @@ export default class AnimalForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { idAnimal } = this.props;
-    const {
-      image,
-      nombre,
-      edad,
-      especie,
-      genero,
-      descripcion,
-      fechaNacimiento,
-      peso,
-    } = this.state;
+    const { idAnimal } = this.state;
+    const { image, nombre, edad, especie, genero, descripcion, fechaNacimiento, peso } = this.state;
+  
 
     const animalData = {
       idAnimal: 0,
