@@ -4,8 +4,11 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Dashboard.css";
 import { Link } from "react-router-dom";
 import Encabezado from "components/header/Encabezado";
+import useUser from "hooks/useUser";
 
 const Dashboard = () => {
+  const { rol } = useUser();
+
   let content = [
     {
       image: "assets/Dash_icons/Animales.svg",
@@ -54,7 +57,7 @@ const Dashboard = () => {
   return (
     <>
       <Encabezado
-        titulo={`BIENVENIDO "USER"`}
+        titulo={`BIENVENIDO ${rol}`}
         info=" "
         style={{
           alignItems: "center",

@@ -26,25 +26,25 @@ const roles = {
 };
 
 function Menu() {
-  const { isLogged, logout } = useUser();
-  const [rol, setRol] = useState([]);
+  const { isLogged, logout, rol, setRol } = useUser();
 
   const getRol = useCallback(async () => {
+    console.log(isLogged);
     if (!isLogged) {
       return;
     }
     try {
       const response = await axiosInstance.get(`LogIn/rol-token`);
       setRol(response.data);
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
-  }, [isLogged]);
+  }, [isLogged, setRol]);
 
   useEffect(() => {
     getRol();
-  }, []);
+  }, [getRol]);
 
   return (
     <>
@@ -105,8 +105,8 @@ function Menu() {
                   <hr />
                   {/* USER ROLES */}
                   {roles.Admin === rol ||
-                  roles.Cuidador ||
-                  roles.Veterinario ? (
+                  roles.Cuidador === rol ||
+                  roles.Veterinario === rol ? (
                     <>
                       <Link
                         to="/Dashboard"

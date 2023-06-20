@@ -35,8 +35,10 @@ export const Context = createContext({});
 function App() {
   const token = window.sessionStorage.getItem("token");
   const [jwt, setJwt] = useState(token);
+  const [rol, setRol] = useState([]);
+
   return (
-    <Context.Provider value={{ jwt, setJwt }}>
+    <Context.Provider value={{ jwt, setJwt, rol, setRol }}>
       <div className="App">
         <main>
           <div>
