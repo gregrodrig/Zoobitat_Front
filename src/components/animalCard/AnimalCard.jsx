@@ -14,18 +14,18 @@ export function AnimalCard({ animal }) {
                 src="assets/Animals.png"
                 className={styles.animalImage}
               />
-             <Card.Title
-          className={styles.animalName}
-          style={{
-            position: "absolute",
-            bottom: "7px",
-            left: "0",
-            color:'white',
-            marginBottom:'10px'
-          }}
-        >
-          Animals
-        </Card.Title>
+              <Card.Title
+                className={styles.animalName}
+                style={{
+                  position: "absolute",
+                  bottom: "7px",
+                  left: "0",
+                  color: "white",
+                  marginBottom: "10px",
+                }}
+              >
+                Animals
+              </Card.Title>
             </Link>
           </Card.Body>
         </Card>
@@ -37,18 +37,19 @@ export function AnimalCard({ animal }) {
                 src="assets/Actividades.png"
                 className={styles.animalImage}
               />
-  <Card.Title
-          className={styles.animalName}
-          style={{
-            position: "absolute",
-            bottom: "7px",
-            left: "0",
-            color:'white',
-            marginBottom:'10px'
-          }}
-        >
-          Actividades
-        </Card.Title>            </Link>
+              <Card.Title
+                className={styles.animalName}
+                style={{
+                  position: "absolute",
+                  bottom: "7px",
+                  left: "0",
+                  color: "white",
+                  marginBottom: "10px",
+                }}
+              >
+                Actividades
+              </Card.Title>{" "}
+            </Link>
           </Card.Body>
         </Card>
         <Card className={styles.animalCard}>
@@ -59,18 +60,19 @@ export function AnimalCard({ animal }) {
                 src="assets/habitat.png"
                 className={styles.animalImage}
               />
-  <Card.Title
-          className={styles.animalName}
-          style={{
-            position: "absolute",
-            bottom: "7px",
-            left: "0",
-            color:'white',
-            marginBottom:'10px'
-          }}
-        >
-          Habitat
-        </Card.Title>            </Link>
+              <Card.Title
+                className={styles.animalName}
+                style={{
+                  position: "absolute",
+                  bottom: "7px",
+                  left: "0",
+                  color: "white",
+                  marginBottom: "10px",
+                }}
+              >
+                Habitat
+              </Card.Title>{" "}
+            </Link>
           </Card.Body>
         </Card>
         <Card className={styles.animalCard}>
@@ -81,18 +83,19 @@ export function AnimalCard({ animal }) {
                 src="assets/mapa.png"
                 className={styles.animalImage}
               />
-  <Card.Title
-          className={styles.animalName}
-          style={{
-            position: "absolute",
-            bottom: "7px",
-            left: "0",
-            color:'white',
-            marginBottom:'10px'
-          }}
-        >
-          Mapa
-        </Card.Title>            </Link>
+              <Card.Title
+                className={styles.animalName}
+                style={{
+                  position: "absolute",
+                  bottom: "7px",
+                  left: "0",
+                  color: "white",
+                  marginBottom: "10px",
+                }}
+              >
+                Mapa
+              </Card.Title>{" "}
+            </Link>
           </Card.Body>
         </Card>
       </div>

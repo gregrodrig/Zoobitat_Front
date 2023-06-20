@@ -15,9 +15,36 @@ import { GiTreeBranch } from "react-icons/gi";
 import { TbMapSearch } from "react-icons/tb";
 import { MdContactPhone } from "react-icons/md";
 import useUser from "../../hooks/useUser";
+import axiosInstance from "utils/api/CallApi";
+import { useCallback, useEffect, useState } from "react";
+const roles = {
+  Admin: 1,
+  Cuidador: 2,
+  Veterinario: 3,
+  Visitante: 4,
+  Inactivo: 5,
+};
 
 function Menu() {
   const { isLogged, logout } = useUser();
+  const [rol, setRol] = useState([]);
+
+  const getRol = useCallback(async () => {
+    if (!isLogged) {
+      return;
+    }
+    try {
+      const response = await axiosInstance.get(`LogIn/rol-token`);
+      setRol(response.data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [isLogged]);
+
+  useEffect(() => {
+    getRol();
+  }, []);
 
   return (
     <>
@@ -57,19 +84,58 @@ function Menu() {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3 pb-4">
-                  <Nav.Link href="/">
+                  <Link
+                    to="/"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     <AiFillHome
                       style={{
                         color: "gray",
                         fontSize: "20px",
                         marginRight: "10px",
                         marginBottom: "7px",
+                        textDecoration: "none",
                       }}
                     />
                     Home
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  {/* USER ROLES */}
+                  {roles.Admin === rol ||
+                  roles.Cuidador ||
+                  roles.Veterinario ? (
+                    <>
+                      <Link
+                        to="/Dashboard"
+                        style={{
+                          textDecoration: "none",
+                          color: "gray",
+                        }}
+                      >
+                        <AiFillHome
+                          style={{
+                            color: "gray",
+                            fontSize: "20px",
+                            marginRight: "10px",
+                            marginBottom: "7px",
+                          }}
+                        />
+                        Dashboard
+                      </Link>
+                      <hr />
+                    </>
+                  ) : null}
+                  {/* END USER ROLES */}
+                  <Link
+                    to="#action2"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     {" "}
                     <BsFillPeopleFill
                       style={{
@@ -80,9 +146,15 @@ function Menu() {
                       }}
                     />{" "}
                     Nosotros
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="/Actividades">
+                  <Link
+                    to="/Actividades"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     {" "}
                     <FiActivity
                       style={{
@@ -93,9 +165,15 @@ function Menu() {
                       }}
                     />{" "}
                     Actividades
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="#action2">
+                  <Link
+                    to="#action2"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     <IoTime
                       style={{
                         color: "gray",
@@ -105,9 +183,15 @@ function Menu() {
                       }}
                     />{" "}
                     Horarios
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="/AnimalList">
+                  <Link
+                    to="/AnimalList"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     <MdPets
                       style={{
                         color: "gray",
@@ -117,9 +201,15 @@ function Menu() {
                       }}
                     />{" "}
                     Animales
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="/habitat">
+                  <Link
+                    to="/habitat"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     {" "}
                     <GiTreeBranch
                       style={{
@@ -130,9 +220,15 @@ function Menu() {
                       }}
                     />{" "}
                     Habitat
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="/mapa">
+                  <Link
+                    to="/mapa"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     {" "}
                     <TbMapSearch
                       style={{
@@ -143,9 +239,15 @@ function Menu() {
                       }}
                     />{" "}
                     Mapa
-                  </Nav.Link>
+                  </Link>
                   <hr />
-                  <Nav.Link href="Contacto">
+                  <Link
+                    to="Contacto"
+                    style={{
+                      textDecoration: "none",
+                      color: "gray",
+                    }}
+                  >
                     <MdContactPhone
                       style={{
                         color: "gray",
@@ -155,11 +257,11 @@ function Menu() {
                       }}
                     />{" "}
                     Contactos
-                  </Nav.Link>
+                  </Link>
                 </Nav>
                 <Nav className="d-grid gap-2">
                   {isLogged ? (
-                    <Nav.Link href="/login">
+                    <Link to="/login">
                       <Button
                         onClick={logout}
                         variant="secondary"
@@ -173,10 +275,10 @@ function Menu() {
                       >
                         Cerrar Sesión
                       </Button>
-                    </Nav.Link>
+                    </Link>
                   ) : (
                     <>
-                      <Nav.Link href="/register">
+                      <Link to="/register">
                         <Button
                           variant="primary"
                           style={{
@@ -189,8 +291,8 @@ function Menu() {
                         >
                           Registrarse
                         </Button>
-                      </Nav.Link>
-                      <Nav.Link href="/login">
+                      </Link>
+                      <Link to="/login">
                         <Button
                           variant="secondary"
                           style={{
@@ -203,7 +305,7 @@ function Menu() {
                         >
                           Iniciar Sesión
                         </Button>
-                      </Nav.Link>
+                      </Link>
                     </>
                   )}
                 </Nav>
