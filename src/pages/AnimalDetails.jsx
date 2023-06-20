@@ -24,6 +24,18 @@ function AnimalDetails() {
         setAnimal(data);
       })
       .catch((error) => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AnimalDetails',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error(error);
       });
   }, [idAnimal]);
@@ -36,6 +48,18 @@ function AnimalDetails() {
         setGaleria(data);
       })
       .catch((error) => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AnimalDetails',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error(error);
       });
   }, [idAnimal]);
@@ -51,6 +75,18 @@ function AnimalDetails() {
         console.log('Log enviado al servidor');
       })
       .catch((error) => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AnimalDetails',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error('Error al enviar el log al servidor', error);
       });
   }

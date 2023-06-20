@@ -148,8 +148,23 @@ export default class AnimalForm extends Component {
         console.log("Animal saved successfully");
         // Resto del código para manejar la respuesta y realizar acciones adicionales
       })
+
       .catch((error) => {
+
         console.error(error);
+
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AnimalForm',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         // Resto del código para manejar el error
       });
   };

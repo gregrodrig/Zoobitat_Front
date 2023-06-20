@@ -22,8 +22,26 @@ export default class HabitatsListsComponent extends Component {
       .then((response) => {
         this.setState({ habitats: response.data });
       })
+
       .catch((error) => {
+
         console.error(error);
+
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'HabitatsListsComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
+
+
+
       });
   };
 

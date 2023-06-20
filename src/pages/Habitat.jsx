@@ -4,6 +4,7 @@ import "./Habitat.css";
 import "../index.css";
 import style from "./Habitat.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Habitat() {
   const [habitats, setHabitats] = useState([]);
@@ -12,7 +13,24 @@ function Habitat() {
     fetch("https://localhost:7106/api/habitat")
       .then((response) => response.json())
       .then((data) => setHabitats(data))
-      .catch((error) => console.error(error));
+      .catch((error) => 
+
+      axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'Habitat',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
+      
+      
+      
+      );
   }, []);
 
   return (

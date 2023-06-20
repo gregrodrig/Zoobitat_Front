@@ -46,61 +46,68 @@ export default class ParteFormComponent extends Component {
         });
       };
 
-      reader.readAsDataURL(file);
-    } catch (e) {
-      this.setState({
-        image: null,
-      });
-    }
-  };
+    
+      handleSubmit = event => {
+        event.preventDefault();
+      
+        const { titulo,  animal, observaciones, animalSelect} = this.state;
+    
+        const asignacionuser = {
+            idParte: 0,
+            titulo: titulo,
+            idAnimal:animal ,
+            animal: null,
+            observaciones: observaciones,
+            estado:1
+        };
+      
+        // Obtener el token del sessionStorage
+        const token = sessionStorage.getItem('token');
+      
+        // Agregar el token al encabezado de la solicitud Axios
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+        axios
+          .post('https://localhost:7106/api/parte', asignacionuser)
+          .then(response => {
+            console.log('Animal saved successfully');
+           
+            // Realizar acciones adicionales después de guardar el animal
+          })
+          .catch(error => {
+            console.error(error);
 
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
 
-    const { titulo, animal, observaciones, animalSelect } = this.state;
+            axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'ParteFormComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
+            alert("error");
+            // Manejar el error en caso de que ocurra
+          });
+      };
+      
+    
+      render() {
+        const { titulo,  animal, observaciones, animalSelect} = this.state;
+    
+        return (
+    
+          <form onSubmit={this.handleSubmit}>
+       
+            <Col className="text-center">
+              
+            <div>
 
-    const asignacionuser = {
-      idParte: 0,
-      titulo: titulo,
-      idAnimal: animal,
-      animal: null,
-      observaciones: observaciones,
-      estado: 1,
-    };
-
-    // Obtener el token del sessionStorage
-    const token = sessionStorage.getItem("token");
-
-    // Agregar el token al encabezado de la solicitud Axios
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    axios
-      .post("https://localhost:7106/api/parte", asignacionuser)
-      .then((response) => {
-        console.log("Animal saved successfully");
-
-        // Realizar acciones adicionales después de guardar el animal
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("error");
-        // Manejar el error en caso de que ocurra
-      });
-  };
-
-  render() {
-    const { titulo, animal, observaciones, animalSelect } = this.state;
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <Col className="text-center">
-          <div>
             <input
               type="text"
               name="titulo"

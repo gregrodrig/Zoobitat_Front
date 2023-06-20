@@ -38,6 +38,18 @@ export default class UsuarioListComponent extends Component {
         this.setState({ user: response.data });
       })
       .catch(error => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'UsuarioListComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error(error);
       });
   };

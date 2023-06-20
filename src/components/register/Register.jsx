@@ -52,6 +52,18 @@ export default function Register() {
       .catch(error => {
         // Manejar el error de la solicitud
         console.error(error);
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'Register',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         setSuccessMessage("");
         setErrorMessage("Error: No se pudo crear el usuario. Verifique la información proporcionada.");
         setTimeout(() => {

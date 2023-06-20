@@ -4,6 +4,7 @@ import './AnimalList.css'
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "../../index.css"
+import axios from 'axios';
 
 function AnimalList() {
 
@@ -13,7 +14,23 @@ function AnimalList() {
     fetch('https://localhost:7106/api/especie')
       .then((response) => response.json())
       .then((data) => setAnimalsData(data))
-      .catch((error) => console.error(error));
+      .catch((error) => 
+      
+      
+      axios
+      .post('https://localhost:7106/api/logs', {
+        message: error,
+        level: 'ERROR',
+        section: 'AnimalList',
+      })
+      .then((response) => {
+        console.log('Log enviado al servidor')
+      })
+      .catch((error) => {
+        console.error('Error al enviar el log al servidor', error)
+      })
+      
+      );
   }, []);
   
 
