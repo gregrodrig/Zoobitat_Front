@@ -45,6 +45,12 @@ export default class ParteFormComponent extends Component {
           image: reader.result,
         });
       };
+    }
+    catch(e){
+      console.log(e.message)
+    }
+  
+  };
 
     
       handleSubmit = event => {
@@ -67,8 +73,7 @@ export default class ParteFormComponent extends Component {
         // Agregar el token al encabezado de la solicitud Axios
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
-        axios
-          .post('https://localhost:7106/api/parte', asignacionuser)
+        axios.post('https://localhost:7106/api/parte', asignacionuser)
           .then(response => {
             console.log('Animal saved successfully');
            
@@ -76,21 +81,17 @@ export default class ParteFormComponent extends Component {
           })
           .catch(error => {
             console.error(error);
-
-
-
-            axios
-        .post('https://localhost:7106/api/logs', {
-          message: error,
-          level: 'ERROR',
-          section: 'ParteFormComponent',
-        })
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+            axios.post('https://localhost:7106/api/logs', {
+                message: error,
+                level: 'ERROR',
+                section: 'ParteFormComponent',
+              })
+              .then((response) => {
+                console.log('Log enviado al servidor')
+              })
+              .catch((error) => {
+                console.error('Error al enviar el log al servidor', error)
+              });
             alert("error");
             // Manejar el error en caso de que ocurra
           });
@@ -184,6 +185,7 @@ export default class ParteFormComponent extends Component {
           </div>
         </Col>
       </form>
-    );
-  }
+        );
+      }
 }
+  

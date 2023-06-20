@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { Context } from "../App";
 
-import axiosInstance from "utils/api/CallApi";
+import axiosInstance, { setAuthorization } from "utils/api/CallApi";
 import axios from "axios";
 
 
