@@ -86,7 +86,7 @@ function Actividades() {
         {actividades.map((act) => (
           <div className='actividadContainer' key={act.id}>
             <Container>
-              <Link to='/actividadDetails' className='link'>
+              <Link to='' className='link'>
 
                 <Row>
                   <Col>

@@ -146,7 +146,7 @@ export default class HabitatsFormComponent extends Component {
 
         axios
         .post('https://localhost:7106/api/logs', {
-          message: error,
+          message: error.message,
           level: 'ERROR',
           section: 'HabitatsFormComponent',
         })

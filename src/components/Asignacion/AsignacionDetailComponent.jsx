@@ -47,7 +47,7 @@ export default class AsignacionDetailComponent extends Component {
       .catch(error => {
         axios
         .post('https://localhost:7106/api/logs', {
-          message: error,
+          message: error.message,
           level: 'ERROR',
           section: 'AsignacionDetailComponent',
         })

@@ -54,7 +54,7 @@ export default function Register() {
         console.error(error);
         axios
         .post('https://localhost:7106/api/logs', {
-          message: error,
+          message: error.message,
           level: 'ERROR',
           section: 'Register',
         })

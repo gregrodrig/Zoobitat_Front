@@ -57,7 +57,7 @@ function App() {
               <Route path="/Habitat" element={<Habitat />} />
               <Route path="/Habitat/:idhabitat" element={<HabitatDetails />} />
               <Route path="/AnimalList" element={<AnimalListView />} />
-              <Route path="/AnimalDetails" element={<AnimalDetails />} />
+              <Route path="/AnimalDetails/:idAnimal" element={<AnimalDetails />} />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
               <Route path="/Contacto" element={<Contacto />} />
               <Route path="/register" element={<Register />} />

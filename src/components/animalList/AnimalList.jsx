@@ -19,7 +19,7 @@ function AnimalList() {
       
       axios
       .post('https://localhost:7106/api/logs', {
-        message: error,
+        message: error.message,
         level: 'ERROR',
         section: 'AnimalList',
       })
@@ -56,7 +56,7 @@ function AnimalList() {
         <Col>
       <div className="animalDetailsContainer">
         <div className="firstItem">
-        <Link  to={`/animal/${animal.idEspecie}`}>
+        <Link  to={`/AnimalDetails/${animal.idEspecie}`}>
                 <p>
                 <strong>{animal.nombre}</strong>
                 </p> 

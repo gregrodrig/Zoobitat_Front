@@ -155,7 +155,7 @@ export default class AnimalForm extends Component {
 
         axios
         .post('https://localhost:7106/api/logs', {
-          message: error,
+          message: error.message,
           level: 'ERROR',
           section: 'AnimalForm',
         })
