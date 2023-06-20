@@ -45,6 +45,19 @@ export default class ParteListComponent extends Component {
               .catch(error => {
                 this.setState({ partes: [] });
                 console.error(error);
+
+                axios
+                .post('https://localhost:7106/api/logs', {
+                  message: error,
+                  level: 'ERROR',
+                  section: 'ParteListComponent',
+                })
+                .then((response) => {
+                  console.log('Log enviado al servidor')
+                })
+                .catch((error) => {
+                  console.error('Error al enviar el log al servidor', error)
+                })
               });
           
       };

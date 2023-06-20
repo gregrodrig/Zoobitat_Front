@@ -23,6 +23,22 @@ export default class NoticiasList extends Component {
       })
       .catch(error => {
         console.error(error);
+
+
+
+
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'NoticiasList',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         // Manejar el error y desactivar la carga en caso de fallo
         this.setState({ loading: false });
       });

@@ -122,6 +122,18 @@ export default class AsignacionFormComponent extends Component {
         // Realizar acciones adicionales después de guardar el animal
       })
       .catch(error => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AsignacionFormComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error(error);
         alert("error");
         // Manejar el error en caso de que ocurra

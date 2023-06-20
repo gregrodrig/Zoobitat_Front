@@ -103,6 +103,21 @@ export default class ParteFormComponent extends Component {
           })
           .catch(error => {
             console.error(error);
+
+
+
+            axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'ParteFormComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
             alert("error");
             // Manejar el error en caso de que ocurra
           });

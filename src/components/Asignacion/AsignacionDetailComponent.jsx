@@ -45,6 +45,18 @@ export default class AsignacionDetailComponent extends Component {
         // Aquí puedes manejar la respuesta del PUT si es necesario
       })
       .catch(error => {
+        axios
+        .post('https://localhost:7106/api/logs', {
+          message: error,
+          level: 'ERROR',
+          section: 'AsignacionDetailComponent',
+        })
+        .then((response) => {
+          console.log('Log enviado al servidor')
+        })
+        .catch((error) => {
+          console.error('Error al enviar el log al servidor', error)
+        })
         console.error(error);
         // Aquí puedes manejar los errores del PUT si es necesario
       });

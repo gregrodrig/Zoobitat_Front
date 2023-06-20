@@ -31,7 +31,22 @@ function Actividades() {
         console.log(data);
         setActividades(data);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => 
+      
+      axios
+      .post('https://localhost:7106/api/logs', {
+        message: error,
+        level: 'ERROR',
+        section: 'Actividades',
+      })
+      .then((response) => {
+        console.log('Log enviado al servidor')
+      })
+      .catch((error) => {
+        console.error('Error al enviar el log al servidor', error)
+      })
+      
+      );
   }, []);
 
   function sendLogToServer(logMessage) {
