@@ -34,18 +34,3 @@ const config: CapacitorConfig = {
 };
 
 export default config;
-
-// import { CapacitorConfig } from "@capacitor/cli";
-
-// const config: CapacitorConfig = {
-//   appId: "com.example.app",
-//   appName: "zoobitat_front",
-//   webDir: "build",
-//   server: {
-//     url: "http://192.168.102.52:3000",
-//     cleartext: true,
-//     // androidScheme: 'https'
-//   },
-// };
-
-// export default config;

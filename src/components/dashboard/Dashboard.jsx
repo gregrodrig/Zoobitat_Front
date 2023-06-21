@@ -8,6 +8,21 @@ import useUser from "hooks/useUser";
 
 const Dashboard = () => {
   const { rol } = useUser();
+  let msgWelcome = "";
+
+  if (rol === 1) {
+    msgWelcome = "Gestor";
+  } else if (rol === 2) {
+    msgWelcome = "Cuidador";
+  } else if (rol === 3) {
+    msgWelcome = "Veterinario";
+  } else if (rol === 4) {
+    msgWelcome = "Visitante";
+  } else if (rol === 5) {
+    msgWelcome = "Inactivo";
+  } else {
+    msgWelcome = "Eliminado";
+  }
 
   let content = [
     {
@@ -57,7 +72,7 @@ const Dashboard = () => {
   return (
     <>
       <Encabezado
-        titulo={`BIENVENIDO ${rol}`}
+        titulo={`BIENVENIDO ${msgWelcome}`}
         info=" "
         style={{
           alignItems: "center",

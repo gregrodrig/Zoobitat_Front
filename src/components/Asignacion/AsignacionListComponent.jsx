@@ -53,19 +53,18 @@ export default class AsignacionListComponent extends Component {
             this.setState({ asignaciones: [] });
             console.error(error);
 
-
             axios
-        .post('https://localhost:7106/api/logs', {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AsignacionListComponent',
-        })
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+              .post("https://localhost:7106/api/logs", {
+                message: error.message,
+                level: "ERROR",
+                section: "AsignacionListComponent",
+              })
+              .then((response) => {
+                console.log("Log enviado al servidor");
+              })
+              .catch((error) => {
+                console.error("Error al enviar el log al servidor", error);
+              });
           });
       })
       .catch((error) => {
@@ -124,6 +123,17 @@ export default class AsignacionListComponent extends Component {
 
     return (
       <div>
+        <div style={{ width: "100%", margin: "0 0 20px", padding: "0 10px" }}>
+          <Link
+            style={{ width: "100%", backgroundColor: "#2a411c" }}
+            to="/asignacionForm"
+            className="btn rounded-pill btn-block"
+          >
+            <span style={{ color: "white", fontSize: "30px" }}>
+              Crear Nueva Tarea
+            </span>
+          </Link>
+        </div>
         <div
           style={{
             display: "flex",
