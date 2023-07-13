@@ -25,8 +25,8 @@ function Home() {
   <AnimalCard animal={undefined} />
 
 
-  <h1 style={{ color: 'var(--MediumGreen)',  '@media (max-width: 1024px)': {
-              fontSize: '1.5rem',
+  <h1 style={{ marginTop:'70px', color: 'var(--MediumGreen)',  '@media (max-width: 1024px)': {
+              fontSize: '1.5rem', 
             },  }}>ATICULOS FORMATIVOS</h1>
   <div style={{width:"95%" , margin:"5px"}}>
     <NoticiasList/>
