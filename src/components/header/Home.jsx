@@ -9,9 +9,15 @@ function Home() {
   return (
   <div className="App">
 <header className="App-header">
-  <h1 className="Header-title">
-   Bienvenidos  <br />a ZOOBITAT
-  </h1>
+<h1
+          className="Header-title"
+          style={{
+            fontSize: '3rem',
+            marginBottom:'-0px'
+          }}
+        >
+          Bienvenidos a ZOOBITAT
+        </h1>
   <p id="Header-description">
     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt et
     voluptatibus, incidunt facere quibusdam enim?
@@ -19,7 +25,9 @@ function Home() {
   <AnimalCard animal={undefined} />
 
 
-  <h1 style={{ color: 'var(--MediumGreen)' }}>ATICULOS FORMATIVOS</h1>
+  <h1 style={{ color: 'var(--MediumGreen)',  '@media (max-width: 1024px)': {
+              fontSize: '1.5rem',
+            },  }}>ATICULOS FORMATIVOS</h1>
   <div style={{width:"95%" , margin:"5px"}}>
     <NoticiasList/>
   </div>
