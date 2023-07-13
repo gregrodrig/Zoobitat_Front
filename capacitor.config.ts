@@ -1,51 +1,33 @@
 import { CapacitorConfig } from "@capacitor/cli";
 import { networkInterfaces } from "os";
 
-// Función para obtener la dirección IP de la máquina por defecto
-function getDefaultIPAddress(): string | undefined {
+// Obtén la dirección IP local del ordenador
+function getLocalIPAddress() {
   const interfaces = networkInterfaces();
-  for (const interfaceName of Object.keys(interfaces)) {
-    const addresses = interfaces[interfaceName];
-    for (const address of addresses) {
-      if (address.family === "IPv4" && !address.internal) {
-        return address.address;
+
+  for (const interfaceName in interfaces) {
+    const networkInterface = interfaces[interfaceName];
+    for (const info of networkInterface) {
+      if (!info.internal && info.family === "IPv4") {
+        return info.address;
       }
     }
   }
-  return undefined;
+
+  return "127.0.0.1"; // Dirección IP predeterminada si no se encuentra ninguna dirección IP local
 }
 
-// Obtener la dirección IP por defecto
-const defaultIP = getDefaultIPAddress();
-
-if (!defaultIP) {
-  console.error("No se pudo obtener la dirección IP por defecto.");
-  process.exit(1);
-}
+const localIPAddress = getLocalIPAddress();
+const port = 3000; // Puerto por defecto
 
 const config: CapacitorConfig = {
-  appId: "com.example.app",
-  appName: "zoobitat_front",
+  appId: "com.zoobitat.app",
+  appName: "zoobitat-app",
   webDir: "build",
   server: {
-    url: `http://${defaultIP}:3000`, // Utilizar la dirección IP por defecto en la URL
+    url: `http://${localIPAddress}:${port}`,
     cleartext: true,
   },
 };
 
 export default config;
-
-// import { CapacitorConfig } from "@capacitor/cli";
-
-// const config: CapacitorConfig = {
-//   appId: "com.example.app",
-//   appName: "zoobitat_front",
-//   webDir: "build",
-//   server: {
-//     url: "http://192.168.102.52:3000",
-//     cleartext: true,
-//     // androidScheme: 'https'
-//   },
-// };
-
-// export default config;
