@@ -93,7 +93,7 @@ export function AnimalCard({ animal }) {
                   marginBottom: "10px",
                 }}
               >
-                Mapa
+                Mapa 
               </Card.Title>{" "}
             </Link>
           </Card.Body>

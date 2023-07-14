@@ -47,7 +47,7 @@ function AnimalList() {
         <Row>
           <Col> 
         <img 
-        style={{marginRight:'-5px' ,borderRadius:'5px' , height:'100px', width:'100px',marginBottom:'7px'}}
+        style={{marginRight:'-5px' ,borderRadius:'5px' , height:'190px', width:'190px',marginBottom:'7px'}}
           className="col animalImage"
           src={animal.icono}
           alt={animal.nombre}

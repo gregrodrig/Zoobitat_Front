@@ -25,3 +25,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+p { 
+  font-size: 14px;
+  margin-top: -12px;
+}
+@media (min-width: 1024px) {
+  .articulo-informativos { 
+  margin-top:70px;
+  color: #2a411c;
+
+}
+}
+@media (max-width: 767px) {
+  .articulo-informativos {
+    margin-top:0px;
+    color: #2a411c;
+
+  }
+
+}

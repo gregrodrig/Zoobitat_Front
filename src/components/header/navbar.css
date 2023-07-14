@@ -1,0 +1,24 @@
+/* Styles for mobile screens */
+@media (max-width: 767px) {
+
+
+    .navbar-laptop {
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        margin-top: -30px;
+
+    }
+}
+
+/* Styles for laptop screens */
+@media (min-width: 1024px) {
+
+
+    .navbar-mobile {
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        margin-top: -30px;
+    }
+}

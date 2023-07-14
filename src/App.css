@@ -43,7 +43,24 @@ h1 {
   color: white;
   margin-top: -20px;
 }
-.App-link {
+@media (min-width: 1024px) {
+  .App-header {
+    background-image: url(/public/assets/HomeBack.png);
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    margin-top: -20px;
+    height: 700px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+
+  }
+  }
+
+  .App-link {
   color: #61dafb;
 }
 

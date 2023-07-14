@@ -32,9 +32,27 @@
 .select-option {
   color: #d2d2d2;
 }
+@media(min-width : 1024px) { 
+  .animalDetailsContainer {
+    margin-right: 20px;
+    margin-left: -17px;
+    font-size:large;
+  }
+ 
+  .firstItem {
+    margin-top: 8px;
+    font-size: 34px;
+    font-weight: bold;
+    color: #4f7302;
+    text-align: start;
+  }
+
+}
 .animalDetailsContainer {
   margin-right: 20px;
-  margin-left: -35px;
+  margin-left: -17px;
+  display: flex;
+  flex-direction: column;
 }
 .firstItem {
   margin-top: 8px;
@@ -49,4 +67,9 @@
   margin-top: -14px;
   margin-left: -1px;
   text-align: start;
+}
+.animalContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; /* Adjust the margin as needed */
 }
