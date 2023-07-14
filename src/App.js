@@ -13,6 +13,7 @@ import Actividades from "./pages/Actividades";
 import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
 import HabitatDetails from "pages/HabitatDetails";
+import MenuWeb from "components/header/MenuWeb";
 import ActividadDetails from "pages/ActividadesDetails";
 import { AnimalListPage } from "pages/Animales/AnimalListPage";
 import { AnimalFormPage } from "pages/Animales/AnimalFormPage";
@@ -29,6 +30,7 @@ import { AsignacionDetail } from "pages/asignaciones/AsignacionDetail";
 import { ParteList } from "pages/parte/ParteList";
 import { ParteDetail } from "pages/parte/ParteDetail";
 import { ParteForm } from "pages/parte/ParteForm";
+import { Navbar } from "react-bootstrap";
 
 export const Context = createContext({});
 
@@ -42,7 +44,9 @@ function App() {
       <div className="App">
         <main>
           <div>
-            <Menu />
+         <Menu />
+         <MenuWeb />
+
             <Routes>
               {/*SIN AUTENTICAR*/}
               <Route path="/" element={<Home />} />

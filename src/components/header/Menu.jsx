@@ -3,8 +3,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { BsSearch } from "react-icons/bs";
 import style from "./Menu.module.css";
+import './navbar.css';
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
@@ -52,7 +52,7 @@ function Menu() {
         <Navbar
           key={expand}
           expand={expand}
-          className={`mb-3 ${style.customNavbar}`}
+          className={`mb-3 ${style.customNavbar} navbar-mobile `}
         >
           <Container fluid>
             <Navbar.Toggle
@@ -62,10 +62,9 @@ function Menu() {
 
             <Navbar.Brand href="#">
               <Link to="/">
-                <img src="assets/Logo.png" alt="Logo" />
+                <img src="assets/Logo.png" alt="Logo" style={{ marginRight:'120px'}} />
               </Link>
             </Navbar.Brand>
-            <BsSearch className={style.searchIcon} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
