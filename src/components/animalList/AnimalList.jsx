@@ -4,13 +4,14 @@ import './AnimalList.css'
 import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "../../index.css"
+import miVariableGlobal from '../../global.js';
 
 function AnimalList() {
 
   const [animalsData, setAnimalsData] = useState([]);
 
   useEffect(() => {
-    fetch('https://localhost:7106/api/especie')
+    fetch(`https://${miVariableGlobal}:7106/api/especie`)
       .then((response) => response.json())
       .then((data) => setAnimalsData(data))
       .catch((error) => console.error(error));

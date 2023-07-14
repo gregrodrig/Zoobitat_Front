@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Col, Container } from 'react-bootstrap';
 import { FaCamera } from 'react-icons/fa';
+import miVariableGlobal from '../../global.js';
 
 export default class AsignacionFormComponent extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class AsignacionFormComponent extends Component {
      // Agregar el token al encabezado de la solicitud Axios
      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     axios
-      .get('https://localhost:7106/api/Usuario/usuariosempl')
+      .get(`https://${miVariableGlobal}:7106/api/Usuario/usuariosempl`)
       .then(response => {
         this.setState({ usuarioSelect: response.data });
       })
@@ -41,7 +42,7 @@ export default class AsignacionFormComponent extends Component {
       });
 
       axios
-      .get('https://localhost:7106/api/Asignacion')
+      .get(`https://${miVariableGlobal}:7106/api/Asignacion`)
       .then(response => {
         this.setState({ asignacionSelect: response.data });
       })
@@ -51,7 +52,7 @@ export default class AsignacionFormComponent extends Component {
 
 
       axios
-      .get('https://localhost:7106/api/animal')
+      .get(`https://${miVariableGlobal}:7106/api/animal`)
       .then(response => {
         this.setState({ animalSelect: response.data });
       })
@@ -115,7 +116,7 @@ export default class AsignacionFormComponent extends Component {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   
     axios
-      .post('https://localhost:7106/api/AsignacionesUsuario', asignacionuser)
+      .post(`https://${miVariableGlobal}:7106/api/AsignacionesUsuario`, asignacionuser)
       .then(response => {
         console.log('Animal saved successfully');
        

@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
 
 
 export const AnimalFormPage = () => {
@@ -16,7 +17,7 @@ export const AnimalFormPage = () => {
   }, [id]);
 
   function sendLogToServer(logMessage) {
-    axios.post('https://localhost:7106/api/logs', { message: logMessage, level: 'INFO', section: 'AnimalFormPage' })
+    axios.post('https://'+miVariableGlobal+':7106/api/logs', { message: logMessage, level: 'INFO', section: 'AnimalFormPage' })
       .then(response => {
         console.log('Log enviado al servidor');
       })

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Empty } from 'components/emptyMsg/Empty';
 import { Col, Container, Row } from 'react-bootstrap';
 import log from 'loglevel';
+import miVariableGlobal from '../global.js';
 
 function Contacto() {
   const contactData = [
@@ -46,7 +47,7 @@ function Contacto() {
     }
 
     axios
-      .post('https://localhost:7106/api/Comentario', data)
+      .post(`https://${miVariableGlobal}:7106/api/Comentario`, data)
       .then((response) => {
         setEnviado(true);
         setError(false);
@@ -70,7 +71,7 @@ function Contacto() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'Contacto',

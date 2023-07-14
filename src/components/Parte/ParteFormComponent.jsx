@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
+import miVariableGlobal from '../../global.js';
 
 export default class ParteFormComponent extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class ParteFormComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .get("https://localhost:7106/api/animal")
+      .get(`https://${miVariableGlobal}:7106/api/animal`)
       .then((response) => {
         this.setState({ animalSelect: response.data });
       })
@@ -81,7 +82,7 @@ export default class ParteFormComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .post("https://localhost:7106/api/parte", asignacionuser)
+      .post(`https://${miVariableGlobal}:7106/api/parte`, asignacionuser)
       .then((response) => {
         console.log("Animal saved successfully");
 

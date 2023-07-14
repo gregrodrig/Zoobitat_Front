@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
 
 export default class AsignacionDetailComponent extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export default class AsignacionDetailComponent extends Component {
     const { idasignacion } = this.props;
 
     axios
-      .get(`https://localhost:7106/api/asignacionesusuario/${idasignacion}`)
+      .get(`https://${miVariableGlobal}:7106/api/asignacionesusuario/${idasignacion}`)
       .then(response => {
         const asignacionData = response.data;
         console.log(asignacionData);
@@ -39,7 +40,7 @@ export default class AsignacionDetailComponent extends Component {
     const { idAsignacionUsuario } = asignacion;
 
     axios
-      .put(`https://localhost:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`)
+      .put(`https://${miVariableGlobal}:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`)
       .then(response => {
         console.log(response.data);
         // Aquí puedes manejar la respuesta del PUT si es necesario

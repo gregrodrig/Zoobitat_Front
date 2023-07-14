@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import miVariableGlobal from '../../global.js';
 
 export default class HabitatsListsComponent extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class HabitatsListsComponent extends Component {
 
   fetchHabitats = () => {
     axios
-      .get("https://localhost:7106/api/habitat")
+      .get(`https://${miVariableGlobal}:7106/api/habitat`)
       .then((response) => {
         this.setState({ habitats: response.data });
       })

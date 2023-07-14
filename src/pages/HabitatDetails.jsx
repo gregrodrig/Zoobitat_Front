@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./HabitatDetails.css";
 import axios from "axios";
+import miVariableGlobal from '../global.js';
 
 function HabitatDetails() {
 
@@ -9,7 +10,7 @@ function HabitatDetails() {
     const [habitat, setHabitat] = useState({});
 
     useEffect(() => {
-        axios.get(`https://localhost:7106/api/habitat/${idhabitat}`)
+        axios.get(`https://${miVariableGlobal}:7106/api/habitat/${idhabitat}`)
             .then(response => {
                 setHabitat(response.data);
             })

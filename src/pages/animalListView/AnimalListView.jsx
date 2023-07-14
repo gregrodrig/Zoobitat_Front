@@ -4,6 +4,7 @@ import Search from "components/search/Search";
 import AnimalList from "components/animalList/AnimalList";
 import log from "loglevel";
 import axios from "axios";
+import miVariableGlobal from '../../global.js';
 
 function AnimalListView() {
   useEffect(() => {
@@ -13,7 +14,7 @@ function AnimalListView() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post("https://localhost:7106/api/logs", {
+      .post('https://'+miVariableGlobal+':7106/api/logs', {
         message: logMessage,
         level: "INFO",
         section: "AnimalListView",

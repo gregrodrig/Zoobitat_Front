@@ -3,6 +3,7 @@ import Encabezado from 'components/header/Encabezado'
 import React, { useEffect } from 'react'
 import log from 'loglevel'
 import axios from 'axios'
+import miVariableGlobal from '../../global.js';
 
 export const AsignacionList = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ export const AsignacionList = () => {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post('https://'+miVariableGlobal+':7106/api/logs', {
         message: logMessage,
         level: 'INFO',
         section: 'AsignacionList',

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
+import miVariableGlobal from '../../global.js';
 
 export default class AnimalForm extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class AnimalForm extends Component {
 
     if (idAnimal !== 0) {
       axios
-        .get(`https://localhost:7106/api/animal/${idAnimal}`)
+        .get(`https://${miVariableGlobal}:7106/api/animal/${idAnimal}`)
         .then((response) => {
           const animalData = response.data;
 
@@ -64,7 +65,7 @@ export default class AnimalForm extends Component {
 
   fetchEspecies = () => {
     axios
-      .get("https://localhost:7106/api/Especie")
+      .get(`https://${miVariableGlobal}:7106/api/Especie`)
       .then((response) => {
         this.setState({ especies: response.data });
       })
@@ -130,8 +131,8 @@ export default class AnimalForm extends Component {
     const requestMethod = idAnimal !== 0 ? "PUT" : "POST";
     const requestURL =
       idAnimal !== 0
-        ? `https://localhost:7106/api/animal/${idAnimal}`
-        : "https://localhost:7106/api/animal";
+        ? `https://${miVariableGlobal}:7106/api/animal/${idAnimal}`
+        : `https://${miVariableGlobal}:7106/api/animal`;
 
     if (idAnimal !== 0) {
       animalData.idAnimal = idAnimal;

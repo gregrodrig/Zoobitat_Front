@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NoticiaCard from './NoticiaCard';
+import miVariableGlobal from '../../global.js';
 
 export default class NoticiasList extends Component {
 
@@ -16,7 +17,7 @@ export default class NoticiasList extends Component {
   componentDidMount() {
     // Realizar la solicitud GET a la API
     axios
-      .get('https://localhost:7106/api/noticia')
+      .get(`https://${miVariableGlobal}:7106/api/noticia`)
       .then(response => {
         // Actualizar el estado con las noticias recibidas y desactivar la carga
         this.setState({ noticias: response.data, loading: false });

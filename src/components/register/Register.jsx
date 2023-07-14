@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import { AiFillEye } from 'react-icons/ai';
 import axios from "axios";
+import miVariableGlobal from '../../global.js';
 
 
 export default function Register() {
@@ -36,7 +37,7 @@ export default function Register() {
     };
 
 
-    axios.post('https://localhost:7106/api/Usuario', userData)
+    axios.post(`https://${miVariableGlobal}:7106/api/Usuario`, userData)
       .then(response => {
         // Manejar la respuesta de la solicitud
         console.log(response.data);

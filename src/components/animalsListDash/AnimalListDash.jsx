@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { FaAngleRight } from "react-icons/fa";
+import miVariableGlobal from '../../global.js';
 
 export default class AnimalListDash extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ export default class AnimalListDash extends Component {
 
   fetchAnimals = () => {
     axios
-      .get("https://localhost:7106/api/animal")
+      .get(`https://${miVariableGlobal}:7106/api/animal`)
       .then((response) => {
         this.setState({ animals: response.data });
       })
@@ -28,7 +29,7 @@ export default class AnimalListDash extends Component {
   };
   handleDeleteAnimal = (idAnimal) => {
     axios
-      .post(`https://localhost:7106/api/animal/${idAnimal}`)
+      .post(`https://${miVariableGlobal}:7106/api/animal/${idAnimal}`)
       .then((response) => {
         console.log("Animal deleted successfully");
         this.fetchAnimals();

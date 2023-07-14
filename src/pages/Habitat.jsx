@@ -4,12 +4,13 @@ import "./Habitat.css";
 import "../index.css";
 import style from "./Habitat.css";
 import { Link } from "react-router-dom";
+import miVariableGlobal from '../global.js';
 
 function Habitat() {
   const [habitats, setHabitats] = useState([]);
 
   useEffect(() => {
-    fetch("https://localhost:7106/api/habitat")
+    fetch(`https://${miVariableGlobal}:7106/api/habitat`)
       .then((response) => response.json())
       .then((data) => setHabitats(data))
       .catch((error) => console.error(error));

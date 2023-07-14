@@ -2,6 +2,7 @@ import Dashboard from "components/dashboard/Dashboard";
 import React, { useEffect } from "react";
 import log from 'loglevel';
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
 
 export default function DashboardView() {
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function DashboardView() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post('https://'+miVariableGlobal+':7106/api/logs', {
         message: logMessage,
         level: 'INFO',
         section: 'DashboardView',

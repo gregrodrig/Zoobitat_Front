@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
 import './Actividades.css';
+import miVariableGlobal from '../global.js';
 
 function formatDate(dateTimeString) {
   const dateObject = new Date(dateTimeString);
@@ -28,7 +29,7 @@ function Actividades() {
     log.info('Página lista de Actividades  visitada');
     sendLogToServer('Página Actividades visitada');
     
-    fetch('https://localhost:7106/api/Actividades/actividades/semana-actual')
+    fetch(`https://${miVariableGlobal}:7106/api/Actividades/actividades/semana-actual`)
 
       .then((response) => response.json())
       .then((data) => {
@@ -41,7 +42,7 @@ function Actividades() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'Actividades'

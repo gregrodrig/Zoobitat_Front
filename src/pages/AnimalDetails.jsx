@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
 import './AnimalDetails.css';
+import miVariableGlobal from '../global.js';
 
 function AnimalDetails() {
   const { idAnimal } = useParams();
@@ -18,7 +19,7 @@ function AnimalDetails() {
     log.info(`Detalles del animal con ID: ${idAnimal}`);
     sendLogToServer(`Detalles del animal con ID: ${idAnimal}`);
 
-    fetch(`https://localhost:7106/api/especie/${idAnimal}`)
+    fetch(`https://${miVariableGlobal}:7106/api/especie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         setAnimal(data);
@@ -29,7 +30,7 @@ function AnimalDetails() {
   }, [idAnimal]);
 
   useEffect(() => {
-    fetch(`https://localhost:7106/api/galeria/idespecie/${idAnimal}`)
+    fetch(`https://${miVariableGlobal}:7106/api/galeria/idespecie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -42,7 +43,7 @@ function AnimalDetails() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'AnimalDetails'

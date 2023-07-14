@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
 import { FaAngleRight, FaCheck, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import miVariableGlobal from '../../global.js';
 
 export default class ParteListComponent extends Component {
     constructor(props) {
@@ -32,7 +33,7 @@ export default class ParteListComponent extends Component {
 
       
           
-             let url = `https://localhost:7106/api/parte`;
+             let url = `https://${miVariableGlobal}:7106/api/parte`;
              // alert(rol);
            
       
@@ -57,7 +58,7 @@ export default class ParteListComponent extends Component {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     
         axios
-          .delete(`https://localhost:7106/api/usuario/${idUsuario}`)
+          .delete(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}`)
           .then(response => {
             console.log('User deleted successfully');
             this.fetchUser();

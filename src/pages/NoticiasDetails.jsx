@@ -3,6 +3,7 @@ import './NoticiasDetails.css';
 import { useParams } from 'react-router';
 import log from 'loglevel';
 import axios from 'axios';
+import miVariableGlobal from '../global.js';
 
 function NoticiasDetails() {
   const { idnoticia } = useParams();
@@ -12,7 +13,7 @@ function NoticiasDetails() {
     log.info(`Cargando detalles de la noticia con ID: ${idnoticia}`);
     sendLogToServer(`Cargando detalles de la noticia con ID: ${idnoticia}`);
 
-    fetch(`https://localhost:7106/api/Noticia/${idnoticia}`)
+    fetch(`https://${miVariableGlobal}:7106/api/Noticia/${idnoticia}`)
       .then(response => response.json())
       .then(data => {
         setNoticia(data);
@@ -24,7 +25,7 @@ function NoticiasDetails() {
   }, [idnoticia]);
 
   function sendLogToServer(logMessage) {
-    axios.post('https://localhost:7106/api/logs', { message: logMessage, level: 'INFO', section: 'NoticiasDetails' })
+    axios.post(`https://${miVariableGlobal}:7106/api/logs`, { message: logMessage, level: 'INFO', section: 'NoticiasDetails' })
       .then(response => {
         console.log('Log enviado al servidor');
       })

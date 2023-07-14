@@ -4,6 +4,7 @@ import Encabezado from 'components/header/Encabezado';
 import React, { useEffect } from 'react';
 import log from 'loglevel';
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
 
 export const ParteList = () => {
   useEffect(() => {
@@ -13,7 +14,7 @@ export const ParteList = () => {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'ParteList',

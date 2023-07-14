@@ -2,6 +2,7 @@ import Mapa from "components/mapa/Mapa";
 import React, { useEffect } from "react";
 import log from "loglevel";
 import axios from "axios";
+import miVariableGlobal from '../../global.js';
 
 export default function MapaView() {
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function MapaView() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post("https://localhost:7106/api/logs", {
+      .post('https://'+miVariableGlobal+':7106/api/logs', {
         message: logMessage,
         level: "INFO",
         section: "MapaView",
