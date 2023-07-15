@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import Register from "./components/register/Register";
 import { Login } from "./components/login/Login";
-import Menu from "./components/header/Menu";
 import Home from "./components/header/Home";
 import AnimalDetails from "./pages/AnimalDetails";
 import NoticiasDetails from "./pages/NoticiasDetails";
@@ -13,7 +12,6 @@ import Actividades from "./pages/Actividades";
 import Habitat from "./pages/Habitat";
 import Contacto from "./pages/Contacto";
 import HabitatDetails from "pages/HabitatDetails";
-import MenuWeb from "components/header/MenuWeb";
 import ActividadDetails from "pages/ActividadesDetails";
 import { AnimalListPage } from "pages/Animales/AnimalListPage";
 import { AnimalFormPage } from "pages/Animales/AnimalFormPage";
@@ -30,10 +28,28 @@ import { AsignacionDetail } from "pages/asignaciones/AsignacionDetail";
 import { ParteList } from "pages/parte/ParteList";
 import { ParteDetail } from "pages/parte/ParteDetail";
 import { ParteForm } from "pages/parte/ParteForm";
-import { Navbar } from "react-bootstrap";
+import "@ionic/react/css/core.css";
+import { setupIonicReact } from "@ionic/react";
+
+/* Core CSS required for Ionic components to work properly */
+import "@ionic/react/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
+
+/* Optional CSS utils that can be commented out */
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
+import MainMenu from "components/header/mainMenu/MainMenu";
 
 export const Context = createContext({});
-
+setupIonicReact();
 function App() {
   const token = window.sessionStorage.getItem("token");
   const [jwt, setJwt] = useState(token);
@@ -42,11 +58,8 @@ function App() {
   return (
     <Context.Provider value={{ jwt, setJwt, rol, setRol }}>
       <div className="App">
-        <main>
-          <div>
-         <Menu />
-         <MenuWeb />
-
+        <MainMenu
+          outlet={
             <Routes>
               {/*SIN AUTENTICAR*/}
               <Route path="/" element={<Home />} />
@@ -61,7 +74,10 @@ function App() {
               <Route path="/Habitat" element={<Habitat />} />
               <Route path="/Habitat/:idhabitat" element={<HabitatDetails />} />
               <Route path="/AnimalList" element={<AnimalListView />} />
-              <Route path="/AnimalDetails/:idAnimal" element={<AnimalDetails />} />
+              <Route
+                path="/AnimalDetails/:idAnimal"
+                element={<AnimalDetails />}
+              />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
               <Route path="/Contacto" element={<Contacto />} />
               <Route path="/register" element={<Register />} />
@@ -110,8 +126,8 @@ function App() {
               </Route>
               {/* FIN RUTAS PROTEGIDAS */}
             </Routes>
-          </div>
-        </main>
+          }
+        />
       </div>
     </Context.Provider>
   );
