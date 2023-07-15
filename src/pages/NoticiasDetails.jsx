@@ -12,7 +12,7 @@ function NoticiasDetails() {
     log.info(`Cargando detalles de la noticia con ID: ${idnoticia}`);
     sendLogToServer(`Cargando detalles de la noticia con ID: ${idnoticia}`);
 
-    fetch(`https://localhost:7106/api/Noticia/${idnoticia}`)
+    fetch(`https://${global}:7106/api/Noticia/${idnoticia}`)
       .then(response => response.json())
       .then(data => {
         setNoticia(data);
@@ -20,7 +20,7 @@ function NoticiasDetails() {
       })
       .catch(error => {
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'NoticiasDetails',
@@ -36,7 +36,7 @@ function NoticiasDetails() {
   }, [idnoticia]);
 
   function sendLogToServer(logMessage) {
-    axios.post('https://localhost:7106/api/logs', { message: logMessage, level: 'INFO', section: 'NoticiasDetails' })
+    axios.post(`https://${global}:7106/api/logs`, { message: logMessage, level: 'INFO', section: 'NoticiasDetails' })
       .then(response => {
         console.log('Log enviado al servidor');
       })

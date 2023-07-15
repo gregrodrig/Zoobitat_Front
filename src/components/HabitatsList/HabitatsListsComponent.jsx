@@ -18,7 +18,7 @@ export default class HabitatsListsComponent extends Component {
 
   fetchHabitats = () => {
     axios
-      .get("https://localhost:7106/api/habitat")
+      .get(`https://${global}:7106/api/habitat`)
       .then((response) => {
         this.setState({ habitats: response.data });
       })
@@ -28,7 +28,7 @@ export default class HabitatsListsComponent extends Component {
         console.error(error);
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'HabitatsListsComponent',

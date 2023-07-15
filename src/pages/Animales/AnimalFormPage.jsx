@@ -16,7 +16,7 @@ export const AnimalFormPage = () => {
   }, [id]);
 
   function sendLogToServer(logMessage) {
-    axios.post('https://localhost:7106/api/logs', { message: logMessage, level: 'INFO', section: 'AnimalFormPage' })
+    axios.post(`https://${global}:7106/api/logs`, { message: logMessage, level: 'INFO', section: 'AnimalFormPage' })
       .then(response => {
         console.log('Log enviado al servidor');
       })

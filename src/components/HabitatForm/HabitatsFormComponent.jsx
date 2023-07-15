@@ -23,7 +23,7 @@ export default class HabitatsFormComponent extends Component {
 
     if (idHabitat !== 0) {
       axios
-        .get(`https://localhost:7106/api/habitat/${idHabitat}`)
+        .get(`https://${global}:7106/api/habitat/${idHabitat}`)
         .then((response) => {
           const habitatData = response.data;
 
@@ -58,7 +58,7 @@ export default class HabitatsFormComponent extends Component {
 
   fetchTipoHabitat = () => {
     axios
-      .get("https://localhost:7106/api/TipoHabitat")
+      .get(`https://${global}:7106/api/TipoHabitat`)
       .then((response) => {
         this.setState({ tipoHabitatList: response.data });
       })
@@ -123,8 +123,8 @@ export default class HabitatsFormComponent extends Component {
     const requestMethod = idHabitat !== 0 ? "PUT" : "POST";
     const requestURL =
       idHabitat !== 0
-        ? `https://localhost:7106/api/habitat/${idHabitat}`
-        : "https://localhost:7106/api/habitat";
+        ? `https://${global}:7106/api/habitat/${idHabitat}`
+        : `https://${global}:7106/api/habitat`;
 
     if (idHabitat !== 0) {
       habitatData.idHabitat = idHabitat;
@@ -145,7 +145,7 @@ export default class HabitatsFormComponent extends Component {
         console.error(error);
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'HabitatsFormComponent',

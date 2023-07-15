@@ -32,7 +32,7 @@ export default class ParteListComponent extends Component {
 
       
           
-             let url = `https://localhost:7106/api/parte`;
+             let url = `https://${global}:7106/api/parte`;
              // alert(rol);
            
       
@@ -47,7 +47,7 @@ export default class ParteListComponent extends Component {
                 console.error(error);
 
                 axios
-                .post('https://localhost:7106/api/logs', {
+                .post(`https://${global}:7106/api/logs`, {
                   message: error.message,
                   level: 'ERROR',
                   section: 'ParteListComponent',
@@ -70,7 +70,7 @@ export default class ParteListComponent extends Component {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     
         axios
-          .delete(`https://localhost:7106/api/usuario/${idUsuario}`)
+          .delete(`https://${global}:7106/api/usuario/${idUsuario}`)
           .then(response => {
             console.log('User deleted successfully');
             this.fetchUser();

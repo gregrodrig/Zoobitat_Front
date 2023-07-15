@@ -19,7 +19,7 @@ export default class ParteDetailComponent extends Component {
     // Agregar el token al encabezado de la solicitud Axios
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         axios
-          .get(`https://localhost:7106/api/parte/${idParte}`)
+          .get(`https://${global}:7106/api/parte/${idParte}`)
           .then(response => {
             const Resparte = response.data;
             console.log(Resparte);
@@ -32,7 +32,7 @@ export default class ParteDetailComponent extends Component {
           .catch(error => {
             console.error(error);
             axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'ParteDetailComponent',
@@ -59,7 +59,7 @@ export default class ParteDetailComponent extends Component {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     
         axios
-          .patch(`https://localhost:7106/api/Parte/ChangeEstado/${idParte}/2`)
+          .patch(`https://${global}:7106/api/Parte/ChangeEstado/${idParte}/2`)
           .then(response => {
             console.log(response.data);
             window.history.back();

@@ -36,7 +36,7 @@ export default function Register() {
     };
 
 
-    axios.post('https://localhost:7106/api/Usuario', userData)
+    axios.post(`https://${global}:7106/api/Usuario`, userData)
       .then(response => {
         // Manejar la respuesta de la solicitud
         console.log(response.data);
@@ -53,7 +53,7 @@ export default function Register() {
         // Manejar el error de la solicitud
         console.error(error);
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'Register',

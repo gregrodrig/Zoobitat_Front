@@ -23,7 +23,7 @@ export default function useUser() {
       return response.data;
     } catch (err) {
       axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: err.response.data,
           level: 'ERROR',
           section: 'lOGIN',

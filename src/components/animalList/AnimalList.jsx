@@ -11,14 +11,14 @@ function AnimalList() {
   const [animalsData, setAnimalsData] = useState([]);
 
   useEffect(() => {
-    fetch('https://localhost:7106/api/especie')
+    fetch(`https://${global}:7106/api/especie`)
       .then((response) => response.json())
       .then((data) => setAnimalsData(data))
       .catch((error) => 
       
       
       axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: error.message,
         level: 'ERROR',
         section: 'AnimalList',

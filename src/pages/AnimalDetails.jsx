@@ -18,14 +18,14 @@ function AnimalDetails() {
     log.info(`Detalles del animal con ID: ${idAnimal}`);
     sendLogToServer(`Detalles del animal con ID: ${idAnimal}`);
 
-    fetch(`https://localhost:7106/api/especie/${idAnimal}`)
+    fetch(`https://${global}:7106/api/especie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         setAnimal(data);
       })
       .catch((error) => {
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',
@@ -41,7 +41,7 @@ function AnimalDetails() {
   }, [idAnimal]);
 
   useEffect(() => {
-    fetch(`https://localhost:7106/api/galeria/idespecie/${idAnimal}`)
+    fetch(`https://${global}:7106/api/galeria/idespecie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -49,7 +49,7 @@ function AnimalDetails() {
       })
       .catch((error) => {
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',
@@ -66,7 +66,7 @@ function AnimalDetails() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'AnimalDetails'
@@ -76,7 +76,7 @@ function AnimalDetails() {
       })
       .catch((error) => {
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',

@@ -28,7 +28,7 @@ function Actividades() {
     log.info('Página lista de Actividades  visitada');
     sendLogToServer('Página Actividades visitada');
     
-    fetch('https://localhost:7106/api/Actividades/actividades/semana-actual')
+    fetch(`https://${global}:7106/api/Actividades/actividades/semana-actual`)
 
       .then((response) => response.json())
       .then((data) => {
@@ -38,7 +38,7 @@ function Actividades() {
       .catch((error) => 
       
       axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: error,
         level: 'ERROR',
         section: 'Actividades',
@@ -56,7 +56,7 @@ function Actividades() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'Actividades'

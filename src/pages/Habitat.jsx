@@ -10,13 +10,13 @@ function Habitat() {
   const [habitats, setHabitats] = useState([]);
 
   useEffect(() => {
-    fetch("https://localhost:7106/api/habitat")
+    fetch(`https://${global}:7106/api/habitat`)
       .then((response) => response.json())
       .then((data) => setHabitats(data))
       .catch((error) => 
 
       axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'Habitat',

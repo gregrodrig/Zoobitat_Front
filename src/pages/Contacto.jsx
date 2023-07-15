@@ -46,7 +46,7 @@ function Contacto() {
     }
 
     axios
-      .post('https://localhost:7106/api/Comentario', data)
+      .post(`https://${global}:7106/api/Comentario`, data)
       .then((response) => {
         setEnviado(true);
         setError(false);
@@ -70,7 +70,7 @@ function Contacto() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'Contacto',

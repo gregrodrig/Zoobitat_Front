@@ -11,7 +11,7 @@ export default function DashboardView() {
 
   function sendLogToServer(logMessage) {
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${global}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'DashboardView',

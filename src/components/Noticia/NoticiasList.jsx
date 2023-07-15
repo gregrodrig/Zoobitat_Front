@@ -16,7 +16,7 @@ export default class NoticiasList extends Component {
   componentDidMount() {
     // Realizar la solicitud GET a la API
     axios
-      .get('https://localhost:7106/api/noticia')
+      .get(`https://${global}:7106/api/noticia`)
       .then(response => {
         // Actualizar el estado con las noticias recibidas y desactivar la carga
         this.setState({ noticias: response.data, loading: false });
@@ -28,7 +28,7 @@ export default class NoticiasList extends Component {
 
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'NoticiasList',

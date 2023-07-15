@@ -15,7 +15,7 @@ export default class AsignacionDetailComponent extends Component {
     const { idasignacion } = this.props;
 
     axios
-      .get(`https://localhost:7106/api/asignacionesusuario/${idasignacion}`)
+      .get(`https://${global}:7106/api/asignacionesusuario/${idasignacion}`)
       .then(response => {
         const asignacionData = response.data;
         console.log(asignacionData);
@@ -39,14 +39,14 @@ export default class AsignacionDetailComponent extends Component {
     const { idAsignacionUsuario } = asignacion;
 
     axios
-      .put(`https://localhost:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`)
+      .put(`https://${global}:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`)
       .then(response => {
         console.log(response.data);
         // Aquí puedes manejar la respuesta del PUT si es necesario
       })
       .catch(error => {
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'AsignacionDetailComponent',

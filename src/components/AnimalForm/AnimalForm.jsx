@@ -25,7 +25,7 @@ export default class AnimalForm extends Component {
 
     if (idAnimal !== 0) {
       axios
-        .get(`https://localhost:7106/api/animal/${idAnimal}`)
+        .get(`https://${global}:7106/api/animal/${idAnimal}`)
         .then((response) => {
           const animalData = response.data;
 
@@ -64,7 +64,7 @@ export default class AnimalForm extends Component {
 
   fetchEspecies = () => {
     axios
-      .get("https://localhost:7106/api/Especie")
+      .get(`https://${global}:7106/api/Especie`)
       .then((response) => {
         this.setState({ especies: response.data });
       })
@@ -130,8 +130,8 @@ export default class AnimalForm extends Component {
     const requestMethod = idAnimal !== 0 ? "PUT" : "POST";
     const requestURL =
       idAnimal !== 0
-        ? `https://localhost:7106/api/animal/${idAnimal}`
-        : "https://localhost:7106/api/animal";
+        ? `https://${global}:7106/api/animal/${idAnimal}`
+        : `https://${global}:7106/api/animal`;
 
     if (idAnimal !== 0) {
       animalData.idAnimal = idAnimal;
@@ -154,7 +154,7 @@ export default class AnimalForm extends Component {
         console.error(error);
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${global}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'AnimalForm',
