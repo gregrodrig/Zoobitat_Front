@@ -17,7 +17,7 @@ export default function Search() {
           style={{
             backgroundColor: "white",
             height: "55px",
-            width: "90%",
+            width: "98%",
             marginLeft: "20px",
             marginTop: "20px",
             borderRadius: "5px",
@@ -36,7 +36,7 @@ export default function Search() {
           style={{
             backgroundColor: "#EBEBEB",
             height: "55px",
-            width: "90%",
+            width: "98%",
             marginLeft: "20px",
             marginTop: "-10px",
             borderRadius: "5px",
