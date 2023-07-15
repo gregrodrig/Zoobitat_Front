@@ -7,6 +7,10 @@ import { Link, useParams } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
 import './AnimalDetails.css';
+import miVariableGlobal from '../global.js';
+
+
+
 
 function AnimalDetails() {
   const { idAnimal } = useParams();
@@ -18,17 +22,22 @@ function AnimalDetails() {
     log.info(`Detalles del animal con ID: ${idAnimal}`);
     sendLogToServer(`Detalles del animal con ID: ${idAnimal}`);
 
-    fetch(`https://${global}:7106/api/especie/${idAnimal}`)
+    fetch(`https://${miVariableGlobal}:7106/api/especie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         setAnimal(data);
       })
       .catch((error) => {
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')
@@ -41,18 +50,23 @@ function AnimalDetails() {
   }, [idAnimal]);
 
   useEffect(() => {
-    fetch(`https://${global}:7106/api/galeria/idespecie/${idAnimal}`)
+    fetch(`https://${miVariableGlobal}:7106/api/galeria/idespecie/${idAnimal}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setGaleria(data);
       })
       .catch((error) => {
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')
@@ -65,21 +79,31 @@ function AnimalDetails() {
   }, [idAnimal]);
 
   function sendLogToServer(logMessage) {
+    if (sessionStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    }
     axios
-      .post(`https://${global}:7106/api/logs`, {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
-        section: 'AnimalDetails'
+        section: 'AnimalDetails',
+        IdUsuario: 4,
+          Usuario: null
       })
       .then((response) => {
         console.log('Log enviado al servidor');
       })
       .catch((error) => {
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error,
           level: 'ERROR',
           section: 'AnimalDetails',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')

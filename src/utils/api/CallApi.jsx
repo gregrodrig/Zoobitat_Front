@@ -1,7 +1,8 @@
 import axios from "axios";
+import miVariableGlobal from '../../global.js';
 
 const axiosInstance = axios.create({
-  baseURL: `https://${global}:7106/api/`,
+  baseURL: `https://${miVariableGlobal}:7106/api/`,
   timeout: 5000,
   headers: { "X-Custom-Header": "foobar" },
 });

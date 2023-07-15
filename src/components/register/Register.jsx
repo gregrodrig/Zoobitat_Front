@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import { AiFillEye } from 'react-icons/ai';
 import axios from "axios";
+import miVariableGlobal from '../../global.js';
 
 
 export default function Register() {
@@ -36,7 +37,7 @@ export default function Register() {
     };
 
 
-    axios.post(`https://${global}:7106/api/Usuario`, userData)
+    axios.post(`https://${miVariableGlobal}:7106/api/Usuario`, userData)
       .then(response => {
         // Manejar la respuesta de la solicitud
         console.log(response.data);
@@ -52,11 +53,16 @@ export default function Register() {
       .catch(error => {
         // Manejar el error de la solicitud
         console.error(error);
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'Register',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')

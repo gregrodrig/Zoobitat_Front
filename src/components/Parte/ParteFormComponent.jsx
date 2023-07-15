@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
+import miVariableGlobal from '../../global.js';
+
 
 export default class ParteFormComponent extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ export default class ParteFormComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .get(`https://${global}:7106/api/animal`)
+      .get(`https://${miVariableGlobal}:7106/api/animal`)
       .then((response) => {
         this.setState({ animalSelect: response.data });
       })
@@ -73,7 +75,7 @@ export default class ParteFormComponent extends Component {
         // Agregar el token al encabezado de la solicitud Axios
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       
-        axios.post(`https://${global}:7106/api/parte`, asignacionuser)
+        axios.post(`https://${miVariableGlobal}:7106/api/parte`, asignacionuser)
           .then(response => {
             console.log('Animal saved successfully');
            
@@ -81,10 +83,15 @@ export default class ParteFormComponent extends Component {
           })
           .catch(error => {
             console.error(error);
-            axios.post(`https://${global}:7106/api/logs`, {
+            if (sessionStorage.getItem('token')) {
+              axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+            }
+            axios.post(`https://${miVariableGlobal}:7106/api/logs`, {
                 message: error,
                 level: 'ERROR',
                 section: 'ParteFormComponent',
+                IdUsuario: 4,
+          Usuario: null
               })
               .then((response) => {
                 console.log('Log enviado al servidor')

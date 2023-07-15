@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
+
 
 
 export const AnimalFormPage = () => {
@@ -16,7 +18,17 @@ export const AnimalFormPage = () => {
   }, [id]);
 
   function sendLogToServer(logMessage) {
-    axios.post(`https://${global}:7106/api/logs`, { message: logMessage, level: 'INFO', section: 'AnimalFormPage' })
+    if (sessionStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    }
+    axios.post(`https://${miVariableGlobal}:7106/api/logs`, {
+       message: logMessage, 
+       level: 'INFO', 
+       section: 'AnimalFormPage',
+    IdUsuario: 4,
+    Usuario: null }
+    
+    )
       .then(response => {
         console.log('Log enviado al servidor');
       })

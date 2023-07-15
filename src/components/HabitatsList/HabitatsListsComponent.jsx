@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 import { FaAngleRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import miVariableGlobal from '../../global.js';
 
 export default class HabitatsListsComponent extends Component {
   constructor(props) {
@@ -18,21 +19,27 @@ export default class HabitatsListsComponent extends Component {
 
   fetchHabitats = () => {
     axios
-      .get(`https://${global}:7106/api/habitat`)
+      .get(`https://${miVariableGlobal}:7106/api/habitat`)
       .then((response) => {
         this.setState({ habitats: response.data });
-      })
+      },)
 
       .catch((error) => {
 
         console.error(error);
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
 
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'HabitatsListsComponent',
-        })
+          IdUsuario: 4,
+          Usuario: null
+        }
+        )
         .then((response) => {
           console.log('Log enviado al servidor')
         })

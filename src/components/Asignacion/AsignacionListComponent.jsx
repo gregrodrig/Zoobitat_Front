@@ -3,6 +3,7 @@ import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaAngleRight, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import miVariableGlobal from '../../global.js';
 
 export default class AsignacionListComponent extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class AsignacionListComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .get(`https://${global}:7106/api/LogIn/rol-token`)
+      .get(`https://${miVariableGlobal}:7106/api/LogIn/rol-token`)
       .then((response) => {
         const rol = response.data;
         this.setState({ idrol: rol });
@@ -36,10 +37,10 @@ export default class AsignacionListComponent extends Component {
         let url = "";
 
         if (parseInt(rol) === 1) {
-          url = `https://${global}:7106/api/AsignacionesUsuario/GetByEstadoId/${estado}`;
+          url = `https://${miVariableGlobal}:7106/api/AsignacionesUsuario/GetByEstadoId/${estado}`;
           // alert(rol);
         } else {
-          url = `https://${global}:7106/api/AsignacionesUsuario/GetByUsuarioAndEstado/${estado}`;
+          url = `https://${miVariableGlobal}:7106/api/AsignacionesUsuario/GetByUsuarioAndEstado/${estado}`;
           //alert(rol);
         }
 
@@ -54,11 +55,14 @@ export default class AsignacionListComponent extends Component {
             console.error(error);
 
             axios
-              .post(`https://${global}:7106/api/logs`, {
+              .post(`https://${miVariableGlobal}:7106/api/logs`, {
                 message: error.message,
                 level: "ERROR",
                 section: "AsignacionListComponent",
-              })
+                IdUsuario: 4,
+          Usuario: null
+              },
+              )
               .then((response) => {
                 console.log("Log enviado al servidor");
               })
@@ -79,7 +83,7 @@ export default class AsignacionListComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .delete(`https://${global}:7106/api/usuario/${idUsuario}`)
+      .delete(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}`)
       .then((response) => {
         console.log("User deleted successfully");
         this.fetchUser();
@@ -108,7 +112,7 @@ export default class AsignacionListComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .patch(`https://${global}:7106/api/usuario/${idUsuario}/4`)
+      .patch(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}/4`)
       .then((response) => {
         console.log("User deleted successfully");
         this.fetchUser();

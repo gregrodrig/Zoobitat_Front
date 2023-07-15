@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
+import miVariableGlobal from '../../global.js';
 
 export default class AnimalForm extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ export default class AnimalForm extends Component {
 
     if (idAnimal !== 0) {
       axios
-        .get(`https://${global}:7106/api/animal/${idAnimal}`)
+        .get(`https://${miVariableGlobal}:7106/api/animal/${idAnimal}`)
         .then((response) => {
           const animalData = response.data;
 
@@ -64,7 +65,7 @@ export default class AnimalForm extends Component {
 
   fetchEspecies = () => {
     axios
-      .get(`https://${global}:7106/api/Especie`)
+      .get(`https://${miVariableGlobal}:7106/api/Especie`)
       .then((response) => {
         this.setState({ especies: response.data });
       })
@@ -130,8 +131,8 @@ export default class AnimalForm extends Component {
     const requestMethod = idAnimal !== 0 ? "PUT" : "POST";
     const requestURL =
       idAnimal !== 0
-        ? `https://${global}:7106/api/animal/${idAnimal}`
-        : `https://${global}:7106/api/animal`;
+        ? `https://${miVariableGlobal}:7106/api/animal/${idAnimal}`
+        : `https://${miVariableGlobal}:7106/api/animal`;
 
     if (idAnimal !== 0) {
       animalData.idAnimal = idAnimal;
@@ -152,13 +153,21 @@ export default class AnimalForm extends Component {
       .catch((error) => {
 
         console.error(error);
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        }
 
         axios
-        .post(`https://${global}:7106/api/logs`, {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'AnimalForm',
-        })
+          IdUsuario: 4,
+          Usuario: null
+        },
+        
+        
+        )
         .then((response) => {
           console.log('Log enviado al servidor')
         })
