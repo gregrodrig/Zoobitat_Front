@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
+import miVariableGlobal from '../../global.js';
+
 
 export default class ParteDetailComponent extends Component {
     constructor(props) {
@@ -19,7 +21,7 @@ export default class ParteDetailComponent extends Component {
     // Agregar el token al encabezado de la solicitud Axios
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         axios
-          .get(`https://localhost:7106/api/parte/${idParte}`)
+          .get(`https://${miVariableGlobal}:7106/api/parte/${idParte}`)
           .then(response => {
             const Resparte = response.data;
             console.log(Resparte);
@@ -31,11 +33,16 @@ export default class ParteDetailComponent extends Component {
           })
           .catch(error => {
             console.error(error);
+            if (sessionStorage.getItem('token')) {
+              axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+            }
             axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'ParteDetailComponent',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')
@@ -59,7 +66,7 @@ export default class ParteDetailComponent extends Component {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     
         axios
-          .patch(`https://localhost:7106/api/Parte/ChangeEstado/${idParte}/2`)
+          .patch(`https://${miVariableGlobal}:7106/api/Parte/ChangeEstado/${idParte}/2`)
           .then(response => {
             console.log(response.data);
             window.history.back();

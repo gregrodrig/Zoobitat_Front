@@ -4,6 +4,8 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import log from 'loglevel'
 import axios from 'axios'
+import miVariableGlobal from '../../global.js';
+
 
 export const AsignacionDetail = () => {
   let { id } = useParams()
@@ -14,11 +16,16 @@ export const AsignacionDetail = () => {
   }, [id])
 
   function sendLogToServer(logMessage) {
+    if (sessionStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    }
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
         section: 'AsignacionDetail',
+        IdUsuario: 4,
+          Usuario: null
       })
       .then((response) => {
         console.log('Log enviado al servidor')

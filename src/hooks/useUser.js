@@ -3,6 +3,8 @@ import { Context } from "../App";
 
 import axiosInstance, { setAuthorization } from "utils/api/CallApi";
 import axios from "axios";
+import miVariableGlobal from '../global.js';
+
 
 
 export default function useUser() {
@@ -22,11 +24,17 @@ export default function useUser() {
       setAuthorization();
       return response.data;
     } catch (err) {
+
+      if (sessionStorage.getItem('token')) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+      }
       axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: err.response.data,
           level: 'ERROR',
           section: 'lOGIN',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')

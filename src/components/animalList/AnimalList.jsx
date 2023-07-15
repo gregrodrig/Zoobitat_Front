@@ -5,23 +5,33 @@ import { Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import "../../index.css"
 import axios from 'axios';
+import miVariableGlobal from '../../global.js';
+
 
 function AnimalList() {
 
   const [animalsData, setAnimalsData] = useState([]);
 
   useEffect(() => {
-    fetch('https://localhost:7106/api/especie')
+    if (sessionStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    }
+
+
+    fetch(`https://${miVariableGlobal}:7106/api/especie`)
       .then((response) => response.json())
       .then((data) => setAnimalsData(data))
       .catch((error) => 
       
       
       axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: error.message,
         level: 'ERROR',
         section: 'AnimalList',
+        IdUsuario: 4,
+          Usuario: null
+      
       })
       .then((response) => {
         console.log('Log enviado al servidor')

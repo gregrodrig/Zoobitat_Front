@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { Component } from "react";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
+import miVariableGlobal from '../../global.js';
+
 
 export default class HabitatsFormComponent extends Component {
   constructor(props) {
@@ -23,7 +25,7 @@ export default class HabitatsFormComponent extends Component {
 
     if (idHabitat !== 0) {
       axios
-        .get(`https://localhost:7106/api/habitat/${idHabitat}`)
+        .get(`https://${miVariableGlobal}:7106/api/habitat/${idHabitat}`)
         .then((response) => {
           const habitatData = response.data;
 
@@ -58,7 +60,7 @@ export default class HabitatsFormComponent extends Component {
 
   fetchTipoHabitat = () => {
     axios
-      .get("https://localhost:7106/api/TipoHabitat")
+      .get(`https://${miVariableGlobal}:7106/api/TipoHabitat`)
       .then((response) => {
         this.setState({ tipoHabitatList: response.data });
       })
@@ -123,8 +125,8 @@ export default class HabitatsFormComponent extends Component {
     const requestMethod = idHabitat !== 0 ? "PUT" : "POST";
     const requestURL =
       idHabitat !== 0
-        ? `https://localhost:7106/api/habitat/${idHabitat}`
-        : "https://localhost:7106/api/habitat";
+        ? `https://${miVariableGlobal}:7106/api/habitat/${idHabitat}`
+        : `https://${miVariableGlobal}:7106/api/habitat`;
 
     if (idHabitat !== 0) {
       habitatData.idHabitat = idHabitat;
@@ -143,13 +145,19 @@ export default class HabitatsFormComponent extends Component {
       })
       .catch((error) => {
         console.error(error);
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'HabitatsFormComponent',
-        })
+          IdUsuario: 4,
+          Usuario: null
+        },
+        )
         .then((response) => {
           console.log('Log enviado al servidor')
         })

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { FaAngleRight, FaCheck, FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import miVariableGlobal from '../../global.js';
+
 
 export default class UsuarioListComponent extends Component {
   constructor(props) {
@@ -27,9 +29,9 @@ export default class UsuarioListComponent extends Component {
     let url = '';
 
     if (idRol === 2) {
-      url = 'https://localhost:7106/api/Usuario/usuarios/rol5';
+      url = `https://${miVariableGlobal}:7106/api/Usuario/usuarios/rol5`;
     } else {
-      url = 'https://localhost:7106/api/usuario';
+      url = `https://${miVariableGlobal}:7106/api/usuario`;
     }
 
     axios
@@ -38,11 +40,17 @@ export default class UsuarioListComponent extends Component {
         this.setState({ user: response.data });
       })
       .catch(error => {
+
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'UsuarioListComponent',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')
@@ -61,7 +69,7 @@ export default class UsuarioListComponent extends Component {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     axios
-      .delete(`https://localhost:7106/api/usuario/${idUsuario}`)
+      .delete(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}`)
       .then(response => {
         console.log('User deleted successfully');
         this.fetchUser();
@@ -91,7 +99,7 @@ export default class UsuarioListComponent extends Component {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
     axios
-      .patch(`https://localhost:7106/api/usuario/${idUsuario}/4`)
+      .patch(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}/4`)
       .then(response => {
         console.log('User deleted successfully');
         this.fetchUser();

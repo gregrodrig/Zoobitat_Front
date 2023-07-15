@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import log from 'loglevel';
 import axios from 'axios';
 import './Actividades.css';
+import miVariableGlobal from '../global.js';
+
 
 function formatDate(dateTimeString) {
   const dateObject = new Date(dateTimeString);
@@ -28,20 +30,25 @@ function Actividades() {
     log.info('Página lista de Actividades  visitada');
     sendLogToServer('Página Actividades visitada');
     
-    fetch('https://localhost:7106/api/Actividades/actividades/semana-actual')
+    fetch(`https://${miVariableGlobal}:7106/api/Actividades/actividades/semana-actual`)
 
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setActividades(data);
       })
-      .catch((error) => 
-      
-      axios
-      .post('https://localhost:7106/api/logs', {
+      .catch((error) => {
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
+
+  axios
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: error,
         level: 'ERROR',
         section: 'Actividades',
+        IdUsuario: 4,
+          Usuario: null
       })
       .then((response) => {
         console.log('Log enviado al servidor')
@@ -49,17 +56,26 @@ function Actividades() {
       .catch((error) => {
         console.error('Error al enviar el log al servidor', error)
       })
+
+      }
+      
+    
       
       );
   }, []);
 
 
   function sendLogToServer(logMessage) {
+    if (sessionStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    }
     axios
-      .post('https://localhost:7106/api/logs', {
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
         message: logMessage,
         level: 'INFO',
-        section: 'Actividades'
+        section: 'Actividades',
+        IdUsuario: 4,
+          Usuario: null
       })
       .then((response) => {
         console.log('Log enviado al servidor');

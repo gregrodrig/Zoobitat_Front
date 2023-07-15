@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import NoticiaCard from './NoticiaCard';
+import miVariableGlobal from '../../global.js';
+
 
 export default class NoticiasList extends Component {
 
@@ -16,22 +18,26 @@ export default class NoticiasList extends Component {
   componentDidMount() {
     // Realizar la solicitud GET a la API
     axios
-      .get('https://localhost:7106/api/noticia')
+      .get(`https://${miVariableGlobal}:7106/api/noticia`)
       .then(response => {
         // Actualizar el estado con las noticias recibidas y desactivar la carga
         this.setState({ noticias: response.data, loading: false });
       })
       .catch(error => {
         console.error(error);
-
+        if (sessionStorage.getItem('token')) {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+        }
 
 
 
         axios
-        .post('https://localhost:7106/api/logs', {
+        .post(`https://${miVariableGlobal}:7106/api/logs`, {
           message: error.message,
           level: 'ERROR',
           section: 'NoticiasList',
+          IdUsuario: 4,
+          Usuario: null
         })
         .then((response) => {
           console.log('Log enviado al servidor')
