@@ -31,6 +31,10 @@ import { ParteList } from "pages/parte/ParteList";
 import { ParteDetail } from "pages/parte/ParteDetail";
 import { ParteForm } from "pages/parte/ParteForm";
 import { Navbar } from "react-bootstrap";
+import { ActividadesAdmin } from "pages/Actividades/ActividadesAdmin";
+import { ActividadesForm } from "pages/Actividades/ActividadesForm";
+import { NoticiasForm } from "pages/Noticias/NoticiasForm";
+import { NoticiasAdmin } from "pages/Noticias/NoticiasAdmin";
 
 export const Context = createContext({});
 
@@ -77,6 +81,19 @@ function App() {
                 <Route path="/usuarioList" element={<UserList />} />
                 <Route path="/Dashboard" element={<DashboardView />} />
                 {/* FIN RUTAS USUARIOS */}
+
+
+                 {/* RUTAS Actividades */}
+                 <Route path="/ActividadesAdmin" element={<ActividadesAdmin />} />
+                <Route path="/ActividadesForm" element={<ActividadesForm />} />
+                <Route path="/ActividadesForm/:id" element={<ActividadesForm />} />
+                {/* FIN RUTAS Actividades */}
+
+                 {/* RUTAS Noticias */}
+                 <Route path="/NoticiasAdmin" element={<NoticiasAdmin />} />
+                <Route path="/NoticiasForm" element={<NoticiasForm />} />
+                <Route path="/NoticiasForm/:id" element={<NoticiasForm />} />
+                {/* FIN RUTAS Noticias */}
 
                 {/* RUTAS HABITAT */}
                 <Route path="/HabitatForm" element={<HabitasForms />} />
