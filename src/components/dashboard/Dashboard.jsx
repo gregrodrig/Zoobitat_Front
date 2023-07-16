@@ -68,6 +68,13 @@ const Dashboard = () => {
       roles: [],
     },
     {
+      image: "assets/Dash_icons/Partes.svg",
+      imageColor: "#969696",
+      link: "/usuarioList",
+      name: "Usuarios",
+      roles: [],
+    },
+    {
       image: "assets/Dash_icons/Alimentacion.svg",
       imageColor: "#D98859",
       link: "",
