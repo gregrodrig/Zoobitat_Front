@@ -17,6 +17,7 @@ export default class ActividadesFormAdmin extends Component {
       idUbicacion: "",
       idUsuario: 0,
       ubicaciones: [],
+      vacio: false,
     };
   }
 
@@ -101,72 +102,88 @@ export default class ActividadesFormAdmin extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const { idActividad, titulo, descripcion, foto, fecha, idUbicacion } =
-      this.state;
+    const {
+      idActividad,
+      titulo,
+      descripcion,
+      foto,
+      fecha,
+      idUbicacion,
+      vacio,
+    } = this.state;
+    if (foto !== "") {
+      const actividadData = {
+        id: idActividad,
+        titulo: titulo,
+        descripcion: descripcion,
+        foto: foto,
+        fecha: fecha,
+        idUbicacion: idUbicacion,
+        ubicacion: null,
+        idUsuario: 0,
+        usuario: null,
+      };
 
-    const actividadData = {
-      id: idActividad,
-      titulo: titulo,
-      descripcion: descripcion,
-      foto: foto,
-      fecha: fecha,
-      idUbicacion: idUbicacion,
-      ubicacion: null,
-      idUsuario: 0,
-      usuario: null,
-    };
+      // Obtener el token del sessionStorage
+      const token = sessionStorage.getItem("token");
 
-    // Obtener el token del sessionStorage
-    const token = sessionStorage.getItem("token");
+      // Agregar el token al encabezado de la solicitud Axios
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
-    // Agregar el token al encabezado de la solicitud Axios
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const requestMethod = idActividad !== 0 ? "PUT" : "POST";
+      const requestURL =
+        idActividad !== 0
+          ? `https://${miVariableGlobal}:7106/api/Actividades/${idActividad}`
+          : `https://${miVariableGlobal}:7106/api/Actividades`;
 
-    const requestMethod = idActividad !== 0 ? "PUT" : "POST";
-    const requestURL =
-      idActividad !== 0
-        ? `https://${miVariableGlobal}:7106/api/Actividades/${idActividad}`
-        : `https://${miVariableGlobal}:7106/api/Actividades`;
+      if (idActividad !== 0) {
+        actividadData.idActividad = idActividad;
+      }
+      // Resto del código para enviar la solicitud utilizando axios y realizar acciones adicionales
 
-    if (idActividad !== 0) {
-      actividadData.idActividad = idActividad;
-    }
-    // Resto del código para enviar la solicitud utilizando axios y realizar acciones adicionales
+      axios
+        .request({
+          method: requestMethod,
+          url: requestURL,
+          data: actividadData,
+        })
+        .then((response) => {
+          console.log("Animal saved successfully");
+          this.handleGoBack();
+          // Resto del código para manejar la respuesta y realizar acciones adicionales
+        })
+        .catch((error) => {
+          console.error(error);
+          if (sessionStorage.getItem("token")) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+          }
 
-    axios
-      .request({
-        method: requestMethod,
-        url: requestURL,
-        data: actividadData,
-      })
-      .then((response) => {
-        console.log("Animal saved successfully");
-        this.handleGoBack();
-        // Resto del código para manejar la respuesta y realizar acciones adicionales
-      })
-      .catch((error) => {
-        <Empty msg="msgNoGuardado" />;
-        console.error(error);
-        if (sessionStorage.getItem("token")) {
-          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        }
-
-        axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
-            message: error.message,
-            level: "ERROR",
-            section: "AnimalForm",
-            IdUsuario: 4,
-            Usuario: null,
-          })
-          .then((response) => {
-            console.log("Log enviado al servidor");
-          })
-          .catch((error) => {
-            console.error("Error al enviar el log al servidor", error);
-          });
-        // Resto del código para manejar el error
+          axios
+            .post(`https://${miVariableGlobal}:7106/api/logs`, {
+              message: error.message,
+              level: "ERROR",
+              section: "AnimalForm",
+              IdUsuario: 4,
+              Usuario: null,
+            })
+            .then((response) => {
+              console.log("Log enviado al servidor");
+            })
+            .catch((error) => {
+              console.error("Error al enviar el log al servidor", error);
+            });
+          // Resto del código para manejar el error
+        });
+    } else {
+      this.setState({
+        vacio: true,
       });
+      setTimeout(() => {
+        this.setState({
+          vacio: false,
+        });
+      }, 2000);
+    }
   };
 
   render() {
@@ -178,12 +195,14 @@ export default class ActividadesFormAdmin extends Component {
       fecha,
       idUbicacion,
       ubicaciones,
+      vacio,
     } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
         <Col className="text-center">
           <div className="d-flex justify-content-center align-items-center mb-4">
+            {vacio ? <Empty msg="msgNoGuardado" /> : null}
             {foto ? (
               <label htmlFor="imageInput">
                 <img
