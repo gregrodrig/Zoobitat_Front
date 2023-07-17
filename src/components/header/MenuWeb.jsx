@@ -107,7 +107,7 @@ function MenuWeb() {
             <Row className="container-menu-list">
               <Col md={8} className="col-menu-list">
                 <Nav
-                  className="m-2 nav-menu-list"
+                  className="nav-menu-list"
                   activeKey="/home"
                   style={{ flexDirection: "inherit" }}
                 >
@@ -144,7 +144,6 @@ function MenuWeb() {
                         style={{
                           fontSize: "40px",
                           color: "white",
-                          // color: "#4F7302",
                         }}
                       />
                     </Link>

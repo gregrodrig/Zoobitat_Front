@@ -8,6 +8,26 @@ export function Empty({ msg }) {
           No se han cargado los datos desde la Base de datos!
         </p>
       );
+    case "msgCargandoDatos":
+      return (
+        <div className={styles.msgOk}>
+          <span className={styles.center}>
+            <strong>¡FENOMENAL!</strong>
+            <br />
+            Estamos cargando los datos...
+          </span>
+        </div>
+      );
+    case "msgGuardado":
+      return (
+        <div className={styles.msgOk}>
+          <span className={styles.center}>
+            <strong>¡FENOMENAL!</strong>
+            <br />
+            Datos guradados con éxito...
+          </span>
+        </div>
+      );
     case "msgOk":
       return (
         <div className={styles.msgOk}>
