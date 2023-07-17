@@ -10,15 +10,21 @@ const Dashboard = () => {
   const { rol } = useUser();
   let msgWelcome = "";
 
-  if (rol === 1) {
+  const gestor = 1;
+  const cuidador = 2;
+  const veterinario = 3;
+  const visitante = 4;
+  const inactivo = 5;
+
+  if (rol === gestor) {
     msgWelcome = "Gestor";
-  } else if (rol === 2) {
+  } else if (rol === cuidador) {
     msgWelcome = "Cuidador";
-  } else if (rol === 3) {
+  } else if (rol === veterinario) {
     msgWelcome = "Veterinario";
-  } else if (rol === 4) {
+  } else if (rol === visitante) {
     msgWelcome = "Visitante";
-  } else if (rol === 5) {
+  } else if (rol === inactivo) {
     msgWelcome = "Inactivo";
   } else {
     msgWelcome = "Eliminado";
@@ -30,66 +36,73 @@ const Dashboard = () => {
       imageColor: "#000",
       link: "/AnimalDash",
       name: "Animales",
-      roles: [],
+      roles: [gestor, veterinario],
     },
     {
       image: "assets/Dash_icons/Habitat.svg",
-      imageColor: "#14223B",
+      imageColor: "#4F7302",
       link: "/HabitatList",
       name: "Hábitat",
-      roles: [],
+      roles: [gestor],
     },
     {
       image: "assets/Dash_icons/Tareas.svg",
       imageColor: "#C0D904",
       link: "/AsignacionList",
       name: "Tareas",
-      roles: [],
-    },
-    {
-      image: "assets/Dash_icons/Habitat.svg",
-      imageColor: "#005eff",
-      link: "/ActividadesAdmin",
-      name: "Actividades",
-      roles: [],
-    },
-    {
-      image: "assets/Dash_icons/Tareas.svg",
-      imageColor: "#ff0099",
-      link: "/NoticiasAdmin",
-      name: "Noticias",
-      roles: [],
+      roles: [gestor, veterinario],
     },
     {
       image: "assets/Dash_icons/Partes.svg",
       imageColor: "#969696",
       link: "/partelist",
       name: "Partes",
-      roles: [],
+      roles: [gestor, cuidador, veterinario],
     },
     {
-      image: "assets/Dash_icons/Partes.svg",
-      imageColor: "#969696",
+      image: "assets/Dash_icons/Actividades.svg",
+      imageColor: "#07D2FF",
+      link: "/ActividadesAdmin",
+      name: "Actividades",
+      roles: [gestor, cuidador],
+    },
+    {
+      image: "assets/Dash_icons/Mapa.svg",
+      imageColor: "#741E76",
+      link: "/Mapa",
+      name: "Mapa",
+      roles: [gestor],
+    },
+    {
+      image: "assets/Dash_icons/Noticias.svg",
+      imageColor: "#394553",
+      link: "/NoticiasAdmin",
+      name: "Noticias",
+      roles: [gestor],
+    },
+    {
+      image: "assets/Dash_icons/Usuarios.svg",
+      imageColor: "#2A411C",
       link: "/usuarioList",
       name: "Usuarios",
-      roles: [],
+      roles: [gestor],
     },
     {
       image: "assets/Dash_icons/Alimentacion.svg",
       imageColor: "#D98859",
       link: "",
       name: "Alimentación",
-      roles: [],
+      roles: [gestor, cuidador, veterinario],
     },
     {
       image: "assets/Dash_icons/Informes.svg",
       imageColor: "#733729",
       link: "",
       name: "Informes",
-      roles: [],
+      roles: [gestor, cuidador, veterinario],
     },
   ];
-  // content = content.filter((content) => content.roles.includes(rol));
+  content = content.filter((content) => content.roles.includes(rol));
   return (
     <>
       <Encabezado

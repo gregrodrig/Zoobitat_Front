@@ -14,7 +14,7 @@ export default function Mapa() {
         {({ zoomIn, zoomOut, resetTransform, ...rest }) => (
           <React.Fragment>
             <Container fluid style={{ marginBottom: "20px" }}>
-              <Row>
+              <Row style={{ marginTop: "1.5rem" }}>
                 <Col>
                   <Button
                     style={{ width: "100%", background: "#d98859", border: 0 }}

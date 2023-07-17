@@ -28,6 +28,15 @@ export function Empty({ msg }) {
           </span>
         </div>
       );
+    case "msgNoGuardado":
+      return (
+        <div className={styles.msgNot}>
+          <span className={styles.center}>
+            <strong>¡ERROR!</strong>
+            <br /> Su solicitud no ha podido ser enviada. Algo te falta aún...
+          </span>
+        </div>
+      );
     case "msgOk":
       return (
         <div className={styles.msgOk}>

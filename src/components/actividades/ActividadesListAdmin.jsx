@@ -81,7 +81,7 @@ export default class ActividadesListAdmin extends Component {
           </Container>
         ) : (
           actividades.map((act) => (
-            <Container className="card mb-3">
+            <Container className="card mb-3" style={{ borderColor: "#c0d904" }}>
               <Row className="row">
                 <Col xs={3}>
                   <img
