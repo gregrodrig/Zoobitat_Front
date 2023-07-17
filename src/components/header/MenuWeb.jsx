@@ -86,95 +86,106 @@ function MenuWeb() {
 
   return (
     <>
-      <Navbar className={`mb-3 ${style.customNavbar} navbar-laptop`}>
-        <Container fluid>
-          <Row className="justify-content-between">
-            <Col md="auto" lg={2}>
-              <Link to="/">
-                <Image
-                  alt="Logo"
-                  src="assets/Logo.png"
-                  style={{ padding: "12px" }}
-                />
-              </Link>
-            </Col>
-          </Row>
-          <Row>
-            <Col md="auto" lg={8}>
-              <Nav className="m-2" activeKey="/home">
-                {menu.map((menu, index) => {
-                  return (
-                    <Nav.Item key={index}>
-                      <Link
-                        to={menu.link}
-                        style={{
-                          color: "white",
-                        }}
-                      >
-                        <small
+      {[false].map((expand) => (
+        <Navbar
+          key={expand}
+          expand={expand}
+          className={`mb-3 ${style.customNavbar} navbar-laptop`}
+        >
+          <Container fluid className="container-menu">
+            <Row className="justify-content-between">
+              <Col md={2}>
+                <Link to="/">
+                  <Image
+                    alt="Logo"
+                    src="assets/Logo.png"
+                    style={{ padding: "12px" }}
+                  />
+                </Link>
+              </Col>
+            </Row>
+            <Row className="container-menu-list">
+              <Col md={8} className="col-menu-list">
+                <Nav
+                  className="m-2 nav-menu-list"
+                  activeKey="/home"
+                  style={{ flexDirection: "inherit" }}
+                >
+                  {menu.map((menu, index) => {
+                    return (
+                      <Nav.Item key={index}>
+                        <Link
+                          to={menu.link}
                           style={{
-                            fontSize: "20px",
+                            color: "white",
                           }}
                         >
-                          {menu.icon}
-                        </small>{" "}
-                        <small className="p-3">{menu.name}</small>
+                          <small
+                            style={{
+                              fontSize: "20px",
+                            }}
+                          >
+                            {menu.icon}
+                          </small>{" "}
+                          <small className="p-3">{menu.name}</small>
+                        </Link>
+                      </Nav.Item>
+                    );
+                  })}
+                </Nav>
+              </Col>
+            </Row>
+            <Row className="container-menu-buttom">
+              <Col md={2}>
+                <Nav style={{ flexDirection: "inherit" }}>
+                  {isLogged ? (
+                    <Link to="/login" onClick={logout}>
+                      <IoLogOutOutline
+                        style={{
+                          fontSize: "40px",
+                          color: "white",
+                          // color: "#4F7302",
+                        }}
+                      />
+                    </Link>
+                  ) : (
+                    <>
+                      <Link to="/register">
+                        <Button
+                          variant="secundary"
+                          style={{
+                            backgroundColor: "#4F7302",
+                            borderRadius: "30px",
+                            color: "white",
+                            padding: "4px 16px",
+                          }}
+                          size="sm"
+                        >
+                          Registrarse
+                        </Button>
                       </Link>
-                    </Nav.Item>
-                  );
-                })}
-              </Nav>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Nav>
-                {isLogged ? (
-                  <Link to="/login" onClick={logout}>
-                    <IoLogOutOutline
-                      style={{
-                        fontSize: "40px",
-                        color: "white",
-                        // color: "#4F7302",
-                      }}
-                    />
-                  </Link>
-                ) : (
-                  <>
-                    <Link to="/register">
-                      <Button
-                        variant="secundary"
-                        style={{
-                          backgroundColor: "#4F7302",
-                          borderRadius: "30px",
-                          color: "white",
-                          padding: "4px 16px",
-                        }}
-                        size="sm"
-                      >
-                        Registrarse
-                      </Button>
-                    </Link>
-                    <Link to="/login">
-                      <Button
-                        variant="sm"
-                        style={{
-                          backgroundColor: "#2A411C",
-                          borderRadius: "30px",
-                          color: "white",
-                        }}
-                        size="sm"
-                      >
-                        Iniciar Sesión
-                      </Button>
-                    </Link>
-                  </>
-                )}
-              </Nav>
-            </Col>
-          </Row>
-        </Container>
-      </Navbar>
+                      <Link to="/login">
+                        <Button
+                          variant="sm"
+                          style={{
+                            backgroundColor: "#2A411C",
+                            borderRadius: "30px",
+                            color: "white",
+                          }}
+                          size="sm"
+                        >
+                          Ingresar
+                          {/* Iniciar Sesión */}
+                        </Button>
+                      </Link>
+                    </>
+                  )}
+                </Nav>
+              </Col>
+            </Row>
+          </Container>
+        </Navbar>
+      ))}
     </>
   );
 }

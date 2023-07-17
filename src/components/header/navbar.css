@@ -1,24 +1,39 @@
-/* Styles for mobile screens */
-@media (max-width: 767px) {
-
-
-    .navbar-laptop {
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-        margin-top: -30px;
-
-    }
+/* Styles for mobile browsers smaller than 480px; (iPhone) */
+@media only screen and (max-width: 634px) {
+  .navbar-laptop {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+}
+/* Styles for laptop screens */
+@media only screen and (min-width: 635px) {
+  .navbar-mobile {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+  .container-menu {
+    justify-content: center !important;
+  }
+  .container-menu-buttom {
+    margin: 0.75rem 0 !important;
+  }
 }
 
-/* Styles for laptop screens */
-@media (min-width: 1024px) {
+/* default iPad screens */
+@media only screen and (min-width: 768px) {
+  .col-menu-list {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .nav-menu-list {
+    margin: 0 1rem !important;
+  }
+}
 
-
-    .navbar-mobile {
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-        margin-top: -30px;
-    }
+@media only screen and (min-width: 1125px) {
+  .container-menu {
+    padding: 0.75rem;
+  }
 }
