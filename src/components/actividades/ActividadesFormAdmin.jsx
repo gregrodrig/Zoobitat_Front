@@ -140,13 +140,12 @@ export default class ActividadesFormAdmin extends Component {
         data: actividadData,
       })
       .then((response) => {
-        <Empty msg="msgGuardado" />;
         console.log("Animal saved successfully");
         this.handleGoBack();
         // Resto del código para manejar la respuesta y realizar acciones adicionales
       })
-
       .catch((error) => {
+        <Empty msg="msgNoGuardado" />;
         console.error(error);
         if (sessionStorage.getItem("token")) {
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
