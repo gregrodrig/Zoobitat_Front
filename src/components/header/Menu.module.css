@@ -5,6 +5,9 @@
 .customNavbar {
   background-color: #2a411c;
 }
+.mainContainer {
+  padding: 0.75rem;
+}
 .menuToggle {
   color: white;
 }

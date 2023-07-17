@@ -17,6 +17,7 @@ import { MdContactPhone } from "react-icons/md";
 import useUser from "../../hooks/useUser";
 import axiosInstance from "utils/api/CallApi";
 import { useCallback, useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 const roles = {
   Admin: 1,
   Cuidador: 2,
@@ -54,29 +55,30 @@ function Menu() {
           expand={expand}
           className={`p-0 ${style.customNavbar} navbar-mobile `}
         >
-          <Container fluid>
-            <Navbar.Toggle
-              aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className={`menuToggle ${style.customMenuToggle}`}
-            />
-
-            <Navbar.Brand href="#">
-              <Link to="/">
-                <img
-                  src="assets/Logo.png"
-                  alt="Logo"
-                  style={{ marginRight: "120px" }}
+          <Container fluid className={`${style.mainContainer}`}>
+            <Row>
+              <Col xs={4}>
+                <Navbar.Toggle
+                  aria-controls={`offcanvasNavbar-expand-${expand}`}
+                  className={`menuToggle ${style.customMenuToggle}`}
                 />
-              </Link>
-            </Navbar.Brand>
+              </Col>
+              <Col xs={8}>
+                <Navbar.Brand href="#">
+                  <Link to="/">
+                    <img src="assets/Logo.png" alt="Logo" />
+                  </Link>
+                </Navbar.Brand>
+              </Col>
+            </Row>
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
               placement="start"
             >
               <Offcanvas.Header
-                closeButton
                 style={{ backgroundColor: "#4F7302" }}
+                closeButton
               >
                 <Offcanvas.Title
                   id={`offcanvasNavbarLabel-expand-${expand}`}

@@ -50,7 +50,7 @@
 .card-body p {
   width: 100%;
 }
-.card-img-top {
+.image-card {
   width: 50% !important;
   height: 12.5rem;
   object-fit: cover;

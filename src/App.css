@@ -56,11 +56,10 @@ h1 {
     height: 700px;
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
-
   }
-  }
+}
 
-  .App-link {
+.App-link {
   color: #61dafb;
 }
 
@@ -72,7 +71,7 @@ h1 {
     transform: rotate(360deg);
   }
 }
-@media (max-width: 560px) {
+@media (max-width: 634px) {
   .Header-title {
     font-size: calc(1rem + 2vmin);
     padding-top: 1rem;
