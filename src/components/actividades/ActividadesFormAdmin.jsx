@@ -1,9 +1,9 @@
-
 import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
-import miVariableGlobal from '../../global.js';
+import miVariableGlobal from "../../global.js";
+import { Empty } from "components/emptyMsg/Empty.jsx";
 
 export default class ActividadesFormAdmin extends Component {
   constructor(props) {
@@ -16,8 +16,7 @@ export default class ActividadesFormAdmin extends Component {
       fecha: "",
       idUbicacion: "",
       idUsuario: 0,
-      ubicaciones:[]
-      
+      ubicaciones: [],
     };
   }
 
@@ -32,22 +31,18 @@ export default class ActividadesFormAdmin extends Component {
 
           console.log(actividad);
           this.setState({
-
             idActividad: idActividad,
             titulo: actividad.titulo,
             descripcion: actividad.descripcion,
             foto: actividad.foto,
             fecha: this.formatoFecha(actividad.fecha),
             idUbicacion: actividad.idUbicacion,
-      
-            
           });
         })
         .catch((error) => {
           console.error(error);
         });
     }
-
     this.fetchUbicacion();
   }
 
@@ -100,16 +95,14 @@ export default class ActividadesFormAdmin extends Component {
     });
   };
   handleGoBack = () => {
-      window.history.back();
-    };
-
+    window.history.back();
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    
-    const { idActividad,titulo,descripcion,foto,fecha,idUbicacion } = this.state;
-  
+    const { idActividad, titulo, descripcion, foto, fecha, idUbicacion } =
+      this.state;
 
     const actividadData = {
       id: idActividad,
@@ -117,10 +110,10 @@ export default class ActividadesFormAdmin extends Component {
       descripcion: descripcion,
       foto: foto,
       fecha: fecha,
-      idUbicacion:idUbicacion,
+      idUbicacion: idUbicacion,
       ubicacion: null,
       idUsuario: 0,
-      usuario: null
+      usuario: null,
     };
 
     // Obtener el token del sessionStorage
@@ -147,42 +140,46 @@ export default class ActividadesFormAdmin extends Component {
         data: actividadData,
       })
       .then((response) => {
+        <Empty msg="msgGuardado" />;
         console.log("Animal saved successfully");
         this.handleGoBack();
-
         // Resto del código para manejar la respuesta y realizar acciones adicionales
       })
 
       .catch((error) => {
-
         console.error(error);
-        if (sessionStorage.getItem('token')) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         }
 
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AnimalForm',
-          IdUsuario: 4,
-          Usuario: null
-        },
-        
-        
-        )
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "AnimalForm",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         // Resto del código para manejar el error
       });
   };
 
   render() {
-    const { idActividad,titulo,descripcion,foto,fecha,idUbicacion,ubicaciones } = this.state;
+    const {
+      idActividad,
+      titulo,
+      descripcion,
+      foto,
+      fecha,
+      idUbicacion,
+      ubicaciones,
+    } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -244,9 +241,6 @@ export default class ActividadesFormAdmin extends Component {
               }}
             />
           </div>
-        
-
-         
 
           <div>
             <input
@@ -290,7 +284,7 @@ export default class ActividadesFormAdmin extends Component {
               ))}
             </select>
           </div>
-         
+
           <div>
             <textarea
               placeholder="Descripcion"
@@ -327,7 +321,4 @@ export default class ActividadesFormAdmin extends Component {
       </form>
     );
   }
-
-
 }
-

@@ -35,6 +35,12 @@ p {
     color: #2a411c;
   }
 }
+@media (min-width: 635px) {
+  .contacto-header {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+  }
+}
 @media (max-width: 767px) {
   .articulo-informativos {
     margin-top: 0px;
