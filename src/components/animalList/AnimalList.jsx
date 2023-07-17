@@ -56,6 +56,7 @@ function AnimalList() {
                 <Link to={`/AnimalDetails/${animal.idEspecie}`}>
                   <div className="d-flex">
                     <Card.Img
+                      className="image-card"
                       variant="top"
                       src={animal.icono}
                       alt={animal.nombre}

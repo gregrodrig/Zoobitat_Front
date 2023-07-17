@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./AnimalCard.module.css";
 import Card from "react-bootstrap/Card";
-import miVariableGlobal from '../../global.js';
+import miVariableGlobal from "../../global.js";
 const img = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg";
 
 export function AnimalCard({ animal }) {
@@ -95,7 +95,7 @@ export function AnimalCard({ animal }) {
                   marginBottom: "10px",
                 }}
               >
-                Mapa 
+                Mapa
               </Card.Title>{" "}
             </Link>
           </Card.Body>

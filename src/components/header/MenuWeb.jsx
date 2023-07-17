@@ -90,7 +90,7 @@ function MenuWeb() {
         <Navbar
           key={expand}
           expand={expand}
-          className={`mb-3 ${style.customNavbar} navbar-laptop`}
+          className={`${style.customNavbar} navbar-laptop`}
         >
           <Container fluid className="container-menu">
             <Row className="justify-content-between">
