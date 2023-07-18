@@ -12,11 +12,13 @@ export default class NoticiaCard extends Component {
         <Card.Body>
           <Row>
             <Col xs={4}>
-              <Card.Img
-                src={imagen}
-                alt="Imagen de la noticia"
-                style={{ width: "100%", height: "auto" }}
-              />
+              <Link to={`/Noticia/${id}`}>
+                <Card.Img
+                  src={imagen}
+                  alt="Imagen de la noticia"
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </Link>
             </Col>
             <Col xs={8}>
               <Link to={`/Noticia/${id}`}>
@@ -25,21 +27,21 @@ export default class NoticiaCard extends Component {
                 >
                   {titulo}
                 </Card.Title>
+                <Card.Text
+                  style={{
+                    color: "var(--Black)",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    maxWidth: "100%",
+                    margin: 0,
+                  }}
+                >
+                  {texto}
+                </Card.Text>
               </Link>
-              <Card.Text
-                style={{
-                  color: "var(--Black)",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: "vertical",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  maxWidth: "100%",
-                  margin: 0,
-                }}
-              >
-                {texto}
-              </Card.Text>
             </Col>
           </Row>
         </Card.Body>

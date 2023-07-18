@@ -3,9 +3,11 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import miVariableGlobal from "../../global.js";
 import axios from "axios";
+import "../../index.css";
 import { GrMapLocation } from "react-icons/gr";
 import { MdDateRange } from "react-icons/md";
 import { FaAngleRight } from "react-icons/fa";
+import { Empty } from "components/emptyMsg/Empty.jsx";
 
 export default class NoticiasListAdmin extends Component {
   constructor(props) {
@@ -64,10 +66,10 @@ export default class NoticiasListAdmin extends Component {
       return formattedDate;
     }
     return (
-      <div style={{ overflowY: "scroll", height: "400px" }}>
-        <div style={{ width: "100%", margin: "10px" }}>
+      <>
+        <div style={{ margin: "1.5rem" }}>
           <Link
-            style={{ width: "90%", backgroundColor: "#2a411c" }}
+            style={{ width: "80%", backgroundColor: "var(--DarkGreen)" }}
             to="/NoticiasForm"
             className="btn rounded-pill btn-block"
           >
@@ -76,30 +78,45 @@ export default class NoticiasListAdmin extends Component {
             </span>
           </Link>
         </div>
-
         <br />
         {loading ? (
-          <p>Cargando Noticias...</p>
+          <Col style={{ margin: "2rem" }}>
+            <Empty msg="msgCargandoDatos" />
+          </Col>
         ) : (
-          noticia.map((act) => (
-            <div className="card mb-2">
-              <div className="row">
-                <Col xs={3}>
-                  <img
+          noticia.map((act, index) => (
+            <Card
+              key={index}
+              className="mb-3"
+              style={{ borderColor: "var(--LightGreen)", margin: "0 3rem" }}
+            >
+              <Row>
+                <Col xs={3} style={{ margin: "auto" }}>
+                  <Card.Img
                     src={act.imagen}
                     alt="Avatar"
                     className="rounded-circle img-fluid"
                     style={{ width: "50%", height: "auto" }}
                   />
                 </Col>
-                <Col xs={7}>
-                  <h5 className="card-title" style={{ color: "green" }}>
+                <Col
+                  xs={7}
+                  style={{
+                    textAlign: "start",
+                    margin: "auto",
+                    padding: "0.75rem",
+                  }}
+                >
+                  <Card.Title
+                    className="mb-2"
+                    style={{ color: "var(--LightGreen)" }}
+                  >
                     {act.idNotica}
-                  </h5>
-                  <p className="card-text text-muted">{act.titulo}</p>
-                  <p className="card-text text-muted">
+                  </Card.Title>
+                  <Card.Title className="mb-3">{act.titulo}</Card.Title>
+                  <Card.Subtitle className="text-muted mb-2">
                     {formatDate(act.fecha)}
-                  </p>
+                  </Card.Subtitle>
                 </Col>
                 <Col xs={2} style={{ alignSelf: "center" }}>
                   <Link
@@ -110,11 +127,11 @@ export default class NoticiasListAdmin extends Component {
                     <FaAngleRight style={{ fontSize: "30px" }} />
                   </Link>
                 </Col>
-              </div>
-            </div>
+              </Row>
+            </Card>
           ))
         )}
-      </div>
+      </>
     );
   }
 }

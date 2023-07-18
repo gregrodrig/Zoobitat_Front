@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import miVariableGlobal from '../../global.js';
-
+import React, { Component } from "react";
+import axios from "axios";
+import miVariableGlobal from "../../global.js";
 
 export default class AsignacionDetailComponent extends Component {
   constructor(props) {
@@ -17,8 +16,10 @@ export default class AsignacionDetailComponent extends Component {
     const { idasignacion } = this.props;
 
     axios
-      .get(`https://${miVariableGlobal}:7106/api/asignacionesusuario/${idasignacion}`)
-      .then(response => {
+      .get(
+        `https://${miVariableGlobal}:7106/api/asignacionesusuario/${idasignacion}`
+      )
+      .then((response) => {
         const asignacionData = response.data;
         console.log(asignacionData);
         this.setState({
@@ -27,7 +28,7 @@ export default class AsignacionDetailComponent extends Component {
           error: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         this.setState({
           loading: false,
@@ -40,35 +41,39 @@ export default class AsignacionDetailComponent extends Component {
     const { asignacion } = this.state;
     const { idAsignacionUsuario } = asignacion;
 
-    if (sessionStorage.getItem('token')) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    if (sessionStorage.getItem("token")) {
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${sessionStorage.getItem("token")}`;
     }
 
     axios
-      .put(`https://${miVariableGlobal}:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`)
-      .then(response => {
+      .put(
+        `https://${miVariableGlobal}:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`
+      )
+      .then((response) => {
         console.log(response.data);
         // Aquí puedes manejar la respuesta del PUT si es necesario
       })
-      .catch(error => {
+      .catch((error) => {
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AsignacionDetailComponent',
-          IdUsuario: 4,
-          Usuario: null
-        })
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "AsignacionDetailComponent",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         console.error(error);
         // Aquí puedes manejar los errores del PUT si es necesario
       });
-      window.history.back();
+    window.history.back();
   };
 
   render() {
@@ -100,14 +105,14 @@ export default class AsignacionDetailComponent extends Component {
           </div>
         )}
 
-        <div style={{ width: '100%', margin: '10px' }}>
+        <div style={{ width: "100%", margin: "10px" }}>
           <button
-            style={{ width: '90%', backgroundColor: '#2a411c' }}
+            style={{ width: "90%", backgroundColor: "#2a411c" }}
             className="btn rounded-pill btn-block"
             disabled={idEstadoAsignacion !== 1}
             onClick={this.handleChangeEstado}
           >
-            <span style={{ color: 'white', fontSize: '30px' }}>Terminada</span>
+            <span style={{ color: "white", fontSize: "30px" }}>Terminada</span>
           </button>
         </div>
 
