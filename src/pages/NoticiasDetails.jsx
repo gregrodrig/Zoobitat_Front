@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import './NoticiasDetails.css';
-import { useParams } from 'react-router';
-import log from 'loglevel';
-import axios from 'axios';
-import miVariableGlobal from '../global.js';
-
+import React, { useEffect, useState } from "react";
+import "./NoticiasDetails.css";
+import { useParams } from "react-router";
+import log from "loglevel";
+import axios from "axios";
+import miVariableGlobal from "../global.js";
 
 function NoticiasDetails() {
   const { idnoticia } = useParams();
@@ -15,46 +14,54 @@ function NoticiasDetails() {
     sendLogToServer(`Cargando detalles de la noticia con ID: ${idnoticia}`);
 
     fetch(`https://${miVariableGlobal}:7106/api/Noticia/${idnoticia}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setNoticia(data);
         console.log(data);
       })
-      .catch(error => {
-        if (sessionStorage.getItem('token')) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+      .catch((error) => {
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error,
-          level: 'ERROR',
-          section: 'NoticiasDetails',
-          IdUsuario: 4,
-          Usuario: null
-        })
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+            message: error,
+            level: "ERROR",
+            section: "NoticiasDetails",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         console.error(error);
       });
   }, [idnoticia]);
 
   function sendLogToServer(logMessage) {
-
-    if (sessionStorage.getItem('token')) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    if (sessionStorage.getItem("token")) {
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${sessionStorage.getItem("token")}`;
     }
-    axios.post(`https://${miVariableGlobal}:7106/api/logs`, { message: logMessage, level: 'INFO', section: 'NoticiasDetails',
-    IdUsuario: 4,
-    Usuario: null })
-      .then(response => {
-        console.log('Log enviado al servidor');
+    axios
+      .post(`https://${miVariableGlobal}:7106/api/logs`, {
+        message: logMessage,
+        level: "INFO",
+        section: "NoticiasDetails",
+        IdUsuario: 4,
+        Usuario: null,
       })
-      .catch(error => {
-        console.error('Error al enviar el log al servidor', error);
+      .then((response) => {
+        console.log("Log enviado al servidor");
+      })
+      .catch((error) => {
+        console.error("Error al enviar el log al servidor", error);
       });
   }
 
@@ -63,17 +70,51 @@ function NoticiasDetails() {
   }
 
   return (
-    <header className='noticia-header'>
-      <div className='noticia-header' key={Noticia.idNotica}>
-        <div className='noticia-container'>
-          <div className='header-image'>
-            <img src={Noticia.imagen} alt='back-image' style={{ height: '220px', borderBottomRightRadius: '30px', borderBottomLeftRadius: '30px' }} />
+    <>
+      <header className="noticia-header">
+        <div className="noticia-header" key={Noticia.idNotica}>
+          <div className="noticia-container">
+            <div className="header-image">
+              <img
+                src={Noticia.imagen}
+                alt={Noticia.imagen}
+                style={{
+                  width: "100%",
+                  height: "60vh",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           </div>
-          <h3> {Noticia.titulo}</h3>
-          <p style={{ marginTop: '60px' }}> {Noticia.cuerpo}</p>
         </div>
+      </header>
+      <div className="noticia">
+        <h2 className="habitat" style={{ fontWeight: "bold" }}>
+          {" "}
+          {Noticia.titulo}
+        </h2>
+        <hr
+          style={{
+            margin: "10px ",
+            borderWidth: "2px",
+            width: "80%",
+            marginLeft: "36px",
+            color: "black",
+          }}
+        />
+        <p
+          style={{
+            textAlign: "start",
+            marginLeft: "20px",
+            fontSize: "12px",
+            width: "100%",
+            marginTop: "20px",
+          }}
+        >
+          {Noticia.cuerpo}
+        </p>
       </div>
-    </header>
+    </>
   );
 }
 
