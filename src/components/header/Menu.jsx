@@ -10,7 +10,7 @@ import { AiFillHome } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FiActivity } from "react-icons/fi";
 import { IoTime } from "react-icons/io5";
-import { MdPets } from "react-icons/md";
+import { MdOutlineDashboard, MdPets } from "react-icons/md";
 import { GiTreeBranch } from "react-icons/gi";
 import { TbMapSearch } from "react-icons/tb";
 import { MdContactPhone } from "react-icons/md";
@@ -120,7 +120,7 @@ function Menu() {
                           color: "gray",
                         }}
                       >
-                        <AiFillHome
+                        <MdOutlineDashboard
                           style={{
                             color: "gray",
                             fontSize: "20px",
