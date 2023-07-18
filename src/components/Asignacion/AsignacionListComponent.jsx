@@ -60,8 +60,9 @@ export default class AsignacionListComponent extends Component {
                 level: "ERROR",
                 section: "AsignacionListComponent",
                 IdUsuario: 4,
-                Usuario: null,
-              })
+          Usuario: null
+              },
+              )
               .then((response) => {
                 console.log("Log enviado al servidor");
               })
