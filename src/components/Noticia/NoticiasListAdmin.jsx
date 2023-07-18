@@ -107,12 +107,6 @@ export default class NoticiasListAdmin extends Component {
                     padding: "0.75rem",
                   }}
                 >
-                  <Card.Title
-                    className="mb-2"
-                    style={{ color: "var(--LightGreen)" }}
-                  >
-                    {act.idNotica}
-                  </Card.Title>
                   <Card.Title className="mb-3">{act.titulo}</Card.Title>
                   <Card.Subtitle className="text-muted mb-2">
                     {formatDate(act.fecha)}
