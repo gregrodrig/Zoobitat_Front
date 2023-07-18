@@ -8,7 +8,7 @@ import "./navbar.css";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FiActivity } from "react-icons/fi";
 import { IoLogOutOutline, IoTime } from "react-icons/io5";
-import { MdPets } from "react-icons/md";
+import { MdOutlineDashboard, MdPets } from "react-icons/md";
 import { GiTreeBranch } from "react-icons/gi";
 import { TbMapSearch } from "react-icons/tb";
 import { MdContactPhone } from "react-icons/md";
@@ -16,14 +16,6 @@ import useUser from "../../hooks/useUser";
 import axiosInstance from "utils/api/CallApi";
 import { useCallback, useEffect } from "react";
 import { Col, Image, Row } from "react-bootstrap";
-
-const roles = {
-  Admin: 1,
-  Cuidador: 2,
-  Veterinario: 3,
-  Visitante: 4,
-  Inactivo: 5,
-};
 
 const menu = [
   {
@@ -64,7 +56,7 @@ const menu = [
 ];
 
 function MenuWeb() {
-  const { isLogged, logout, rol, setRol } = useUser();
+  const { isLogged, logout, setRol } = useUser();
 
   const getRol = useCallback(async () => {
     console.log(isLogged);
@@ -139,14 +131,24 @@ function MenuWeb() {
               <Col md={2}>
                 <Nav style={{ flexDirection: "inherit" }}>
                   {isLogged ? (
-                    <Link to="/login" onClick={logout}>
-                      <IoLogOutOutline
-                        style={{
-                          fontSize: "40px",
-                          color: "white",
-                        }}
-                      />
-                    </Link>
+                    <>
+                      <Link to="/Dashboard">
+                        <MdOutlineDashboard
+                          style={{
+                            fontSize: "40px",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
+                      <Link to="/login" onClick={logout}>
+                        <IoLogOutOutline
+                          style={{
+                            fontSize: "40px",
+                            color: "white",
+                          }}
+                        />
+                      </Link>
+                    </>
                   ) : (
                     <>
                       <Link to="/register">
