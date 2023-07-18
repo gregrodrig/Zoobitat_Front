@@ -57,9 +57,6 @@ function App() {
           <div>
             <Menu />
             <MenuWeb />
-            {JSON.stringify(
-              console.log("Usuraio no.:" + rol + "rol>: " + roles.cuidador)
-            )}
             <Routes>
               {/*SIN AUTENTICAR*/}
               <Route path="/" element={<Home />} />
