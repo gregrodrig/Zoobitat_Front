@@ -30,7 +30,6 @@ import { AsignacionDetail } from "pages/asignaciones/AsignacionDetail";
 import { ParteList } from "pages/parte/ParteList";
 import { ParteDetail } from "pages/parte/ParteDetail";
 import { ParteForm } from "pages/parte/ParteForm";
-import { Navbar } from "react-bootstrap";
 import { ActividadesAdmin } from "pages/Actividades/ActividadesAdmin";
 import { ActividadesForm } from "pages/Actividades/ActividadesForm";
 import { NoticiasForm } from "pages/Noticias/NoticiasForm";
@@ -43,14 +42,24 @@ function App() {
   const [jwt, setJwt] = useState(token);
   const [rol, setRol] = useState([]);
 
+  let roles = {
+    gestor: 1,
+    cuidador: 2,
+    veterinario: 3,
+    visitante: 4,
+    inactivo: 5,
+  };
+
   return (
     <Context.Provider value={{ jwt, setJwt, rol, setRol }}>
       <div className="App">
         <main>
           <div>
-         <Menu />
-         <MenuWeb />
-
+            <Menu />
+            <MenuWeb />
+            {JSON.stringify(
+              console.log("Usuraio no.:" + rol + "rol>: " + roles.cuidador)
+            )}
             <Routes>
               {/*SIN AUTENTICAR*/}
               <Route path="/" element={<Home />} />
@@ -65,7 +74,10 @@ function App() {
               <Route path="/Habitat" element={<Habitat />} />
               <Route path="/Habitat/:idhabitat" element={<HabitatDetails />} />
               <Route path="/AnimalList" element={<AnimalListView />} />
-              <Route path="/AnimalDetails/:idAnimal" element={<AnimalDetails />} />
+              <Route
+                path="/AnimalDetails/:idAnimal"
+                element={<AnimalDetails />}
+              />
               <Route path="/NoticiaDetails" element={<NoticiasDetails />} />
               <Route path="/Contacto" element={<Contacto />} />
               <Route path="/register" element={<Register />} />
@@ -74,34 +86,63 @@ function App() {
               {/*FIN SIN AUTENTICAR*/}
 
               {/* RUTAS PROTEGIDAS */}
+
+              {/* TODOS USUARIOS */}
               <Route
-                element={<ProtectedRoute isAllowed={token} redirectTo="/" />}
+                element={
+                  <ProtectedRoute
+                    isAllowed={
+                      token
+                        ? roles?.cuidador === rol ||
+                          roles?.gestor === rol ||
+                          roles?.veterinario === rol
+                        : null
+                    }
+                    redirectTo="/"
+                  />
+                }
               >
-                {/* RUTAS USUARIOS */}
-                <Route path="/usuarioList" element={<UserList />} />
                 <Route path="/Dashboard" element={<DashboardView />} />
-                {/* FIN RUTAS USUARIOS */}
+              </Route>
 
+              {/* RUTAS ASIGNACIONES */}
+              <Route path="/AsignacionForm" element={<AsignacionForm />} />
+              <Route path="/AsignacionList" element={<AsignacionList />} />
+              <Route
+                path="/asignacionDetail/:id"
+                element={<AsignacionDetail />}
+              />
+              {/* FIN RUTAS ASIGNACIONES */}
 
-                 {/* RUTAS Actividades */}
-                 <Route path="/ActividadesAdmin" element={<ActividadesAdmin />} />
-                <Route path="/ActividadesForm" element={<ActividadesForm />} />
-                <Route path="/ActividadesForm/:id" element={<ActividadesForm />} />
-                {/* FIN RUTAS Actividades */}
+              {/* FIN TODOS USUARIOS */}
 
-                 {/* RUTAS Noticias */}
-                 <Route path="/NoticiasAdmin" element={<NoticiasAdmin />} />
-                <Route path="/NoticiasForm" element={<NoticiasForm />} />
-                <Route path="/NoticiasForm/:id" element={<NoticiasForm />} />
-                {/* FIN RUTAS Noticias */}
+              {/* CUIDADOR */}
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAllowed={
+                      token
+                        ? roles?.cuidador === rol || roles?.gestor === rol
+                        : null
+                    }
+                    redirectTo="/"
+                  />
+                }
+              ></Route>
 
-                {/* RUTAS HABITAT */}
-                <Route path="/HabitatForm" element={<HabitasForms />} />
-                <Route path="/HabitatForm/:id" element={<HabitasForms />} />
-                <Route path="/HabitatDetails" element={<HabitatDetails />} />
-                <Route path="/HabitatList" element={<HabitatsList />} />
-                {/* FIN RUTAS HABITAT */}
-
+              {/* VETERINARIO */}
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAllowed={
+                      token
+                        ? roles?.veterinario === rol || roles?.gestor === rol
+                        : null
+                    }
+                    redirectTo="/"
+                  />
+                }
+              >
                 {/* RUTAS ANIMALES */}
                 <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
                 <Route path="/AnimalDash" element={<AnimalListPage />} />
@@ -115,16 +156,47 @@ function App() {
                 <Route path="/parteForm/" element={<ParteForm />} />
                 <Route path="/parteForm/:id" element={<ParteForm />} />
                 {/* FIN RUTAS PARTES */}
-
-                {/* RUTAS ASIGNACIONES */}
-                <Route path="/AsignacionForm" element={<AsignacionForm />} />
-                <Route path="/AsignacionList" element={<AsignacionList />} />
-                <Route
-                  path="/asignacionDetail/:id"
-                  element={<AsignacionDetail />}
-                />
-                {/* FIN RUTAS ASIGNACIONES */}
               </Route>
+
+              {/* GESTOR */}
+              <Route
+                element={
+                  <ProtectedRoute
+                    isAllowed={token ? roles?.gestor === rol : null}
+                    redirectTo="/"
+                  />
+                }
+              >
+                {/* RUTAS USUARIOS */}
+                <Route path="/usuarioList" element={<UserList />} />
+                {/* FIN RUTAS USUARIOS */}
+
+                {/* RUTAS Actividades */}
+                <Route
+                  path="/ActividadesAdmin"
+                  element={<ActividadesAdmin />}
+                />
+                <Route path="/ActividadesForm" element={<ActividadesForm />} />
+                <Route
+                  path="/ActividadesForm/:id"
+                  element={<ActividadesForm />}
+                />
+                {/* FIN RUTAS Actividades */}
+
+                {/* RUTAS Noticias */}
+                <Route path="/NoticiasAdmin" element={<NoticiasAdmin />} />
+                <Route path="/NoticiasForm" element={<NoticiasForm />} />
+                <Route path="/NoticiasForm/:id" element={<NoticiasForm />} />
+                {/* FIN RUTAS Noticias */}
+
+                {/* RUTAS HABITAT */}
+                <Route path="/HabitatForm" element={<HabitasForms />} />
+                <Route path="/HabitatForm/:id" element={<HabitasForms />} />
+                <Route path="/HabitatDetails" element={<HabitatDetails />} />
+                <Route path="/HabitatList" element={<HabitatsList />} />
+                {/* FIN RUTAS HABITAT */}
+              </Route>
+
               {/* FIN RUTAS PROTEGIDAS */}
             </Routes>
           </div>

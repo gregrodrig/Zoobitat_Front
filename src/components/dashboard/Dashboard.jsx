@@ -50,7 +50,7 @@ const Dashboard = () => {
       imageColor: "#C0D904",
       link: "/AsignacionList",
       name: "Tareas",
-      roles: [gestor, veterinario],
+      roles: [gestor, veterinario, cuidador],
     },
     {
       image: "assets/Dash_icons/Partes.svg",
@@ -64,7 +64,7 @@ const Dashboard = () => {
       imageColor: "#07D2FF",
       link: "/ActividadesAdmin",
       name: "Actividades",
-      roles: [gestor, cuidador],
+      roles: [gestor],
     },
     {
       image: "assets/Dash_icons/Mapa.svg",
