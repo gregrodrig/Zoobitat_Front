@@ -19,6 +19,11 @@ export default class ParteFormComponent extends Component {
   componentDidMount() {
     this.fetchUsuario();
   }
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
   fetchUsuario = () => {
     // Obtener el token del sessionStorage
