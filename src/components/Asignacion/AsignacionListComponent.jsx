@@ -188,7 +188,7 @@ export default class AsignacionListComponent extends Component {
                   </h5>
                 </Col>
                 <Col xs={2} style={{ margin: "auto" }}>
-                  {idrol != 1 ? (
+                  {idrol !== 1 ? (
                     <Link
                       to={`/asignacionDetail/${item.idAsignacionUsuario}`}
                       style={{ color: "#bcbcbc", justifyContent: "center" }}
