@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 export const ProtectedRoute = ({
   isAllowed,
   children,
-  redirectTo = "/landing",
+  redirectTo = "/Dashboard",
 }) => {
   if (!isAllowed) {
     return <Navigate to={redirectTo} />;
