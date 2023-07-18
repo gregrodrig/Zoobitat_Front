@@ -6,7 +6,10 @@ import { Link } from "react-router-dom";
 import log from "loglevel";
 import axios from "axios";
 import "./Actividades.css";
+import "./../index.css";
 import miVariableGlobal from "../global.js";
+import { Empty } from "components/emptyMsg/Empty";
+import { BiNoEntry } from "react-icons/bi";
 
 function formatDate(dateTimeString) {
   const dateObject = new Date(dateTimeString);
@@ -20,7 +23,7 @@ function formatDate(dateTimeString) {
 }
 
 function Actividades() {
-  const [actividades, setActividades] = useState(null);
+  const [actividades, setActividades] = useState([]);
 
   useEffect(() => {
     log.info("Página lista de Actividades  visitada");
@@ -80,73 +83,92 @@ function Actividades() {
       });
   }
 
-  if (!actividades) {
-    return <div>No hay actividades</div>;
-  }
-
   return (
-    <div className="main">
-      <header className="actividad-header">
-        <h1 className="actividad-title">Actividades</h1>
-        <p className="actividad-description">
-          Explora el fascinante mundo de la vida silvestre disfrutando de
-          nuestras actividades.
-        </p>
-      </header>
-
-      <div className="detailsContainer">
-        {actividades.map((act) => (
-          <div className="actividadContainer" key={act.id}>
-            <Container>
-              <Link to="" className="link">
-                <Row>
-                  <Col>
-                    <img
+    <>
+      {!actividades || actividades.length === 0 ? (
+        <Col style={{ margin: "2rem" }}>
+          <Empty msg="msgDatosNoCargados" />
+        </Col>
+      ) : (
+        <>
+          <div className="main">
+            <header className="actividad-header mb-5">
+              <h1 className="actividad-title">Actividades</h1>
+              <p className="actividad-description">
+                Explora el fascinante mundo de la vida silvestre disfrutando de
+                nuestras actividades.
+              </p>
+            </header>
+            {actividades.map((act, index) => (
+              <Card
+                key={index}
+                className="mb-3"
+                style={{
+                  border: "none",
+                  margin: "0 3rem",
+                  background: "var(--background)",
+                }}
+              >
+                <Link to="" className="link">
+                  <Row>
+                    <Col xs={3} style={{ margin: "auto" }}>
+                      <Card.Img
+                        key={act.id}
+                        className="img-fluid"
+                        style={{
+                          width: "50%",
+                          height: "auto",
+                          borderRadius: "0.75rem",
+                        }}
+                        src={act.foto}
+                        alt={act.titulo}
+                      />
+                    </Col>
+                    <Col
+                      xs={7}
                       style={{
-                        marginRight: "-5px",
-                        borderRadius: "6px",
-                        height: "100px",
-                        width: "100px",
-                        marginBottom: "7px",
+                        textAlign: "start",
+                        margin: "auto",
+                        padding: "0.75rem",
                       }}
-                      className="actividadImage"
-                      src={act.foto}
-                      alt={act.titulo}
-                    />
-                  </Col>
-                  <Col>
-                    <div className="actividadDetailsContainer">
-                      <div className="firstItem">
-                        <p>
-                          <strong>{act.titulo}</strong>
-                        </p>
-                      </div>
-                      <div className="information">
-                        <p>
-                          <span>{act.descripcion}</span>
-                        </p>
-                        <div>
-                          <p className="dateAndplace">
-                            <GrMapLocation
-                              style={{ marginRight: "5px", color: "#C0D904" }}
-                            />
-                            {`${act.ubicacion.nombre} - `}
-                            <MdDateRange
-                              style={{ marginRight: "5px", color: "#C0D904" }}
-                            />
-                            {formatDate(act.fecha)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </Link>
-            </Container>
+                    >
+                      <Card.Title
+                        className="mb-3"
+                        style={{
+                          color: "var(--DarkGreen)",
+                          fontSize: "x-large",
+                        }}
+                      >
+                        {act.titulo}
+                      </Card.Title>
+                      <Card.Subtitle className="text-muted mb-3">
+                        {act.descripcion}
+                      </Card.Subtitle>
+                      <Card.Subtitle className="text-muted">
+                        <GrMapLocation
+                          style={{
+                            marginRight: "5px",
+                            color: "var(--LightGreen)",
+                          }}
+                        />
+                        {`${act.ubicacion.nombre} - `}
+                        <MdDateRange
+                          style={{
+                            marginRight: "5px",
+                            color: "var(--LightGreen)",
+                          }}
+                        />
+                        {formatDate(act.fecha)}
+                      </Card.Subtitle>
+                    </Col>
+                  </Row>
+                </Link>
+              </Card>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </>
+      )}
+    </>
   );
 }
 

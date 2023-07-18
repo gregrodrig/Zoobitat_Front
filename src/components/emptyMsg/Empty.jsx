@@ -8,6 +8,15 @@ export function Empty({ msg }) {
           No se han cargado los datos desde la Base de datos!
         </p>
       );
+    case "msgDatosNoCargados":
+      return (
+        <div className={styles.msgNot}>
+          <span className={styles.center}>
+            <strong>¡ERROR!</strong>
+            <br /> No se han cargado los datos desde la Base de datos!...
+          </span>
+        </div>
+      );
     case "msgCargandoDatos":
       return (
         <div className={styles.msgOk}>
