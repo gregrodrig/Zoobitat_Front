@@ -33,10 +33,8 @@ function Home() {
         </Container>
 
         <AnimalCard animal={undefined} />
-        <h1 className="articulo-informativos">ATICULOS FORMATIVOS</h1>
-        <div style={{ width: "95%", margin: "5px" }}>
-          <NoticiasList />
-        </div>
+        <h1 className="articulo-informativos mb-5">ARTÍCULOS FORMATIVOS</h1>
+        <NoticiasList />
       </header>
     </div>
   );
