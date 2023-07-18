@@ -3,7 +3,7 @@ import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaAngleRight, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import miVariableGlobal from '../../global.js';
+import miVariableGlobal from "../../global.js";
 
 export default class AsignacionListComponent extends Component {
   constructor(props) {
@@ -60,9 +60,8 @@ export default class AsignacionListComponent extends Component {
                 level: "ERROR",
                 section: "AsignacionListComponent",
                 IdUsuario: 4,
-          Usuario: null
-              },
-              )
+                Usuario: null,
+              })
               .then((response) => {
                 console.log("Log enviado al servidor");
               })
@@ -126,10 +125,10 @@ export default class AsignacionListComponent extends Component {
     const { asignaciones, estado, idrol } = this.state;
 
     return (
-      <div>
-        <div style={{ width: "100%", margin: "0 0 20px", padding: "0 10px" }}>
+      <div className="m-4">
+        <div style={{ margin: "1.5rem" }}>
           <Link
-            style={{ width: "100%", backgroundColor: "#2a411c" }}
+            style={{ width: "80%", backgroundColor: "#2a411c" }}
             to="/asignacionForm"
             className="btn rounded-pill btn-block"
           >
@@ -169,7 +168,7 @@ export default class AsignacionListComponent extends Component {
           </button>
         </div>
 
-        <div className="Col" style={{ margin: "10px" }}>
+        <div className="Col" style={{ margin: "2rem 0.7rem" }}>
           {asignaciones.map((item) => (
             <div
               className="card"
@@ -178,6 +177,7 @@ export default class AsignacionListComponent extends Component {
                 justifyContent: "center",
                 borderColor: "#c0d904",
                 height: "75px",
+                marginBottom: "0.75rem",
               }}
             >
               <div className="row">
@@ -186,7 +186,7 @@ export default class AsignacionListComponent extends Component {
                     {item.asignacion.nombre} A {item.animal.nombre}
                   </h5>
                 </Col>
-                <Col xs={2}>
+                <Col xs={2} style={{ margin: "auto" }}>
                   {idrol != 1 ? (
                     <Link
                       to={`/asignacionDetail/${item.idAsignacionUsuario}`}

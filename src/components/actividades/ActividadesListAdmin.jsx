@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import miVariableGlobal from "../../global.js";
 import axios from "axios";
 import { FaAngleRight } from "react-icons/fa";
 import { Empty } from "components/emptyMsg/Empty.jsx";
+import "../../index.css";
 
 export default class ActividadesListAdmin extends Component {
   constructor(props) {
@@ -64,9 +65,9 @@ export default class ActividadesListAdmin extends Component {
     }
     return (
       <>
-        <div style={{ width: "100%", margin: "1.5rem" }}>
+        <div style={{ margin: "1.5rem" }}>
           <Link
-            style={{ width: "80%", backgroundColor: "#2a411c" }}
+            style={{ width: "80%", backgroundColor: "var(--DarkGreen)" }}
             to="/ActividadesForm"
             className="btn rounded-pill btn-block"
           >
@@ -76,29 +77,43 @@ export default class ActividadesListAdmin extends Component {
           </Link>
         </div>
         {loading ? (
-          <Container>
+          <Col style={{ margin: "2rem" }}>
             <Empty msg="msgCargandoDatos" />
-          </Container>
+          </Col>
         ) : (
-          actividades.map((act) => (
-            <Container className="card mb-3" style={{ borderColor: "#c0d904" }}>
-              <Row className="row">
-                <Col xs={3}>
-                  <img
+          actividades.map((act, index) => (
+            <Card
+              key={index}
+              className="mb-3"
+              style={{ borderColor: "var(--LightGreen)", margin: "0 3rem" }}
+            >
+              <Row>
+                <Col xs={3} style={{ margin: "auto" }}>
+                  <Card.Img
                     src={act.foto}
                     alt="Avatar"
                     className="rounded-circle img-fluid"
                     style={{ width: "50%", height: "auto" }}
                   />
                 </Col>
-                <Col xs={7}>
-                  <h5 className="card-title" style={{ color: "green" }}>
-                    {act.Id}
-                  </h5>
-                  <p className="card-text text-muted">{act.titulo}</p>
-                  <p className="card-text text-muted">
+                <Col
+                  xs={7}
+                  style={{
+                    textAlign: "start",
+                    margin: "auto",
+                    padding: "0.75rem",
+                  }}
+                >
+                  <Card.Title
+                    className="mb-2"
+                    style={{ color: "var(--LightGreen)" }}
+                  >
+                    {act.id}
+                  </Card.Title>
+                  <Card.Title className="mb-3">{act.titulo}</Card.Title>
+                  <Card.Subtitle className="text-muted mb-2">
                     {formatDate(act.fecha)}
-                  </p>
+                  </Card.Subtitle>
                 </Col>
                 <Col xs={2} style={{ alignSelf: "center" }}>
                   <Link
@@ -110,7 +125,7 @@ export default class ActividadesListAdmin extends Component {
                   </Link>
                 </Col>
               </Row>
-            </Container>
+            </Card>
           ))
         )}
       </>

@@ -13,7 +13,7 @@ export default class Encabezado extends Component {
       return (
         <div>
           <header
-            className="contacto-header"
+            className="contacto-header pt-3 pb-2"
             style={{ display: "flex", justifyContent: "center" }}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -49,7 +49,7 @@ export default class Encabezado extends Component {
     } else {
       return (
         <div>
-          <header className="contacto-header">
+          <header className="contacto-header pt-3 pb-2">
             <h1 className="contacto-title">{titulo}</h1>
             <p className="contacto-description">{info}</p>
           </header>
