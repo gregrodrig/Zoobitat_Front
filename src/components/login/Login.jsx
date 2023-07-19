@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import "./Login.module.css";
 import { AiFillCheckCircle } from "react-icons/ai";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 
 export const Login = () => {
@@ -100,12 +100,12 @@ export const Login = () => {
           >
             ¿No tienes cuenta?
             <span style={{ color: "#4F7302" }}>
-              <a
-                href="/register"
+              <Link
+                to="/register"
                 style={{ color: "#4F7302", marginLeft: "5px" }}
               >
                 Regístrate Ahora
-              </a>
+              </Link>
             </span>
           </div>
         </>
