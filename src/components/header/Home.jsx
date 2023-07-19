@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Menu from "./Menu";
 import { AnimalCard } from "../animalCard/AnimalCard";
 import NoticiasList from "components/Noticia/NoticiasList";
 import "../../index.css";

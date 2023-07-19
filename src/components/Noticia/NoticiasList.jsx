@@ -3,7 +3,7 @@ import axios from "axios";
 import NoticiaCard from "./NoticiaCard";
 import miVariableGlobal from "../../global.js";
 import { Empty } from "components/emptyMsg/Empty";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 export default class NoticiasList extends Component {
   constructor(props) {
@@ -55,20 +55,22 @@ export default class NoticiasList extends Component {
 
     return (
       <>
-        <Container className="pb-5">
-          {loading ? (
-            <Empty msg="msgCargandoDatos" />
-          ) : (
-            noticias.map((noticia) => (
-              <NoticiaCard
-                key={noticia.idNotica}
-                id={noticia.idNotica}
-                imagen={noticia.imagen}
-                titulo={noticia.titulo}
-                texto={noticia.cuerpo}
-              />
-            ))
-          )}
+        <Container className="pb-5" fluid>
+          <Row>
+            {loading ? (
+              <Empty msg="msgCargandoDatos" />
+            ) : (
+              noticias.map((noticia) => (
+                <NoticiaCard
+                  key={noticia.idNotica}
+                  id={noticia.idNotica}
+                  imagen={noticia.imagen}
+                  titulo={noticia.titulo}
+                  texto={noticia.cuerpo}
+                />
+              ))
+            )}
+          </Row>
         </Container>
       </>
     );
