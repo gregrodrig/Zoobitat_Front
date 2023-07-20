@@ -21,7 +21,7 @@ export default class NoticiasListAdmin extends Component {
   componentDidMount() {
     // Realizar la solicitud GET a la API
     axios
-      .get(`https://${miVariableGlobal}:7106/api/Noticia`)
+      .get(`${miVariableGlobal}Noticia`)
       .then((response) => {
         // Actualizar el estado con las noticias recibidas y desactivar la carga
         this.setState({ noticia: response.data, loading: false });
@@ -35,7 +35,7 @@ export default class NoticiasListAdmin extends Component {
         }
 
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "NoticiasListAdmin",

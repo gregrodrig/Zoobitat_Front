@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
-import miVariableGlobal from '../../global.js';
-
+import miVariableGlobal from "../../global.js";
 
 export default class ParteFormComponent extends Component {
   constructor(props) {
@@ -33,7 +32,7 @@ export default class ParteFormComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .get(`https://${miVariableGlobal}:7106/api/animal`)
+      .get(`${miVariableGlobal}animal`)
       .then((response) => {
         this.setState({ animalSelect: response.data });
       })
@@ -52,75 +51,71 @@ export default class ParteFormComponent extends Component {
           image: reader.result,
         });
       };
+    } catch (e) {
+      console.log(e.message);
     }
-    catch(e){
-      console.log(e.message)
-    }
-  
   };
 
-    
-      handleSubmit = event => {
-        event.preventDefault();
-      
-        const { titulo,  animal, observaciones, animalSelect} = this.state;
-    
-        const asignacionuser = {
-            idParte: 0,
-            titulo: titulo,
-            idAnimal:animal ,
-            animal: null,
-            observaciones: observaciones,
-            estado:1
-        };
-      
-        // Obtener el token del sessionStorage
-        const token = sessionStorage.getItem('token');
-      
-        // Agregar el token al encabezado de la solicitud Axios
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
-        axios.post(`https://${miVariableGlobal}:7106/api/parte`, asignacionuser)
-          .then(response => {
-            console.log('Animal saved successfully');
-           
-            // Realizar acciones adicionales después de guardar el animal
-          })
-          .catch(error => {
-            console.error(error);
-            if (sessionStorage.getItem('token')) {
-              axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
-            }
-            axios.post(`https://${miVariableGlobal}:7106/api/logs`, {
-                message: error,
-                level: 'ERROR',
-                section: 'ParteFormComponent',
-                IdUsuario: 4,
-          Usuario: null
-              })
-              .then((response) => {
-                console.log('Log enviado al servidor')
-              })
-              .catch((error) => {
-                console.error('Error al enviar el log al servidor', error)
-              });
-            alert("error");
-            // Manejar el error en caso de que ocurra
-          });
-      };
-      
-    
-      render() {
-        const { titulo,  animal, observaciones, animalSelect} = this.state;
-    
-        return (
-    
-          <form onSubmit={this.handleSubmit}>
-       
-            <Col className="text-center">
-              
-            <div>
+  handleSubmit = (event) => {
+    event.preventDefault();
 
+    const { titulo, animal, observaciones, animalSelect } = this.state;
+
+    const asignacionuser = {
+      idParte: 0,
+      titulo: titulo,
+      idAnimal: animal,
+      animal: null,
+      observaciones: observaciones,
+      estado: 1,
+    };
+
+    // Obtener el token del sessionStorage
+    const token = sessionStorage.getItem("token");
+
+    // Agregar el token al encabezado de la solicitud Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    axios
+      .post(`${miVariableGlobal}parte`, asignacionuser)
+      .then((response) => {
+        console.log("Animal saved successfully");
+
+        // Realizar acciones adicionales después de guardar el animal
+      })
+      .catch((error) => {
+        console.error(error);
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${sessionStorage.getItem("token")}`;
+        }
+        axios
+          .post(`${miVariableGlobal}logs`, {
+            message: error,
+            level: "ERROR",
+            section: "ParteFormComponent",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
+        alert("error");
+        // Manejar el error en caso de que ocurra
+      });
+  };
+
+  render() {
+    const { titulo, animal, observaciones, animalSelect } = this.state;
+
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <Col className="text-center">
+          <div>
             <input
               type="text"
               name="titulo"
@@ -197,7 +192,6 @@ export default class ParteFormComponent extends Component {
           </div>
         </Col>
       </form>
-        );
-      }
+    );
+  }
 }
-  

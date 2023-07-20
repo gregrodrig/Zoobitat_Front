@@ -12,7 +12,7 @@ function HabitatDetails() {
 
   useEffect(() => {
     axios
-      .get(`https://${miVariableGlobal}:7106/api/habitat/${idhabitat}`)
+      .get(`${miVariableGlobal}habitat/${idhabitat}`)
       .then((response) => {
         setHabitat(response.data);
       })
@@ -24,7 +24,7 @@ function HabitatDetails() {
         }
 
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error,
             level: "ERROR",
             section: "HabitatDetails",

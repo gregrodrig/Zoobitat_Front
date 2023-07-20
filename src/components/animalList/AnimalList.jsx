@@ -21,12 +21,12 @@ function AnimalList() {
       ] = `Bearer ${sessionStorage.getItem("token")}`;
     }
 
-    fetch(`https://${miVariableGlobal}:7106/api/especie`)
+    fetch(`${miVariableGlobal}especie`)
       .then((response) => response.json())
       .then((data) => setAnimalsData(data))
       .catch((error) =>
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "AnimalList",

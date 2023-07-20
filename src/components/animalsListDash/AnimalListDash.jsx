@@ -21,7 +21,7 @@ export default class AnimalListDash extends Component {
 
   fetchAnimals = () => {
     axios
-      .get(`https://${miVariableGlobal}:7106/api/animal`)
+      .get(`${miVariableGlobal}animal`)
       .then((response) => {
         this.setState({ animals: response.data, loading: false });
       })
@@ -34,7 +34,7 @@ export default class AnimalListDash extends Component {
         }
 
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "AnimalListDash",
@@ -54,7 +54,7 @@ export default class AnimalListDash extends Component {
   };
   handleDeleteAnimal = (idAnimal) => {
     axios
-      .post(`https://${miVariableGlobal}:7106/api/animal/${idAnimal}`)
+      .post(`${miVariableGlobal}animal/${idAnimal}`)
       .then((response) => {
         console.log("Animal deleted successfully");
         this.fetchAnimals();

@@ -1,128 +1,131 @@
-import React, { Component } from 'react'
-import axios from 'axios';
-import { Col, Row } from 'react-bootstrap';
-import { FaAngleRight, FaCheck, FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import miVariableGlobal from '../../global.js';
-
+import React, { Component } from "react";
+import axios from "axios";
+import { Col, Row } from "react-bootstrap";
+import { FaAngleRight, FaCheck, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import miVariableGlobal from "../../global.js";
 
 export default class ParteListComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          partes: [],
-         
-         
-        };
-      }
-    
-      componentDidMount() {
-        this.fetchParte();
-      }
-    
-    
-      fetchParte = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      partes: [],
+    };
+  }
 
-        const { partes } = this.state;
-       
-        const token = sessionStorage.getItem('token');
-      
-        // Agregar el token al encabezado de la solicitud Axios
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      
-       
+  componentDidMount() {
+    this.fetchParte();
+  }
 
-      
-          
-             let url = `https://${miVariableGlobal}:7106/api/parte`;
-             // alert(rol);
-           
-      
-            axios
-              .get(url)
-              .then(response => {
-                this.setState({ partes: response.data });
-                console.log(response.data);
-              })
-              .catch(error => {
-                this.setState({ partes: [] });
-                console.error(error);
-                if (sessionStorage.getItem('token')) {
-                  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
-                }
+  fetchParte = () => {
+    const { partes } = this.state;
 
-                axios
-                .post(`https://${miVariableGlobal}:7106/api/logs`, {
-                  message: error.message,
-                  level: 'ERROR',
-                  section: 'ParteListComponent',
-                  IdUsuario: 4,
-          Usuario: null
-                })
-                .then((response) => {
-                  console.log('Log enviado al servidor')
-                })
-                .catch((error) => {
-                  console.error('Error al enviar el log al servidor', error)
-                })
-              });
-          
-      };
-      
-    
-      handleDeleteUser = idUsuario => {
-        const token = sessionStorage.getItem('token');
-    
-        // Agregar el token al encabezado de la solicitud Axios
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    
+    const token = sessionStorage.getItem("token");
+
+    // Agregar el token al encabezado de la solicitud Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    let url = `${miVariableGlobal}parte`;
+    // alert(rol);
+
+    axios
+      .get(url)
+      .then((response) => {
+        this.setState({ partes: response.data });
+        console.log(response.data);
+      })
+      .catch((error) => {
+        this.setState({ partes: [] });
+        console.error(error);
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${sessionStorage.getItem("token")}`;
+        }
+
         axios
-          .delete(`https://${miVariableGlobal}bleGlobal}bleGlobal}:7106/api/usuario/${idUsuario}`)
-          .then(response => {
-            console.log('User deleted successfully');
-            this.fetchUser();
+          .post(`${miVariableGlobal}logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "ParteListComponent",
+            IdUsuario: 4,
+            Usuario: null,
           })
-          .catch(error => {
-            console.error(error);
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
           });
-      };
-    
-      
-    
-      render() {
-        const { partes } = this.state;
-    
-        return (
-          <div>
-             <div style={{width:"100%", margin:"10px"}} >
-                <Link style={{width:"90%", backgroundColor:"#2a411c"}} to="/parteform"  className="btn rounded-pill btn-block">
-                <span style={{ color: 'white', fontSize:"30px" }}>CREAR NUEVO PARTE</span>
-            </Link>
+      });
+  };
 
+  handleDeleteUser = (idUsuario) => {
+    const token = sessionStorage.getItem("token");
+
+    // Agregar el token al encabezado de la solicitud Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    axios
+      .delete(
+        `http://${miVariableGlobal}bleGlobal}bleGlobal}:7106/api/usuario/${idUsuario}`
+      )
+      .then((response) => {
+        console.log("User deleted successfully");
+        this.fetchUser();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  render() {
+    const { partes } = this.state;
+
+    return (
+      <div>
+        <div style={{ width: "100%", margin: "10px" }}>
+          <Link
+            style={{ width: "90%", backgroundColor: "#2a411c" }}
+            to="/parteform"
+            className="btn rounded-pill btn-block"
+          >
+            <span style={{ color: "white", fontSize: "30px" }}>
+              CREAR NUEVO PARTE
+            </span>
+          </Link>
         </div>
-    
-            <div className="Col" style={{ margin: '10px' }}>
-              {partes.map(item => (
-                <div className="card" key={item.idParte} style={{ justifyContent:"center", borderColor:"#c0d904",height:"75px"}}>
-                  <div className="row">
-                    <Col xs={10}>
-                      <h5 className="card-title" style={{ color: '#bcbcbc' }}>
-                      {item.titulo}
-                      </h5>                  
-                    </Col>
-                    <Col xs={2}  >
-                 
-                    <Link to={`/partedetail/${item.idParte}`} style={{ color: '#bcbcbc', justifyContent:"center" }} > 
-                            <FaAngleRight style={{ fontSize: '50px' }} /> 
-                          </Link> 
-                   
-                    </Col>
-                  </div>
-                </div>
-              ))}
+
+        <div className="Col" style={{ margin: "10px" }}>
+          {partes.map((item) => (
+            <div
+              className="card"
+              key={item.idParte}
+              style={{
+                justifyContent: "center",
+                borderColor: "#c0d904",
+                height: "75px",
+              }}
+            >
+              <div className="row">
+                <Col xs={10}>
+                  <h5 className="card-title" style={{ color: "#bcbcbc" }}>
+                    {item.titulo}
+                  </h5>
+                </Col>
+                <Col xs={2}>
+                  <Link
+                    to={`/partedetail/${item.idParte}`}
+                    style={{ color: "#bcbcbc", justifyContent: "center" }}
+                  >
+                    <FaAngleRight style={{ fontSize: "50px" }} />
+                  </Link>
+                </Col>
+              </div>
             </div>
-          </div>
-        );
-      }
-    }
-    
+          ))}
+        </div>
+      </div>
+    );
+  }
+}

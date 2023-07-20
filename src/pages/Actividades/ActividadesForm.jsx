@@ -19,7 +19,7 @@ export const ActividadesForm = () => {
       ] = `Bearer ${sessionStorage.getItem("token")}`;
     }
     axios
-      .post(`https://${miVariableGlobal}:7106/api/logs`, {
+      .post(`${miVariableGlobal}logs`, {
         message: logMessage,
         level: "INFO",
         section: "HabitasForms",
