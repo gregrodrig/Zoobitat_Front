@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: "zoobitat-app",
   webDir: "build",
   server: {
-    url: "http://zoobitat.joswald.info:7106/api/",
+    androidScheme: "https",
   },
 };
 
