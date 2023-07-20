@@ -140,13 +140,6 @@ function App() {
                   />
                 }
               >
-                {/* RUTAS ANIMALES */}
-                <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
-                <Route path="/AnimalDash" element={<AnimalListPage />} />
-                <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
-                <Route path="/AnimalForm/" element={<AnimalFormPage />} />
-                {/* FIN RUTAS ANIMALES */}
-
                 {/* RUTAS PARTES */}
                 <Route path="/partelist" element={<ParteList />} />
                 <Route path="/partedetail/:id" element={<ParteDetail />} />
@@ -167,6 +160,13 @@ function App() {
                 {/* RUTAS USUARIOS */}
                 <Route path="/usuarioList" element={<UserList />} />
                 {/* FIN RUTAS USUARIOS */}
+
+                {/* RUTAS ANIMALES */}
+                <Route path="/animal/:idAnimal" element={<AnimalDetails />} />
+                <Route path="/AnimalDash" element={<AnimalListPage />} />
+                <Route path="/AnimalForm/:id" element={<AnimalFormPage />} />
+                <Route path="/AnimalForm/" element={<AnimalFormPage />} />
+                {/* FIN RUTAS ANIMALES */}
 
                 {/* RUTAS Actividades */}
                 <Route

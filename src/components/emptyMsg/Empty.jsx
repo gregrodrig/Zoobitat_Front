@@ -56,6 +56,27 @@ export function Empty({ msg }) {
           </span>
         </div>
       );
+    case "msgOkRegister":
+      return (
+        <div className={styles.msgOk}>
+          <span className={styles.center}>
+            <strong>¡FENOMENAL!</strong>
+            <br />
+            Se registró exitosamente. Espere a ser confirmado por un
+            administrador...
+          </span>
+        </div>
+      );
+    case "msgNotRegister":
+      return (
+        <div className={styles.msgNot}>
+          <span className={styles.center}>
+            <strong>¡ERROR!</strong>
+            <br /> No se pudo crear el usuario. Verifique la información
+            proporcionada...
+          </span>
+        </div>
+      );
     case "msgNot":
       return (
         <div className={styles.msgNot}>

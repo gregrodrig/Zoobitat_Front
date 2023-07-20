@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { AiFillCheckCircle } from "react-icons/ai";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { AiFillEye } from "react-icons/ai";
 import axios from "axios";
 import miVariableGlobal from "../../global.js";
 import { Link } from "react-router-dom";
+import { Empty } from "components/emptyMsg/Empty.jsx";
+import { Col } from "react-bootstrap";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -86,14 +86,14 @@ export default function Register() {
   return (
     <>
       {successMessage && (
-        <div style={{ backgroundColor: "green", height: "auto" }}>
-          <p>{successMessage}</p>
-        </div>
+        <Col style={{ margin: "2rem" }}>
+          <Empty msg="msgOkRegister" />
+        </Col>
       )}
       {errorMessage && (
-        <div style={{ backgroundColor: "red", height: "auto" }}>
-          <p>{errorMessage}</p>
-        </div>
+        <Col style={{ margin: "2rem" }}>
+          <Empty msg="msgNotRegister" />
+        </Col>
       )}
       <div
         style={{ maxWidth: "320px", margin: "0 auto", marginTop: "6.25rem" }}
