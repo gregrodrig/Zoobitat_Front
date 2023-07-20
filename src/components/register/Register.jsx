@@ -37,7 +37,7 @@ export default function Register() {
     };
 
     axios
-      .post(`https://${miVariableGlobal}:7106/api/Usuario`, userData)
+      .post(`${miVariableGlobal}Usuario`, userData)
       .then((response) => {
         // Manejar la respuesta de la solicitud
         console.log(response.data);
@@ -61,7 +61,7 @@ export default function Register() {
           ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "Register",

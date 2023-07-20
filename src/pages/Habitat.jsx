@@ -15,7 +15,7 @@ function Habitat() {
   useEffect(() => {
     log.info("Página HabitatsList visitada ");
     sendLogToServer("Página HabitatsList visitada ");
-    fetch(`https://${miVariableGlobal}:7106/api/habitat`)
+    fetch(`${miVariableGlobal}habitat`)
       .then((response) => response.json())
       .then((data) => setHabitats(data))
       .catch((error) => {
@@ -25,7 +25,7 @@ function Habitat() {
           ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error,
             level: "ERROR",
             section: "Habitat",
@@ -61,7 +61,7 @@ function Habitat() {
     }
 
     axios
-      .post(`https://${miVariableGlobal}:7106/api/logs`, config)
+      .post(`${miVariableGlobal}logs`, config)
       .then((response) => {
         console.log("Log enviado al servidor");
       })

@@ -16,9 +16,7 @@ export default class AsignacionDetailComponent extends Component {
     const { idasignacion } = this.props;
 
     axios
-      .get(
-        `https://${miVariableGlobal}:7106/api/asignacionesusuario/${idasignacion}`
-      )
+      .get(`${miVariableGlobal}asignacionesusuario/${idasignacion}`)
       .then((response) => {
         const asignacionData = response.data;
         console.log(asignacionData);
@@ -49,7 +47,7 @@ export default class AsignacionDetailComponent extends Component {
 
     axios
       .put(
-        `https://${miVariableGlobal}:7106/api/AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`
+        `${miVariableGlobal}AsignacionesUsuario/ChangeEstado/2/${idAsignacionUsuario}`
       )
       .then((response) => {
         console.log(response.data);
@@ -57,7 +55,7 @@ export default class AsignacionDetailComponent extends Component {
       })
       .catch((error) => {
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "AsignacionDetailComponent",

@@ -13,7 +13,7 @@ function NoticiasDetails() {
     log.info(`Cargando detalles de la noticia con ID: ${idnoticia}`);
     sendLogToServer(`Cargando detalles de la noticia con ID: ${idnoticia}`);
 
-    fetch(`https://${miVariableGlobal}:7106/api/Noticia/${idnoticia}`)
+    fetch(`${miVariableGlobal}Noticia/${idnoticia}`)
       .then((response) => response.json())
       .then((data) => {
         setNoticia(data);
@@ -26,7 +26,7 @@ function NoticiasDetails() {
           ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error,
             level: "ERROR",
             section: "NoticiasDetails",
@@ -50,7 +50,7 @@ function NoticiasDetails() {
       ] = `Bearer ${sessionStorage.getItem("token")}`;
     }
     axios
-      .post(`https://${miVariableGlobal}:7106/api/logs`, {
+      .post(`${miVariableGlobal}logs`, {
         message: logMessage,
         level: "INFO",
         section: "NoticiasDetails",

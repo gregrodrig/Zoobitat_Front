@@ -1,24 +1,21 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { Col, Container } from 'react-bootstrap';
-import { FaCamera } from 'react-icons/fa';
-import miVariableGlobal from '../../global.js';
-
+import React, { Component } from "react";
+import axios from "axios";
+import { Col, Container } from "react-bootstrap";
+import { FaCamera } from "react-icons/fa";
+import miVariableGlobal from "../../global.js";
 
 export default class AsignacionFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
       usuarioSelect: [],
       asignacionSelect: [],
-      animalSelect:[],
+      animalSelect: [],
 
-      usuario: '',
-      animal: '',
-      asignacion:"",
-      descripcion:"",
-     
+      usuario: "",
+      animal: "",
+      asignacion: "",
+      descripcion: "",
     };
   }
 
@@ -27,78 +24,73 @@ export default class AsignacionFormComponent extends Component {
   }
 
   fetchUsuario = () => {
+    // Obtener el token del sessionStorage
+    const token = sessionStorage.getItem("token");
 
-     // Obtener el token del sessionStorage
-     const token = sessionStorage.getItem('token');
-  
-     // Agregar el token al encabezado de la solicitud Axios
-     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // Agregar el token al encabezado de la solicitud Axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     axios
-      .get(`https://${miVariableGlobal}:7106/api/Usuario/usuariosempl`)
-      .then(response => {
+      .get(`${miVariableGlobal}Usuario/usuariosempl`)
+      .then((response) => {
         this.setState({ usuarioSelect: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
 
-      axios
-      .get(`https://${miVariableGlobal}:7106/api/Asignacion`)
-      .then(response => {
+    axios
+      .get(`${miVariableGlobal}Asignacion`)
+      .then((response) => {
         this.setState({ asignacionSelect: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
 
-
-      axios
-      .get(`https://${miVariableGlobal}:7106/api/animal`)
-      .then(response => {
+    axios
+      .get(`${miVariableGlobal}animal`)
+      .then((response) => {
         this.setState({ animalSelect: response.data });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   };
 
-  handleImageUpload = event => {
-    try{
+  handleImageUpload = (event) => {
+    try {
       const file = event.target.files[0];
-    const reader = new FileReader();
+      const reader = new FileReader();
 
-    reader.onloadend = () => {
-      this.setState({
-        image: reader.result,
-      });
-    };
+      reader.onloadend = () => {
+        this.setState({
+          image: reader.result,
+        });
+      };
 
-    reader.readAsDataURL(file);
-    }
-    catch(e){
+      reader.readAsDataURL(file);
+    } catch (e) {
       this.setState({
         image: null,
       });
-
     }
-    
   };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
-  
-    const { usuario, asignacion, animal,descripcion} = this.state;
-  
+
+    const { usuario, asignacion, animal, descripcion } = this.state;
+
     const asignacionuser = {
       idAsignacionUsuario: 0,
       idUsuario: usuario,
-      usuario:null,
+      usuario: null,
       idUsuarioMandante: 0,
       usuarioMandante: null,
       idAnimal: animal,
@@ -107,63 +99,78 @@ export default class AsignacionFormComponent extends Component {
       estadoAsignacion: null,
       idAsignacion: asignacion,
       asignacion: null,
-      notas:descripcion
+      notas: descripcion,
     };
-  
+
     // Obtener el token del sessionStorage
-    const token = sessionStorage.getItem('token');
-  
+    const token = sessionStorage.getItem("token");
+
     // Agregar el token al encabezado de la solicitud Axios
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
     axios
-      .post(`https://${miVariableGlobal}:7106/api/AsignacionesUsuario`, asignacionuser)
-      .then(response => {
-        console.log('Animal saved successfully');
-       
+      .post(`${miVariableGlobal}AsignacionesUsuario`, asignacionuser)
+      .then((response) => {
+        console.log("Animal saved successfully");
+
         // Realizar acciones adicionales después de guardar el animal
       })
-      .catch(error => {
-
-        if (sessionStorage.getItem('token')) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+      .catch((error) => {
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AsignacionFormComponent',
-          IdUsuario: 4,
-          Usuario: null
-        })
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`${miVariableGlobal}logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "AsignacionFormComponent",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         console.error(error);
         alert("error");
         // Manejar el error en caso de que ocurra
       });
   };
-  
 
   render() {
-    const { usuario, asignacion, animal, usuarioSelect,asignacionSelect, animalSelect,descripcion} = this.state;
+    const {
+      usuario,
+      asignacion,
+      animal,
+      usuarioSelect,
+      asignacionSelect,
+      animalSelect,
+      descripcion,
+    } = this.state;
 
     return (
-
       <form onSubmit={this.handleSubmit}>
-   
         <Col className="text-center">
-          
-
-
           <div>
-              <select name="animal" value={animal} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
+            <select
+              name="animal"
+              value={animal}
+              onChange={this.handleInputChange}
+              style={{
+                width: "95%",
+                border: "none",
+                backgroundColor: "lightgray",
+                marginBottom: "10px",
+                height: "50px",
+                borderRadius: "5px",
+              }}
+            >
               <option value="">Seleccione un animal</option>
-              {animalSelect.map(item => (
+              {animalSelect.map((item) => (
                 <option key={item.idAnimal} value={item.idAnimal}>
                   {item.nombre}
                 </option>
@@ -171,12 +178,22 @@ export default class AsignacionFormComponent extends Component {
             </select>
           </div>
 
-          
-
           <div>
-              <select name="asignacion" value={asignacion} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
+            <select
+              name="asignacion"
+              value={asignacion}
+              onChange={this.handleInputChange}
+              style={{
+                width: "95%",
+                border: "none",
+                backgroundColor: "lightgray",
+                marginBottom: "10px",
+                height: "50px",
+                borderRadius: "5px",
+              }}
+            >
               <option value="">Seleccione un tipo de asignacion</option>
-              {asignacionSelect.map(item => (
+              {asignacionSelect.map((item) => (
                 <option key={item.idAsignacion} value={item.idAsignacion}>
                   {item.nombre}
                 </option>
@@ -185,9 +202,21 @@ export default class AsignacionFormComponent extends Component {
           </div>
 
           <div>
-              <select name="usuario" value={usuario} onChange={this.handleInputChange}  style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"50px", borderRadius: '5px',}}>
+            <select
+              name="usuario"
+              value={usuario}
+              onChange={this.handleInputChange}
+              style={{
+                width: "95%",
+                border: "none",
+                backgroundColor: "lightgray",
+                marginBottom: "10px",
+                height: "50px",
+                borderRadius: "5px",
+              }}
+            >
               <option value="">Seleccione un usuario</option>
-              {usuarioSelect.map(item => (
+              {usuarioSelect.map((item) => (
                 <option key={item.idUsuario} value={item.idUsuario}>
                   {item.nombre}
                 </option>
@@ -196,23 +225,38 @@ export default class AsignacionFormComponent extends Component {
           </div>
 
           <div>
-            
-            <textarea placeholder='Descripcion' name="descripcion" value={descripcion} onChange={this.handleInputChange}   style={{ width:"95%", border:"none", backgroundColor: 'lightgray', marginBottom: '10px'  ,height:"150px", borderRadius: '5px',}}/>
+            <textarea
+              placeholder="Descripcion"
+              name="descripcion"
+              value={descripcion}
+              onChange={this.handleInputChange}
+              style={{
+                width: "95%",
+                border: "none",
+                backgroundColor: "lightgray",
+                marginBottom: "10px",
+                height: "150px",
+                borderRadius: "5px",
+              }}
+            />
           </div>
-          
-         
-         
-           
-          <div style={{width:"100%", margin:"10px"}}  >
-            
-            <button className="btn rounded-pill btn-block" style={{ color: 'white', fontSize:"30px" ,width:"90%", backgroundColor:"#2a411c"}} type="submit">Guardar</button>
-        </div>
 
-          
-          
+          <div style={{ width: "100%", margin: "10px" }}>
+            <button
+              className="btn rounded-pill btn-block"
+              style={{
+                color: "white",
+                fontSize: "30px",
+                width: "90%",
+                backgroundColor: "#2a411c",
+              }}
+              type="submit"
+            >
+              Guardar
+            </button>
+          </div>
         </Col>
-        </form>
-   
+      </form>
     );
   }
 }

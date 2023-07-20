@@ -32,7 +32,7 @@ export const NoticiasAdmin = () => {
     }
 
     axios
-      .post(`https://${miVariableGlobal}:7106/api/logs`, config)
+      .post(`${miVariableGlobal}logs`, config)
       .then((response) => {
         console.log("Log enviado al servidor");
       })

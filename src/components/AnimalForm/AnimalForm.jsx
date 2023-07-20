@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
-import miVariableGlobal from '../../global.js';
+import miVariableGlobal from "../../global.js";
 
 export default class AnimalForm extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class AnimalForm extends Component {
 
     if (idAnimal !== 0) {
       axios
-        .get(`https://${miVariableGlobal}:7106/api/animal/${idAnimal}`)
+        .get(`${miVariableGlobal}animal/${idAnimal}`)
         .then((response) => {
           const animalData = response.data;
 
@@ -65,7 +65,7 @@ export default class AnimalForm extends Component {
 
   fetchEspecies = () => {
     axios
-      .get(`https://${miVariableGlobal}:7106/api/Especie`)
+      .get(`${miVariableGlobal}Especie`)
       .then((response) => {
         this.setState({ especies: response.data });
       })
@@ -103,8 +103,16 @@ export default class AnimalForm extends Component {
     event.preventDefault();
 
     const { idAnimal } = this.state;
-    const { image, nombre, edad, especie, genero, descripcion, fechaNacimiento, peso } = this.state;
-  
+    const {
+      image,
+      nombre,
+      edad,
+      especie,
+      genero,
+      descripcion,
+      fechaNacimiento,
+      peso,
+    } = this.state;
 
     const animalData = {
       idAnimal: 0,
@@ -131,8 +139,8 @@ export default class AnimalForm extends Component {
     const requestMethod = idAnimal !== 0 ? "PUT" : "POST";
     const requestURL =
       idAnimal !== 0
-        ? `https://${miVariableGlobal}:7106/api/animal/${idAnimal}`
-        : `https://${miVariableGlobal}:7106/api/animal`;
+        ? `${miVariableGlobal}animal/${idAnimal}`
+        : `${miVariableGlobal}animal`;
 
     if (idAnimal !== 0) {
       animalData.idAnimal = idAnimal;
@@ -151,29 +159,25 @@ export default class AnimalForm extends Component {
       })
 
       .catch((error) => {
-
         console.error(error);
-        if (sessionStorage.getItem('token')) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         }
 
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AnimalForm',
-          IdUsuario: 4,
-          Usuario: null
-        },
-        
-        
-        )
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`${miVariableGlobal}logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "AnimalForm",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         // Resto del código para manejar el error
       });
   };

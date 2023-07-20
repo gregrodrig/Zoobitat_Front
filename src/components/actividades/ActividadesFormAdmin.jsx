@@ -26,7 +26,7 @@ export default class ActividadesFormAdmin extends Component {
 
     if (idActividad !== 0) {
       axios
-        .get(`https://${miVariableGlobal}:7106/api/Actividades/${idActividad}`)
+        .get(`${miVariableGlobal}Actividades/${idActividad}`)
         .then((response) => {
           const actividad = response.data;
 
@@ -62,7 +62,7 @@ export default class ActividadesFormAdmin extends Component {
 
   fetchUbicacion = () => {
     axios
-      .get(`https://${miVariableGlobal}:7106/api/Ubicacion`)
+      .get(`${miVariableGlobal}Ubicacion`)
       .then((response) => {
         this.setState({ ubicaciones: response.data });
       })
@@ -133,8 +133,8 @@ export default class ActividadesFormAdmin extends Component {
       const requestMethod = idActividad !== 0 ? "PUT" : "POST";
       const requestURL =
         idActividad !== 0
-          ? `https://${miVariableGlobal}:7106/api/Actividades/${idActividad}`
-          : `https://${miVariableGlobal}:7106/api/Actividades`;
+          ? `${miVariableGlobal}Actividades/${idActividad}`
+          : `${miVariableGlobal}Actividades`;
 
       if (idActividad !== 0) {
         actividadData.idActividad = idActividad;
@@ -159,7 +159,7 @@ export default class ActividadesFormAdmin extends Component {
           }
 
           axios
-            .post(`https://${miVariableGlobal}:7106/api/logs`, {
+            .post(`${miVariableGlobal}logs`, {
               message: error.message,
               level: "ERROR",
               section: "AnimalForm",

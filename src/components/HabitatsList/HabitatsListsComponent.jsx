@@ -21,7 +21,7 @@ export default class HabitatsListsComponent extends Component {
 
   fetchHabitats = () => {
     axios
-      .get(`https://${miVariableGlobal}:7106/api/habitat`)
+      .get(`${miVariableGlobal}habitat`)
       .then((response) => {
         this.setState({ habitats: response.data, loading: false });
       })
@@ -35,7 +35,7 @@ export default class HabitatsListsComponent extends Component {
         }
 
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "HabitatsListsComponent",

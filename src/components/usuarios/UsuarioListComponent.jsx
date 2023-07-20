@@ -29,9 +29,9 @@ export default class UsuarioListComponent extends Component {
     let url = "";
 
     if (idRol === 2) {
-      url = `https://${miVariableGlobal}:7106/api/Usuario/usuarios/rol5`;
+      url = `${miVariableGlobal}Usuario/usuarios/rol5`;
     } else {
-      url = `https://${miVariableGlobal}:7106/api/usuario`;
+      url = `${miVariableGlobal}usuario`;
     }
 
     axios
@@ -46,7 +46,7 @@ export default class UsuarioListComponent extends Component {
           ] = `Bearer ${sessionStorage.getItem("token")}`;
         }
         axios
-          .post(`https://${miVariableGlobal}:7106/api/logs`, {
+          .post(`${miVariableGlobal}logs`, {
             message: error.message,
             level: "ERROR",
             section: "UsuarioListComponent",
@@ -70,7 +70,7 @@ export default class UsuarioListComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .delete(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}`)
+      .delete(`${miVariableGlobal}usuario/${idUsuario}`)
       .then((response) => {
         console.log("User deleted successfully");
         this.fetchUser();
@@ -99,7 +99,7 @@ export default class UsuarioListComponent extends Component {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     axios
-      .patch(`https://${miVariableGlobal}:7106/api/usuario/${idUsuario}/4`)
+      .patch(`${miVariableGlobal}usuario/${idUsuario}/4`)
       .then((response) => {
         console.log("User deleted successfully");
         this.fetchUser();

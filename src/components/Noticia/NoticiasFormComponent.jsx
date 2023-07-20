@@ -2,24 +2,20 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Col } from "react-bootstrap";
 import { FaCamera } from "react-icons/fa";
-import miVariableGlobal from '../../global.js';
+import miVariableGlobal from "../../global.js";
 
 export default class NoticiasFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
       idNotica: props.id || 0,
       titulo: "",
       imagen: "",
       cuerpo: "",
 
-      
       idUsuario: 0,
       usuario: null,
-      fecha: "2023-07-16T17:37:50.791Z"
-      
-      
+      fecha: "2023-07-16T17:37:50.791Z",
     };
   }
 
@@ -28,32 +24,25 @@ export default class NoticiasFormComponent extends Component {
 
     if (idNotica !== 0) {
       axios
-        .get(`https://${miVariableGlobal}:7106/api/Noticia/${idNotica}`)
+        .get(`${miVariableGlobal}Noticia/${idNotica}`)
         .then((response) => {
           const noticia = response.data;
 
           console.log(noticia);
           this.setState({
-
-            
-
             idNotica: noticia.idNotica,
             titulo: noticia.titulo,
             imagen: noticia.imagen,
             cuerpo: noticia.cuerpo,
             idUsuario: noticia.idUsuario,
             usuario: noticia.usuario,
-            fecha: noticia.fecha
-      
-            
+            fecha: noticia.fecha,
           });
         })
         .catch((error) => {
           console.error(error);
         });
     }
-
-    
   }
 
   formatoFecha = (fechaHora) => {
@@ -68,7 +57,6 @@ export default class NoticiasFormComponent extends Component {
 
     return `${año}-${mesFormateado}-${diaFormateado}`;
   };
-
 
   handleImageUpload = (event) => {
     try {
@@ -95,16 +83,14 @@ export default class NoticiasFormComponent extends Component {
     });
   };
   handleGoBack = () => {
-      window.history.back();
-    };
-
+    window.history.back();
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
 
-    
-    const {cuerpo,imagen,titulo,idNotica,fecha,usuario,idUsuario} = this.state;
-  
+    const { cuerpo, imagen, titulo, idNotica, fecha, usuario, idUsuario } =
+      this.state;
 
     const noticiaData = {
       idNotica: idNotica,
@@ -113,8 +99,7 @@ export default class NoticiasFormComponent extends Component {
       cuerpo: cuerpo,
       idUsuario: idUsuario,
       usuario: usuario,
-      fecha: fecha
-     
+      fecha: fecha,
     };
 
     // Obtener el token del sessionStorage
@@ -126,8 +111,8 @@ export default class NoticiasFormComponent extends Component {
     const requestMethod = idNotica !== 0 ? "PUT" : "POST";
     const requestURL =
       idNotica !== 0
-        ? `https://${miVariableGlobal}:7106/api/Noticia/${idNotica}`
-        : `https://${miVariableGlobal}:7106/api/Noticia`;
+        ? `${miVariableGlobal}Noticia/${idNotica}`
+        : `${miVariableGlobal}Noticia`;
 
     if (idNotica !== 0) {
       noticiaData.idNotica = idNotica;
@@ -148,35 +133,31 @@ export default class NoticiasFormComponent extends Component {
       })
 
       .catch((error) => {
-
         console.error(error);
-        if (sessionStorage.getItem('token')) {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        if (sessionStorage.getItem("token")) {
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         }
 
         axios
-        .post(`https://${miVariableGlobal}:7106/api/logs`, {
-          message: error.message,
-          level: 'ERROR',
-          section: 'AnimalForm',
-          IdUsuario: 4,
-          Usuario: null
-        },
-        
-        
-        )
-        .then((response) => {
-          console.log('Log enviado al servidor')
-        })
-        .catch((error) => {
-          console.error('Error al enviar el log al servidor', error)
-        })
+          .post(`${miVariableGlobal}logs`, {
+            message: error.message,
+            level: "ERROR",
+            section: "AnimalForm",
+            IdUsuario: 4,
+            Usuario: null,
+          })
+          .then((response) => {
+            console.log("Log enviado al servidor");
+          })
+          .catch((error) => {
+            console.error("Error al enviar el log al servidor", error);
+          });
         // Resto del código para manejar el error
       });
   };
 
   render() {
-    const {cuerpo,imagen,titulo,idNotica} = this.state;
+    const { cuerpo, imagen, titulo, idNotica } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -238,13 +219,7 @@ export default class NoticiasFormComponent extends Component {
               }}
             />
           </div>
-        
 
-         
-
-        
-
-        
           <div>
             <textarea
               placeholder="Cuerpo"
