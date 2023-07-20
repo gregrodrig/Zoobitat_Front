@@ -36,7 +36,7 @@ const Dashboard = () => {
       imageColor: "#000",
       link: "/AnimalDash",
       name: "Animales",
-      roles: [gestor, veterinario],
+      roles: [gestor],
     },
     {
       image: "assets/Dash_icons/Habitat.svg",
