@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.zoobitat.app',
-  appName: 'zooobitat',
+  appName: 'zoobitat-app',
   webDir: 'build',
   server: {
     androidScheme: 'https'
