@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="App">
       <header className="App-header">
-        <Container>
+        <Container fluit>
           <Row>
             <Col>
               <h1
