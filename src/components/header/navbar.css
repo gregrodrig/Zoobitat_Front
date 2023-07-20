@@ -6,6 +6,11 @@
     overflow: hidden;
   }
 }
+@media only screen and (max-width: 490px) {
+  .Header-title {
+    font-size: 2rem !important;
+  }
+}
 /* Styles for laptop screens */
 @media only screen and (min-width: 635px) {
   .navbar-mobile {
